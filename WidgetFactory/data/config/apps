@@ -1,6 +1,0 @@
-
-config core 'core'
-	option body_bg 'dark-blue-purps.png'
-	option theme 'dark'
-	option order '{"a.scada":1,"b.system":2,"c.visualization":3,"d.touch":4,"e.schedulers":5,"f.trends":6,"canx":7,"lmcloud":8,"mosaic30":9,"mosaic30-admin":10}'
-
