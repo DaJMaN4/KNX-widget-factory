@@ -1,0 +1,58 @@
+
+# names of the rooms
+rooms: ["A2017_A"]
+
+# ----------------------------------------------------------------------------------------------------------------------
+#                                         Config for Info Room widgets
+# ----------------------------------------------------------------------------------------------------------------------
+
+createInfoRoomWidgets: True # True if room widgets should be created, False if not
+
+
+roomWidgets:
+  # prefix to the name of the widget
+  widgetName: "Kontor A-%romName%"
+
+  # True if widget name should be added unchanged to the widget. i.e "Kontor A-A2001" with current settings
+  # False if room prefix should be deleted from the widget name. i.e "Kontor A-2001" with current settings
+  addPrefixToWidgetName: False
+
+  # prefix for name of the widget in files on LM
+  widgetNameInFiles: "Rom A-%romName%"
+
+  # True if prefix should be added to the widget name in files on LM, False if not
+  addPrefixToWidgetNameInFiles: False
+
+  # name of the schematic to use for the trend widget
+  schematicToUse: "Vis-Rom_A-2008-Bygg_A_GTW-2023.10.27-10.51.yml"
+
+  # names of the objects in the database that are needed for the widget
+  objectsNamesWidget: ["Driftsmodus - Rom", "Tilstedesensor -", "Romtemperatur - Verdi",
+                       "Romtemperatur - Aktivt settpunkt",
+                       "Romtemperatur - Lokal", "Romtemperatur - Settpunkt", "Varmeaktuator - Tilbakemelding",
+                       "Kjoleaktuator - Tilbakemelding", "CO2 i rom - Verdi", "Fukt i rom - Verdi"]
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+#                                        Config for Trend widgets
+# ----------------------------------------------------------------------------------------------------------------------
+
+# True if trend widgets should be created, False if not
+createTrendWidgets: True
+
+
+trendWidgets:
+  # prefix for name of the widget in files on LM
+  widgetNameInFiles: "Trend A-%romName% boom"
+
+  # The prefix is A if the room name is A2002 inside array rooms
+  # If true and the room name is A2002 then placeholder %romName% will be replaced with A2002
+  # If false and the room name is A2002 then placeholder %romName% will be replaced with 2002
+  addPrefixToWidgetName: False
+
+  # name of the schematic to use for the trend widget
+  schematicToUse: "Vis-Trend_2001-Bygg_A_GTW-2023.10.30-08.23.yml"
+
+  # names of the objects in the database that are needed for the trend widget
+  objectsNamesWidget: ["Romtemperatur - Verdi", "Romtemperatur - Aktivt settpunkt", "CO2 i rom - Verdi",
+                "Tilstedesensor -"]
