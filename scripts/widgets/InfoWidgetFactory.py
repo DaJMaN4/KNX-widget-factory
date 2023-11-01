@@ -3,8 +3,7 @@ import json
 import tarfile
 import yaml
 import os
-import main
-
+from scripts import main
 
 class InfoWidgetFactory:
     # Initialize TrendWidgetFactory class it sets all variables when creating the object in main class

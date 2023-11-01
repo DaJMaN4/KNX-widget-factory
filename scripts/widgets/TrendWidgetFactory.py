@@ -3,7 +3,7 @@ import json
 import tarfile
 import yaml
 import os
-import main
+from scripts import main
 
 
 class TrendWidgetFactory:

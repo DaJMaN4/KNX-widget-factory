@@ -2,7 +2,7 @@ import ast
 import os
 import tarfile
 import yaml
-import main
+from scripts import main
 
 
 class ImportManager:

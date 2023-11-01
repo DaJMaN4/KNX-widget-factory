@@ -1,4 +1,5 @@
 import os
+
 import pip
 
 # Check if yaml module is installed, if not then install it
@@ -9,7 +10,8 @@ except ImportError:
     pip.main(['install', "pyyaml"])
     import yaml
 
-import ConfigManager, InfoWidgetFactory, TrendWidgetFactory, ImportWidgets, databaseManager
+import ConfigManager, databaseManager
+from widgets import ImportWidgets, InfoWidgetFactory, TrendWidgetFactory
 
 # Get path of WidgetFactory folder
 path = os.path.dirname(os.path.dirname(__file__))
