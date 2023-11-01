@@ -19,9 +19,9 @@ class ImportManager:
     # then it prints error message and exits program.
     def open(self):
         # Goes through all files in import folder
-        for file in os.listdir(self.path + "/import"):
+        for file in os.listdir(self.path + "/import/widgets"):
             # Goes through all files in schematics folder
-            for fileSchematics in os.listdir(self.path + "/schematics"):
+            for fileSchematics in os.listdir(self.path + "/schematics/widgets"):
                 # Create string with changed extension from .tar to .yml
                 fileImport = file.replace(".tar", ".yml")
                 # If file with the same name as defined in config.yml
@@ -34,7 +34,7 @@ class ImportManager:
                 # If file is .tar format
                 if file.endswith(".tar"):
                     # Open file as "r" which means read only. tar is a variable name of opened file
-                    tar = tarfile.open(os.path.join(self.path + "/import", file), "r")
+                    tar = tarfile.open(os.path.join(self.path + "/import/widgets", file), "r")
                     # Goes through all files in tar file
                     for member in tar.getmembers():
                         # If file is data.json
@@ -82,7 +82,7 @@ class ImportManager:
             raise e
 
         # Open file as "x" which means write only. "file" is a variable name of opened file
-        file = open(self.path + "/schematics/" + name, "x")
+        file = open(self.path + "/schematics/widgets/" + name, "x")
         # Write file to schematics folder
         yaml.dump(data, file, allow_unicode=True)
 

@@ -34,11 +34,11 @@ class TrendWidgetFactory:
     # Check if file exists in schematics folder
     def checkIfFileExists(self):
         # Goes through all files in schematics folder
-        for schematicFile in os.listdir(self.path + "/schematics"):
+        for schematicFile in os.listdir(self.path + "/schematics/widgets"):
             # If file with the same name as defined in config.yml
             if schematicFile == self.schematicName:
                 # Open file as "r" which means read only. "file" is a variable name of opened file
-                with open(self.path + "/schematics/" + schematicFile, 'r') as file:
+                with open(self.path + "/schematics/widgets/" + schematicFile, 'r') as file:
                     # Load yaml file to dictionary variable
                     self.dictionary = yaml.safe_load(file)
                     # Close loop and end function
@@ -160,7 +160,7 @@ class TrendWidgetFactory:
             json_object = json.dumps(self.dictionary, indent=4)
 
             # Create tar file with name Trend_Widget_Rom-<room number>.tar
-            file = tarfile.open(self.path + "/" + "output/Trend_Widget_Rom-" + key + ".tar", "w", None,
+            file = tarfile.open(self.path + "/" + "output/widgets/Trend_Widget_Rom-" + key + ".tar", "w", None,
                                 tarfile.GNU_FORMAT)
 
             # Create file inside tar file called "."
