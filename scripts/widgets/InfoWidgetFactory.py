@@ -35,12 +35,15 @@ class InfoWidgetFactory:
 
     # Checks if file exists in schematics folder
     def checkIfFileExists(self):
+        onlyOne = False
+        if len(os.listdir(self.path + "/schematics/widgets/info")) == 1:
+            onlyOne = True
         # Goes through all files in schematics folder
-        for schematicFile in os.listdir(self.path + "/schematics/widgets"):
+        for schematicFile in os.listdir(self.path + "/schematics/widgets/info"):
             # If file with the same name as defined in config.yml
-            if schematicFile == self.schematicName:
+            if schematicFile == self.schematicName or onlyOne or self.schematicName == "":
                 # Open file as "r" which means read only. "file" is a variable name of opened file
-                with open(self.path + "/schematics/widgets/" + schematicFile, 'r') as file:
+                with open(self.path + "/schematics/widgets/info/" + schematicFile, 'r') as file:
                     # Load yaml file to dictionary variable
                     self.dictionary = yaml.safe_load(file)
                     # Close loop and end function

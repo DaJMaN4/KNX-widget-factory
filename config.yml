@@ -1,10 +1,10 @@
 
-# names of the rooms
+# names of the rooms used for the widgets
 rooms: ["A2017_A"]
 
-# ----------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------
 #                                         Config for Info Room widgets
-# ----------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------
 
 createInfoRoomWidgets: True # True if room widgets should be created, False if not
 
@@ -24,7 +24,7 @@ roomWidgets:
   addPrefixToWidgetNameInFiles: False
 
   # name of the schematic to use for the trend widget
-  schematicToUse: "Vis-Rom_A-2008-Bygg_A_GTW-2023.10.27-10.51.yml"
+  schematicToUse: #"Vis-Rom_A-2008-Bygg_A_GTW-2023.10.27-10.51.yml"
 
   # names of the objects in the database that are needed for the widget
   objectsNamesWidget: ["Driftsmodus - Rom", "Tilstedesensor -", "Romtemperatur - Verdi",
@@ -33,12 +33,11 @@ roomWidgets:
                        "Kjoleaktuator - Tilbakemelding", "CO2 i rom - Verdi", "Fukt i rom - Verdi"]
 
 
-# ----------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------
 #                                        Config for Trend widgets
-# ----------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------
 
-# True if trend widgets should be created, False if not
-createTrendWidgets: True
+createTrendWidgets: True # True if trend widgets should be created, False if not
 
 
 trendWidgets:
@@ -51,8 +50,68 @@ trendWidgets:
   addPrefixToWidgetName: False
 
   # name of the schematic to use for the trend widget
-  schematicToUse: "Vis-Trend_2001-Bygg_A_GTW-2023.10.30-08.23.yml"
+  schematicToUse: ""
 
   # names of the objects in the database that are needed for the trend widget
   objectsNamesWidget: ["Romtemperatur - Verdi", "Romtemperatur - Aktivt settpunkt", "CO2 i rom - Verdi",
                 "Tilstedesensor -"]
+
+
+#-----------------------------------------------------------------------------------------------------------------------
+#                                       Config for Levels and frameworks
+#-----------------------------------------------------------------------------------------------------------------------
+
+# True if levels should be created, False if not
+createLevels: True
+
+levels:
+  # if there is just one schematic inside the folder, then you can leave this empty
+  # name of the schematic to use for the trend widget
+  schematicLevel: "level-Bygg_A_GTW-2023.10.30-08.23.yml"
+
+  schematicFramework: "framework-Bygg_A_GTW-2023.10.30-08.23.yml"
+
+  boxData:
+    standard:
+      template: "A2001"
+      objectsNamesWidget: [ "Romtemperatur - Verdi", "Romtemperatur - Settpunkt", "Varmeaktuator - Tilbakemelding",
+                            "Kjoleaktuator - Tilbakemelding", "CO2 i rom - Verdi" ]
+
+      cold: "blue_boksmidten.png"
+      normal: "boks_rom_liggende.png"
+      warm: "red_boksmidten.png"
+
+    lying:
+      template: "A2017A"
+      objectsNamesWidget: [ "Romtemperatur - Verdi", "Romtemperatur - Settpunkt", "Varmeaktuator - Tilbakemelding",
+                            "Kjoleaktuator - Tilbakemelding", "CO2 i rom - Verdi" ]
+
+      cold: "blue_boks_rom_liggende.png"
+      normal: "boks_rom_liggende.png"
+      warm: "red_boks_rom_liggende.png"
+
+  # names of roms and corresponding names of the objects in the database that are needed for the level widget
+  roomNames:
+    standard:
+      A2001: 2001
+      A2002: 2002
+      A2003: 2003
+      A2004: 2004
+      A2005: 2005
+      A2006: 2006
+      A2007: 2007
+      A2008: 2008
+      A2011: 2011
+      A2012: 2012
+      A2013: 2013
+      A2014: 2014
+      A2016: 2016
+      A2016A: 2116
+    lying:
+      A2017A: 2017A
+      A2017B: 2017B
+      A2018: 2018
+      A2019: 2019
+      A2021: 2021
+
+

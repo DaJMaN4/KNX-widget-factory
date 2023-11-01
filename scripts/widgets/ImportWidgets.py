@@ -10,6 +10,7 @@ class ImportManager:
     def __init__(self, path, roomObjectNames):
         self.path = path
         self.roomObjectNames = roomObjectNames
+        self.type = None
 
     # Open function is called from main class and it contains everything to run successfully the module it goes
     # through all files in import folder and checks if file with the same name exists in schematics folder, if it
@@ -20,17 +21,31 @@ class ImportManager:
     def open(self):
         # Goes through all files in import folder
         for file in os.listdir(self.path + "/import/widgets"):
+
+            fileAlreadyExist = False
+
             # Goes through all files in schematics folder
-            for fileSchematics in os.listdir(self.path + "/schematics/widgets"):
+            for fileSchematics in os.listdir(self.path + "/schematics/widgets/info"):
                 # Create string with changed extension from .tar to .yml
                 fileImport = file.replace(".tar", ".yml")
                 # If file with the same name as defined in config.yml
                 if fileImport == fileSchematics:
                     # Skip this file and continue to next file in import folder
                     print("File with name " + file + " already exists in schematics, skipping...")
+                    fileAlreadyExist = True
                     break
-            # Runs if for didn't encounter break which means that file doesn't exist
-            else:
+
+            for fileSchematics in os.listdir(self.path + "/schematics/widgets/trends"):
+                # Create string with changed extension from .tar to .yml
+                fileImport = file.replace(".tar", ".yml")
+                # If file with the same name as defined in config.yml
+                if fileImport == fileSchematics:
+                    # Skip this file and continue to next file in import folder
+                    print("File with name " + file + " already exists in schematics, skipping...")
+                    fileAlreadyExist = True
+                    break
+
+            if not fileAlreadyExist:
                 # If file is .tar format
                 if file.endswith(".tar"):
                     # Open file as "r" which means read only. tar is a variable name of opened file
@@ -81,8 +96,11 @@ class ImportManager:
             print("\033[93mFailed to automatically write placeholders into files \033[0m")
             raise e
 
-        # Open file as "x" which means write only. "file" is a variable name of opened file
-        file = open(self.path + "/schematics/widgets/" + name, "x")
+        if self.type == "trend":
+            # Open file as "x" which means write only. "file" is a variable name of opened file
+            file = open(self.path + "/schematics/widgets/trends/" + name, "x")
+        else:
+            file = open(self.path + "/schematics/widgets/info/" + name, "x")
         # Write file to schematics folder
         yaml.dump(data, file, allow_unicode=True)
 
@@ -129,6 +147,7 @@ class ImportManager:
                 if passIt == 3:
                     passed = True
         # Returns modified data back to write method
+        self.type = "trend"
         return data
 
     # This method is for getting object names from database and replacing it with a placeholder. It goes through all
@@ -157,5 +176,5 @@ class ImportManager:
                                 objectInData["object"] = roomObjectName
                                 objectInData["statusobject"] = roomObjectName
                                 break
-
+        self.type = "info"
         return data

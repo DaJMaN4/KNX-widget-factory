@@ -12,6 +12,8 @@ except ImportError:
 
 import ConfigManager, databaseManager
 from widgets import ImportWidgets, InfoWidgetFactory, TrendWidgetFactory
+from levels import levelManager
+
 
 # Get path of WidgetFactory folder
 path = os.path.dirname(os.path.dirname(__file__))
@@ -46,6 +48,19 @@ def run():
     # Run open function of ImportManager class
     importManager.open()
 
+    if config.getCreateLevels():
+        levelManagerObject = levelManager.LevelManager(
+            path,
+            config.getLevelsSchematicFramework(),
+            config.getLevelsSchematicLevel(),
+            config.getLevelsBoxData(),
+            config.getLevelsRoomNames()
+        )
+        if levelManagerObject.isEnable():
+            levelManagerObject.run()
+            print("Level and framework created and saved in output folder")
+
+    return
     # Create object of TrendWidgetFactory class
     if config.getCreateTrendWidgets():
         trendWidgetFactory = TrendWidgetFactory.TrendWidgetFactory(
