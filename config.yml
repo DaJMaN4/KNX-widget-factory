@@ -67,24 +67,24 @@ createLevels: True
 levels:
   # if there is just one schematic inside the folder, then you can leave this empty
   # name of the schematic to use for the trend widget
-  schematicLevel: "level-Bygg_A_GTW-2023.10.30-08.23.yml"
+  schematicLevel: "Vis-Romvisualisering_3_etg_for_testing-Bygg_A_GTW-2023.11.02-11.18.yml"
 
-  schematicFramework: "framework-Bygg_A_GTW-2023.10.30-08.23.yml"
+  schematicFramework: "Vis-Rammeverk_romstyring_3_etg_for_testing-Bygg_A_GTW-2023.11.02-11.18.yml"
 
   boxData:
     standard:
-      template: "A2001"
-      objectsNamesWidget: [ "Romtemperatur - Verdi", "Romtemperatur - Settpunkt", "Varmeaktuator - Tilbakemelding",
-                            "Kjoleaktuator - Tilbakemelding", "CO2 i rom - Verdi" ]
+      template: "A3001"
+      objectsNames: ["Romtemperatur - Verdi", "Varmeaktuator - Tilbakemelding",
+                            "Kjoleaktuator - Tilbakemelding", "CO2 i rom - Verdi", "Tilstedesensor -"]
 
-      cold: "blue_boksmidten.png"
-      normal: "boks_rom_liggende.png"
-      warm: "red_boksmidten.png"
+      cold: "Bokskald.png"
+      normal: "Boksmidten.png"
+      warm: "Boksvarm.png"
 
     lying:
-      template: "A2017A"
-      objectsNamesWidget: [ "Romtemperatur - Verdi", "Romtemperatur - Settpunkt", "Varmeaktuator - Tilbakemelding",
-                            "Kjoleaktuator - Tilbakemelding", "CO2 i rom - Verdi" ]
+      template: "A3017"
+      objectsNames: ["Romtemperatur - Verdi", "Varmeaktuator - Tilbakemelding",
+                            "Kjoleaktuator - Tilbakemelding", "CO2 i rom - Verdi", "Tilstedesensor -"]
 
       cold: "blue_boks_rom_liggende.png"
       normal: "boks_rom_liggende.png"
@@ -93,25 +93,24 @@ levels:
   # names of roms and corresponding names of the objects in the database that are needed for the level widget
   roomNames:
     standard:
-      A2001: 2001
-      A2002: 2002
-      A2003: 2003
-      A2004: 2004
-      A2005: 2005
-      A2006: 2006
-      A2007: 2007
-      A2008: 2008
-      A2011: 2011
-      A2012: 2012
-      A2013: 2013
-      A2014: 2014
-      A2016: 2016
-      A2016A: 2116
+      A3001: A3001
+      A3002: A3002
+      A3003: A3003
+      A3004: A3004
+      A3006: A3006
+      A3007: A3007
+      A3008: A3008
+      A3009: A3009
+      A3011: A3011
+      A3012: A3012
+      A3013: A3013
+      A3014: A3014
+      A3016: A3016
     lying:
-      A2017A: 2017A
-      A2017B: 2017B
-      A2018: 2018
-      A2019: 2019
-      A2021: 2021
+      A3017: A3017
+      A3018A: A3018
+      A3019: A3019
+      A3020: A3020
+
 
 

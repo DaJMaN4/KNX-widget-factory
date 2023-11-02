@@ -59,6 +59,8 @@ def run():
         if levelManagerObject.isEnable():
             levelManagerObject.run()
             print("Level and framework created and saved in output folder")
+        else:
+            print("Level and framework creation disabled in config.yml")
 
     return
     # Create object of TrendWidgetFactory class

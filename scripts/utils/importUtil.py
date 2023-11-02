@@ -13,23 +13,21 @@ class ImportManager:
 
             for fileSchematics in os.listdir(self.path + "/schematics/" + folder):
                 fileImport = file.replace(".tar", ".yml")
-                print(fileImport, "   ", fileSchematics)
                 if fileImport == fileSchematics:
                     print("File with name " + file + " already exists in schematics, skipping...")
                     return
+            if file.endswith(".tar"):
+                tar = tarfile.open(os.path.join(self.path + "/import/" + folder, file), "r")
+                for member in tar.getmembers():
+                    if member.name == "./data.json":
+                        f = tar.extractfile(member)
+                        if f is not None:
+                            content = f.read()
+                            self.write(ast.literal_eval(content.decode('utf-8')), file, folder)
+                tar.close()
             else:
-                if file.endswith(".tar"):
-                    tar = tarfile.open(os.path.join(self.path + "/import/" + folder, file), "r")
-                    for member in tar.getmembers():
-                        if member.name == "./data.json":
-                            f = tar.extractfile(member)
-                            if f is not None:
-                                content = f.read()
-                                self.write(ast.literal_eval(content.decode('utf-8')), file, folder)
-                    tar.close()
-                else:
-                    print("File" + file + " is not supported, use .tar format")
-                    exit(1)
+                print("File" + file + " is not supported, use .tar format")
+                exit(1)
 
     def write(self, data: dict, name, folder):
         # Replace .tar extension to .yml
@@ -53,7 +51,7 @@ class ImportManager:
             # If file with the same name as defined in config.yml
             if schematicFile == schematicName or onlyOne or schematicName == "":
                 # Open file as "r" which means read only. "file" is a variable name of opened file
-                with open(self.path + "/schematics/" + folder + schematicFile, 'r') as file:
+                with open(self.path + "/schematics/" + folder + "/" + schematicFile, 'r') as file:
                     # Load yaml file to dictionary variable
                     return yaml.safe_load(file)
         return None
