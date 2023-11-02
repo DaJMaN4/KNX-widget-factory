@@ -20,6 +20,7 @@ class LevelManager:
         self.boxesIDs = {}
         self.templateObjects = {}
         self.sizeOfBoxes = {}
+        self.objectPlacements = {}
 
     def importSchematics(self):
         self.importUtil.open("frameworks")
@@ -77,7 +78,26 @@ class LevelManager:
                                 if self.templateObjects.get(box) is None:
                                     self.templateObjects[box] = [boxType, obj]
                                 else:
-                                    self.templateObjects[box].append(obj)
+                                    self.templateObjects[box].append(obj)  # templates room databox from config.yml
+
+    def getObjectsPlacement(self):
+        table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
+        for row in table:
+            ID = row[0]
+            name = str(row[1])
+            for roomTypes in self.roomNames:
+                for roomName in self.roomNames[roomTypes]:
+                    if roomName in name:
+                        for obj in self.templateObjects:
+                            if obj == roomName:
+                                for objectName in self.boxData[roomTypes]["objectsNames"]:
+                                    if objectName in name:
+                                        placementX = int(self.templateObjects[obj][1]["locx"]) - self.boxesIDs[obj][3]
+                                        placementY = int(self.templateObjects[obj][1]["locy"]) - self.boxesIDs[obj][2]
+                                        if self.objectPlacements.get(objectName) is None: # add template room databox from config.yml
+                                            self.objectPlacements[objectName] = [roomTypes, placementY, placementX]
+                                            box = self.boxesIDs[obj]
+        print(self.objectPlacements)
 
     def createObjects(self):
         for boxType in self.roomNames:
@@ -93,17 +113,6 @@ class LevelManager:
     # change id of object by finding the same name in database that corresponds to room and
     # object name sample in config.yml
 
-    def gettingDataFromTemplates(self):
-        for obj in self.boxData:
-            template = self.boxData[obj].get("template")
-            table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
-            for row in table:
-                ID = row[0]
-                name = str(row[1])
-                if template in name:
-                    print("woo ", name, " ", ID)
-
-
     def iteratingThroughObjects(self, boxType, boxName, boxTemplate):
         table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
         for row in table:
@@ -112,10 +121,10 @@ class LevelManager:
             if boxName in name:
                 for objectName in self.boxData[boxType]["objectsNames"]:
                     if objectName in name:
-                        #print("Found object " + name + " in database " + objectName + " with id " + str(ID))
-                        #obj["object"] = ID
-                        #obj["statusobject"] = ID
-                        pass
+                        template = self.templateObjects[boxTemplate]
+                        #template["object"] = ID
+                        #template["statusobject"] = ID
+
 
     def isEnable(self):
         return self.isEnabled
@@ -126,5 +135,6 @@ class LevelManager:
         self.getNamesLocations()
         self.getBoxesIDs()
         self.getObjectsFromTemplates()
+        self.getObjectsPlacement()
         self.createObjects()
-        self.gettingDataFromTemplates()
+
