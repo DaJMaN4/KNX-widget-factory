@@ -60,17 +60,17 @@ class Config:
     def getTrendRoomWidgetsObjectsNamesWidget(self):
         return self.prime_service['trendWidgets']['objectsNamesWidget']
 
-    def getCreateLevels(self):
-        return bool(self.prime_service['createLevels'])
+    def getCreateStructures(self):
+        return bool(self.prime_service['createStructures'])
 
-    def getLevelsSchematicLevel(self):
-        return self.prime_service['levels']['schematicLevel']
+    def getStructureSchematicLevel(self):
+        return self.prime_service['structure']['schematicLevel']
 
-    def getLevelsSchematicFramework(self):
-        return self.prime_service['levels']['schematicFramework']
+    def getStructureSchematicFramework(self):
+        return self.prime_service['structure']['schematicFramework']
 
-    def getLevelsBoxData(self):
-        return self.prime_service['levels']['boxData']
+    def getStructureBoxData(self):
+        return self.prime_service['structure']['boxData']
 
-    def getLevelsRoomNames(self):
-        return self.prime_service['levels']['roomNames']
+    def getStructureRoomNames(self):
+        return self.prime_service['structure']['roomNames']

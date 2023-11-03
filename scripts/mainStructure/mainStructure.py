@@ -1,12 +1,11 @@
-import os
-import yaml
 from scripts import main
 from scripts.utils import importUtil
 import json
 import tarfile
 import io
 
-class LevelManager:
+
+class mainStructureManager:
     def __init__(self, path, schematicNameFramework, schematicNameLevel, boxData, roomNames):
         self.importUtil = importUtil.ImportManager(path)
         self.path = path
@@ -35,7 +34,6 @@ class LevelManager:
         self.schematicLevelData = self.importUtil.getData(self.schematicNameLevel, "levels")
         self.outPutDataLevel = self.schematicLevelData
         self.schematicLevelData = self.schematicLevelData["plan"]
-
 
     def getNamesLocations(self):
         for obj in self.schematicLevelData["objects"]:
@@ -97,9 +95,11 @@ class LevelManager:
                 for roomName in self.roomNames[roomTypes]:
                     if roomName not in name:
                         continue
+
                     for obj in self.templateObjects:
                         if obj != roomName:
                             continue
+
                         for singleObjNum in range(len(self.templateObjects[obj])):
                             if singleObjNum == 0:
                                 continue
@@ -107,11 +107,15 @@ class LevelManager:
                                 continue
                             if self.templateObjects[obj][singleObjNum]["object"] != ID:
                                 continue
+
                             for objectName in self.boxData[roomTypes]["objectsNames"]:
                                 if objectName not in name:
                                     continue
-                                placementX = int(self.templateObjects[obj][singleObjNum]["locx"]) - self.boxesIDs[obj][3]
-                                placementY = int(self.templateObjects[obj][singleObjNum]["locy"]) - self.boxesIDs[obj][2]
+
+                                placementX = int(self.templateObjects[obj][singleObjNum]["locx"]) - self.boxesIDs[obj][
+                                    3]
+                                placementY = int(self.templateObjects[obj][singleObjNum]["locy"]) - self.boxesIDs[obj][
+                                    2]
                                 if self.objectPlacements.get(roomTypes) is None:
                                     self.objectPlacements[roomTypes] = [[objectName, placementY, placementX]]
                                 else:
@@ -125,18 +129,20 @@ class LevelManager:
                 for boxTemplate in self.templateObjects:
                     if self.templateObjects[boxTemplate][0] != boxType:
                         continue
-                    for singleObjNum in range(len(self.templateObjects[boxTemplate])):# good
+
+                    for singleObjNum in range(len(self.templateObjects[boxTemplate])):  # good
                         if singleObjNum == 0:
                             continue
                         if self.templateObjects[boxTemplate][singleObjNum].get("object") is None:
                             continue
                         doneRoomObj = None
                         table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
+
                         for row in table:
                             ID = row[0]
                             name = str(row[1])
                             if ID == self.templateObjects[boxTemplate][singleObjNum]["object"]:
-                                #print(ID, "  ", self.templateObjects[boxTemplate][singleObjNum]["object"], "  " , name, "  ", boxTemplate, "  ", singleObjNum, "  ", boxType, "  ", boxName, "  ", name)
+
                                 for roomObj in self.boxData[boxType]["objectsNames"]:
                                     if roomObj in name:
                                         if boxTemplate in name:
@@ -146,11 +152,6 @@ class LevelManager:
                                     continue
                                 break
                         self.iteratingThroughObjects(boxType, boxName, boxTemplate, singleObjNum, doneRoomObj)
-
-
-    # Has the same type of box and iterates through all objects in that box,
-    # change id of object by finding the same name in database that corresponds to room and
-    # object name sample in config.yml
 
     def iteratingThroughObjects(self, boxType, boxName, boxTemplate, singleObjNum, objName):
         table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
@@ -171,23 +172,35 @@ class LevelManager:
                 if placement[0] == objName:
                     newObject["locx"] = self.boxesIDs[boxName][3] + placement[2]
                     newObject["locy"] = self.boxesIDs[boxName][2] + placement[1]
-                    print("assignesd", newObject["locx"], "  ", newObject["locy"], "  ", boxName, "  ", objName)
                     break
             self.outPutDataLevel["plan"]["objects"].append(newObject)
 
-            #print(self.outPutDataLevel)
+    def changeRoomNamesPlace(self):
+        placements = {}
+        for obj in self.schematicLevelData["objects"]:
+            if obj.get("name") is not None:
+                for template in self.templateObjects:
+                    if template == obj["name"]:
+                        if template == self.boxData[self.templateObjects[template][0]]["template"]:
+                            placements[template] = \
+                                [int(self.namesLocations[template][0]) - self.boxesIDs[template][3],
+                                 int(self.namesLocations[template][1]) - self.boxesIDs[template][2]]
 
-            #newObject["statusobject"] = ID
-                #print(boxType, "  ", boxName, "  ", boxTemplate, "  ", name, "  ", self.templateObjects[boxTemplate][singleObjNum])
-                #template = self.templateObjects[boxTemplate]
-                #template["object"] = ID
-                #template["statusobject"] = ID
+        for obj in self.outPutDataLevel["plan"]["objects"]:
+            if obj.get("name") is not None:
+                for name in self.namesLocations:
+                    if name == obj["name"]:
+                        for placementsType in placements:
+                            if self.namesLocations[placementsType][2] == self.namesLocations[name][2]:
+                                obj["locx"] = placements[placementsType][0] + self.boxesIDs[name][3]
+                                obj["locy"] = placements[placementsType][1] + self.boxesIDs[name][2]
+                                break
 
     def saveLevel(self):
         json_object = json.dumps(self.outPutDataLevel, indent=4)
 
         # Create tar file with name Trend_Widget_Rom-<room number>.tar
-        file = tarfile.open(self.path + "/" + "output/widgets/Trend_Widget_Rom-" + "bla" + ".tar", "w", None,
+        file = tarfile.open(self.path + "/" + "output/levels/Levels_" + "bla" + ".tar", "w", None,
                             tarfile.GNU_FORMAT)
 
         # Create file inside tar file called "."
@@ -207,8 +220,6 @@ class LevelManager:
         # Close and save tar file
         file.close()
 
-
-
     def isEnable(self):
         return self.isEnabled
 
@@ -220,4 +231,5 @@ class LevelManager:
         self.getObjectsFromTemplates()
         self.getObjectsPlacement()
         self.createObjects()
+        self.changeRoomNamesPlace()
         self.saveLevel()

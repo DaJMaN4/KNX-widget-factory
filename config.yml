@@ -61,10 +61,10 @@ trendWidgets:
 #                                       Config for Levels and frameworks
 #-----------------------------------------------------------------------------------------------------------------------
 
-# True if levels should be created, False if not
-createLevels: True
+# True if mainStructure should be created, False if not
+createStructures: True
 
-levels:
+structure:
   # if there is just one schematic inside the folder, then you can leave this empty
   # name of the schematic to use for the trend widget
   schematicLevel: "Vis-Romvisualisering_3_etg_for_testing-Bygg_A_GTW-2023.11.02-11.18.yml"
@@ -108,7 +108,7 @@ levels:
       A3016: A3016
     lying:
       A3017: A3017
-      A3018A: A3018
+      A3018: A3018
       A3019: A3019
       A3020: A3020
 
