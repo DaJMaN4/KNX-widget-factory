@@ -12,9 +12,9 @@ except ImportError:
 
 import ConfigManager, databaseManager
 from widgets import ImportWidgets, InfoWidgetFactory, TrendWidgetFactory
-from mainStructure import mainStructure
+from structures import mainStructure, frameworkStructure
 
-
+trendDictionary = None
 # Get path of WidgetFactory folder
 path = os.path.dirname(os.path.dirname(__file__))
 
@@ -48,20 +48,6 @@ def run():
     # Run open function of ImportManager class
     importManager.open()
 
-    if config.getCreateStructures():
-        mainStructureManagerObject = mainStructure.mainStructureManager(
-            path,
-            config.getStructureSchematicFramework(),
-            config.getStructureSchematicLevel(),
-            config.getStructureBoxData(),
-            config.getStructureRoomNames()
-        )
-        if mainStructureManagerObject.isEnable():
-            mainStructureManagerObject.run()
-            print("Level and framework created and saved in output folder")
-        else:
-            print("Level and framework creation disabled in config.yml")
-
     # Create object of TrendWidgetFactory class
     if config.getCreateTrendWidgets():
         trendWidgetFactory = TrendWidgetFactory.TrendWidgetFactory(
@@ -77,6 +63,21 @@ def run():
         # If module is enabled then print message
         if trendWidgetFactory.isEnable():
             print("All trend widgets created and saved in output folder")
+
+    if config.getCreateStructures():
+        mainStructureManagerObject = mainStructure.mainStructureManager(
+            path,
+            config.getStructureSchematicFramework(),
+            config.getStructureSchematicLevel(),
+            config.getStructureBoxData(),
+            config.getStructureRoomNames(),
+            config.getCreateTrendWidgets()
+        )
+        if mainStructureManagerObject.isEnable():
+            mainStructureManagerObject.run()
+            print("Level and framework created and saved in output folder")
+        else:
+            print("Level and framework creation disabled in config.yml")
 
     # Create object of InfoWidgetFactory class
     if config.getCreateInfoRoomWidgets():
@@ -97,9 +98,27 @@ def run():
             print("All info widgets created and saved in output folder")
 
 
+def createFrameworkStructure():
+    frameworkStructureObject = frameworkStructure.frameworkStructure(
+        path
+    )
+    if frameworkStructureObject.isEnable():
+        frameworkStructureObject.run()
+        print("Level and framework created and saved in output folder")
+
+
 # Getter for databaseManagerObject
 def getDatabaseObject():
     return databaseManagerObject
+
+
+def getTrendDictionary():
+    return trendDictionary
+
+
+def setTrendDictionary(dictionary):
+    global trendDictionary
+    trendDictionary = dictionary
 
 
 # Getter for path

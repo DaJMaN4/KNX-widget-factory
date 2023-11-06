@@ -5,7 +5,6 @@ import yaml
 import os
 from scripts import main
 
-
 class TrendWidgetFactory:
     # Initialize TrendWidgetFactory class it sets all variables when creating the object in the main class
     def __init__(self, roomNumber, widgetName, addPrefix, objectsNames, path, schematicName):
@@ -182,5 +181,8 @@ class TrendWidgetFactory:
 
             # Close and save tar file
             file.close()
+
+            # Add trend dictionary to the main class
+            main.setTrendDictionary(self.dictionary)
 
             print("Trend_Widget_Rom-" + key + ".tar created")

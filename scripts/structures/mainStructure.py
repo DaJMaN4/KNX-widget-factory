@@ -6,13 +6,14 @@ import io
 
 
 class mainStructureManager:
-    def __init__(self, path, schematicNameFramework, schematicNameLevel, boxData, roomNames):
+    def __init__(self, path, schematicNameFramework, schematicNameLevel, boxData, roomNames, doCreateTrend):
         self.importUtil = importUtil.ImportManager(path)
         self.path = path
         self.schematicNameFramework = schematicNameFramework
         self.schematicNameLevel = schematicNameLevel
         self.boxData = boxData
         self.roomNames = roomNames
+        self.doCreateTrend = doCreateTrend
         self.isEnabled = True
         self.schematicFrameworkData = None
         self.schematicLevelData = None
@@ -196,6 +197,9 @@ class mainStructureManager:
                                 obj["locy"] = placements[placementsType][1] + self.boxesIDs[name][2]
                                 break
 
+    def createTrendIcons(self):
+        self.trendDictionary = main.g
+
     def saveLevel(self):
         json_object = json.dumps(self.outPutDataLevel, indent=4)
 
@@ -232,4 +236,8 @@ class mainStructureManager:
         self.getObjectsPlacement()
         self.createObjects()
         self.changeRoomNamesPlace()
+        if self.doCreateTrend:
+            self.createTrendIcons()
         self.saveLevel()
+
+
