@@ -61,3 +61,7 @@ class DatabaseManager:
         table = self.connection.execute("SELECT " + columns + " from " + table)
         # Return table with chosen columns
         return table
+
+    def getBiggestWidgetID(self):
+        table = self.connection.execute("SELECT id from visfloors ORDER BY id DESC LIMIT 1")
+        return table.fetchone()[0]

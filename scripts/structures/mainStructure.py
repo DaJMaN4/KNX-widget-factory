@@ -85,7 +85,6 @@ class mainStructureManager:
                                     self.templateObjects[box] = [boxType, obj]
                                 else:
                                     self.templateObjects[box].append(obj)  # templates room databox from config.yml
-        #print("template", self.templateObjects)
 
     def getObjectsPlacement(self):
         table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
@@ -121,8 +120,6 @@ class mainStructureManager:
                                     self.objectPlacements[roomTypes] = [[objectName, placementY, placementX]]
                                 else:
                                     self.objectPlacements[roomTypes].append([objectName, placementY, placementX])
-
-        #print(self.objectPlacements)
 
     def createObjects(self):
         for boxType in self.roomNames:

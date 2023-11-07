@@ -139,6 +139,8 @@ class InfoWidgetFactory:
             # Replace placeholders in file with room number
             self.dictionary["plan"]["name"] = widgetNameAdd
 
+            self.dictionary["plan"]["id"] = main.newBiggestWidgetID("trends", key)
+
             # Transform dictionary to json object
             json_object = json.dumps(self.dictionary, indent=4)
 

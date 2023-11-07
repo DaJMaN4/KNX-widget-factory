@@ -14,7 +14,8 @@ import ConfigManager, databaseManager
 from widgets import ImportWidgets, InfoWidgetFactory, TrendWidgetFactory
 from structures import mainStructure, frameworkStructure
 
-trendDictionary = None
+trendWidgetDictionary = {}
+infoWidgetDictionary = {}
 boxesIDs = None
 # Get path of WidgetFactory folder
 path = os.path.dirname(os.path.dirname(__file__))
@@ -34,6 +35,8 @@ if not os.path.exists(path + "/database"):
 # Create object of DatabaseManager class
 databaseManagerObject = databaseManager.DatabaseManager(path)
 databaseManagerObject.unZipData()
+
+biggestWidgetID = databaseManagerObject.getBiggestWidgetID()
 
 
 # Runs everything
@@ -92,7 +95,6 @@ def run():
     )
     frameworkStructureObject.run()
 
-    return
     # Create object of InfoWidgetFactory class
     if config.getCreateInfoRoomWidgets():
         infoWidgetFactory = InfoWidgetFactory.InfoWidgetFactory(
@@ -110,9 +112,9 @@ def run():
         # If module is enabled then print message
         if infoWidgetFactory.isEnable():
             print("All info widgets created and saved in output folder")
-
-
-
+    print("saawdawdawdawdadawdwafafwaga")
+    print(infoWidgetDictionary)
+    print(trendWidgetDictionary)
 
 
 # Getter for databaseManagerObject
@@ -120,17 +122,35 @@ def getDatabaseObject():
     return databaseManagerObject
 
 
-def getTrendDictionary():
-    return trendDictionary
+def getTrendWidgetDictionary():
+    return trendWidgetDictionary
+
+
+def getInfoWidgetDictionary():
+    return infoWidgetDictionary
 
 
 def getBoxesIDs():
     return boxesIDs
 
 
-def setTrendDictionary(dictionary):
-    global trendDictionary
-    trendDictionary = dictionary
+def getBiggestWidgetID():
+    return biggestWidgetID
+
+
+def newBiggestWidgetID(widgetType, room):
+    global biggestWidgetID
+    biggestWidgetID += 1
+    if widgetType == "trend":
+        global trendWidgetDictionary
+        trendWidgetDictionary[room] = biggestWidgetID
+    elif widgetType == "info":
+        global infoWidgetDictionary
+        infoWidgetDictionary[room] = biggestWidgetID
+    else:
+        print("Something went very wrong, it cannot be determined what ID of widgets are")
+        exit(1)
+    return biggestWidgetID
 
 
 def setBoxesIDs(ids):
