@@ -10,7 +10,7 @@ plan:
   layout: 0
   locx: ''
   locy: ''
-  name: Rammeverk romstyring 3.etg for testing
+  name: Rammeverk romstyring 3.etg for testing old
   objects:
   - cls: ''
     floor: 157
@@ -217,22 +217,6 @@ plan:
     visparams: ''
   - cls: ''
     floor: 157
-    id: 3812
-    locx: 100
-    locy: 560
-    name: ''
-    nobg: 1
-    notouch: 0
-    object: 65824
-    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":85,"height":120,"icon_default":"Boksmidten.png","icon_touch":"","icons_add":[],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
-    pincode: ''
-    readonly: 0
-    sortorder: 9
-    statusobject: 65824
-    type: 1
-    visparams: ''
-  - cls: ''
-    floor: 157
     id: 3813
     locx: 205
     locy: 560
@@ -409,22 +393,6 @@ plan:
     visparams: ''
   - cls: ''
     floor: 157
-    id: 3824
-    locx: 1090
-    locy: 450
-    name: ''
-    nobg: 1
-    notouch: 0
-    object: 65837
-    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":120,"height":85,"icon_default":"boks_rom_liggende.png","icon_touch":"","icons_add":[],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":74,"backdrop":0}'
-    pincode: ''
-    readonly: 0
-    sortorder: 9
-    statusobject: 65837
-    type: 1
-    visparams: ''
-  - cls: ''
-    floor: 157
     id: 3825
     locx: 1090
     locy: 554
@@ -487,8 +455,40 @@ plan:
     statusobject: 65827
     type: 1
     visparams: ''
+  - cls: ''
+    floor: 157
+    id: 3972
+    locx: 100
+    locy: 560
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 65824
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":85,"height":120,"icon_default":"Boksmidten.png","icon_touch":"","icons_add":[{"min":0,"max":0,"icon":"Boksmidten.png"},{"min":1,"max":1,"icon":"Boksvarm.png"},{"min":2,"max":2,"icon":"Bokskald.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 0
+    sortorder: 9
+    statusobject: 65824
+    type: 1
+    visparams: ''
+  - cls: ''
+    floor: 157
+    id: 3973
+    locx: 1090
+    locy: 450
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 65837
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":120,"height":85,"icon_default":"boks_rom_liggende.png","icon_touch":"","icons_add":[{"min":0,"max":0,"icon":"boks_rom_liggende.png"},{"min":1,"max":1,"icon":"blue_boks_rom_liggende.png"},{"min":2,"max":2,"icon":"red_boks_rom_liggende.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":74,"backdrop":0}'
+    pincode: ''
+    readonly: 0
+    sortorder: 9
+    statusobject: 65837
+    type: 1
+    visparams: ''
   pincode: ''
-  sortorder: 113
+  sortorder: 112
   touch_bgcolor: ''
   touch_param: ''
   type: layout

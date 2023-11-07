@@ -15,6 +15,7 @@ from widgets import ImportWidgets, InfoWidgetFactory, TrendWidgetFactory
 from structures import mainStructure, frameworkStructure
 
 trendDictionary = None
+boxesIDs = None
 # Get path of WidgetFactory folder
 path = os.path.dirname(os.path.dirname(__file__))
 
@@ -62,7 +63,8 @@ def run():
         trendWidgetFactory.run()
         # If module is enabled then print message
         if trendWidgetFactory.isEnable():
-            print("All trend widgets created and saved in output folder")
+            pass
+            #print("All trend widgets created and saved in output folder")
 
     if config.getCreateStructures():
         mainStructureManagerObject = mainStructure.mainStructureManager(
@@ -75,10 +77,22 @@ def run():
         )
         if mainStructureManagerObject.isEnable():
             mainStructureManagerObject.run()
-            print("Level and framework created and saved in output folder")
+            pass
+            #print("Level and framework created and saved in output folder")
         else:
-            print("Level and framework creation disabled in config.yml")
+            pass
+            #print("Level and framework creation disabled in config.yml")
 
+    frameworkStructureObject = frameworkStructure.frameworkStructure(
+        path,
+        config.getStructureSchematicFramework(),
+        config.getStructureSchematicLevel(),
+        config.getStructureBoxData(),
+        config.getStructureRoomNames()
+    )
+    frameworkStructureObject.run()
+
+    return
     # Create object of InfoWidgetFactory class
     if config.getCreateInfoRoomWidgets():
         infoWidgetFactory = InfoWidgetFactory.InfoWidgetFactory(
@@ -98,13 +112,7 @@ def run():
             print("All info widgets created and saved in output folder")
 
 
-def createFrameworkStructure():
-    frameworkStructureObject = frameworkStructure.frameworkStructure(
-        path
-    )
-    if frameworkStructureObject.isEnable():
-        frameworkStructureObject.run()
-        print("Level and framework created and saved in output folder")
+
 
 
 # Getter for databaseManagerObject
@@ -116,9 +124,18 @@ def getTrendDictionary():
     return trendDictionary
 
 
+def getBoxesIDs():
+    return boxesIDs
+
+
 def setTrendDictionary(dictionary):
     global trendDictionary
     trendDictionary = dictionary
+
+
+def setBoxesIDs(ids):
+    global boxesIDs
+    boxesIDs = ids
 
 
 # Getter for path

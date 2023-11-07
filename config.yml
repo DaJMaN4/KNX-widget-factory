@@ -13,8 +13,8 @@ roomWidgets:
   # prefix to the name of the widget
   widgetName: "Kontor A-%romName%"
 
-  # True if widget name should be added unchanged to the widget. i.e "Kontor A-A2001" with current settings
-  # False if room prefix should be deleted from the widget name. i.e "Kontor A-2001" with current settings
+  # True if widget name should be added unchanged to the widget. i.e. "Kontor A-A2001" with current settings
+  # False if room prefix should be deleted from the widget name. i.e. "Kontor A-2001" with current settings
   addPrefixToWidgetName: False
 
   # prefix for name of the widget in files on LM
@@ -77,18 +77,14 @@ structure:
       objectsNames: ["Romtemperatur - Verdi", "Varmeaktuator - Tilbakemelding",
                             "Kjoleaktuator - Tilbakemelding", "CO2 i rom - Verdi", "Tilstedesensor -"]
 
-      cold: "Bokskald.png"
       normal: "Boksmidten.png"
-      warm: "Boksvarm.png"
 
     lying:
       template: "A3017"
       objectsNames: ["Romtemperatur - Verdi", "Varmeaktuator - Tilbakemelding",
                             "Kjoleaktuator - Tilbakemelding", "CO2 i rom - Verdi", "Tilstedesensor -"]
 
-      cold: "blue_boks_rom_liggende.png"
       normal: "boks_rom_liggende.png"
-      warm: "red_boks_rom_liggende.png"
 
   # names of roms and corresponding names of the objects in the database that are needed for the level widget
   roomNames:

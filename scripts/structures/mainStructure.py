@@ -85,7 +85,7 @@ class mainStructureManager:
                                     self.templateObjects[box] = [boxType, obj]
                                 else:
                                     self.templateObjects[box].append(obj)  # templates room databox from config.yml
-        print("template", self.templateObjects)
+        #print("template", self.templateObjects)
 
     def getObjectsPlacement(self):
         table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
@@ -122,7 +122,7 @@ class mainStructureManager:
                                 else:
                                     self.objectPlacements[roomTypes].append([objectName, placementY, placementX])
 
-        print(self.objectPlacements)
+        #print(self.objectPlacements)
 
     def createObjects(self):
         for boxType in self.roomNames:
@@ -137,8 +137,8 @@ class mainStructureManager:
                         if self.templateObjects[boxTemplate][singleObjNum].get("object") is None:
                             continue
                         doneRoomObj = None
-                        table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
 
+                        table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
                         for row in table:
                             ID = row[0]
                             name = str(row[1])
@@ -198,7 +198,8 @@ class mainStructureManager:
                                 break
 
     def createTrendIcons(self):
-        self.trendDictionary = main.g
+        pass
+        #self.trendDictionary = main.g
 
     def saveLevel(self):
         json_object = json.dumps(self.outPutDataLevel, indent=4)
@@ -239,5 +240,6 @@ class mainStructureManager:
         if self.doCreateTrend:
             self.createTrendIcons()
         self.saveLevel()
+        main.setBoxesIDs(self.boxesIDs)
 
 
