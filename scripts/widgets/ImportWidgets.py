@@ -2,14 +2,14 @@ import ast
 import os
 import tarfile
 import yaml
-from scripts import main
 
 
 class ImportManager:
     # Initialize TrendWidgetFactory class it sets all variables when creating the object in main class
-    def __init__(self, path, roomObjectNames):
+    def __init__(self, path, roomObjectNames, main):
         self.path = path
         self.roomObjectNames = roomObjectNames
+        self.main = main
         self.type = None
 
     # Open function is called from main class and it contains everything to run successfully the module it goes
@@ -156,7 +156,7 @@ class ImportManager:
     # is certain that it is the same object, so it replaces object name with a placeholder that will be used in the
     # future to replace it with a real object id of an object of a room.
     def importInfoWidget(self, data):
-        table = main.getDatabaseObject().getTableColumns(["id, name"], "objects")
+        table = self.main.getDatabaseObject().getTableColumns(["id, name"], "objects")
         # Goes through all rows in table
         for row in table:
             # Get object from data which is data from the file that is being imported

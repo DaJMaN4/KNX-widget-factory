@@ -3,11 +3,10 @@ import json
 import tarfile
 import yaml
 import os
-from scripts import main
 
 class TrendWidgetFactory:
     # Initialize TrendWidgetFactory class it sets all variables when creating the object in the main class
-    def __init__(self, roomNumber, widgetName, addPrefix, objectsNames, path, schematicName):
+    def __init__(self, roomNumber, widgetName, addPrefix, objectsNames, path, schematicName, main):
         self.dictionary = None
         self.prime_service = None
         self.roomNumber = roomNumber
@@ -16,6 +15,7 @@ class TrendWidgetFactory:
         self.objectsNames = objectsNames
         self.path = path
         self.schematicName = schematicName
+        self.main = main
         self.disable = False
         # Check if room number is with word or not and writes it to a boolean variable
         # Room with word is something like A2001 and room without word is 2001
@@ -61,7 +61,7 @@ class TrendWidgetFactory:
         global oldKey
         if self.disable:
             return
-        table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
+        table = self.main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
         # Create empty dictionary
         valid = {}
         # Go through all rows in table
@@ -86,7 +86,7 @@ class TrendWidgetFactory:
                                 valid[romName] = [[ID, name]]
 
         # Get from table in database called "trends" id, name and category of all trends
-        table = main.getDatabaseObject().getTableColumns(["id", "category"], "trends")
+        table = self.main.getDatabaseObject().getTableColumns(["id", "category"], "trends")
         # Create empty dictionary
         assigned = {}
         # Go through all rows in table
@@ -158,7 +158,7 @@ class TrendWidgetFactory:
             # Replace placeholders in file with room number
             self.dictionary["plan"]["name"] = widgetName
 
-            self.dictionary["plan"]["id"] = main.newBiggestWidgetID("trends", key)
+            self.dictionary["plan"]["id"] = self.main.newBiggestWidgetID("trend", key)
 
             # Create a json object from dictionary
             json_object = json.dumps(self.dictionary, indent=4)
@@ -183,8 +183,5 @@ class TrendWidgetFactory:
 
             # Close and save tar file
             file.close()
-
-            # Add trend dictionary to the main class
-            main.setTrendDictionary(self.dictionary)
 
             print("Trend_Widget_Rom-" + key + ".tar created")

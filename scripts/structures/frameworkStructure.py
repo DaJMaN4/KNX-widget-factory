@@ -1,12 +1,11 @@
 import io
 import tarfile
 from scripts.utils import importUtil
-from scripts import main
 import json
 
 
 class frameworkStructure:
-    def __init__(self, path, schematicNameFramework, schematicNameLevel, boxData, roomNames):
+    def __init__(self, path, schematicNameFramework, schematicNameLevel, boxData, roomNames, main):
         self.schematicFrameworkData = None
         self.disable = False
         self.importUtil = importUtil .ImportManager(path)
@@ -15,7 +14,8 @@ class frameworkStructure:
         self.schematicNameLevel = schematicNameLevel
         self.boxData = boxData
         self.roomNames = roomNames
-        self.boxesIDs = main.getBoxesIDs()
+        self.main = main
+        self.boxesIDs = self.main.getBoxesIDs()
         self.boxObjects = {}
         self.boxParameters = {}
         if self.boxesIDs is None:
@@ -31,7 +31,7 @@ class frameworkStructure:
         self.schematicFrameworkData = self.schematicFrameworkData["plan"]
 
     def findBoxObjects(self):
-        table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
+        table = self.main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
         for row in table:
             ID = row[0]
             name = str(row[1])
@@ -62,6 +62,7 @@ class frameworkStructure:
                                 paramsDict = box["params"]
                                 paramsDict = json.loads(paramsDict)
                                 paramsDict["icons_add"] = self.boxParameters[self.boxData[roomType]["template"]]
+                                paramsDict["widget"] = self.main.getInfoWidgetDictionary(roomNumber)
                                 paramsDict = str(paramsDict)
                                 paramsDict = paramsDict.replace("'", '"')
                                 paramsDict = paramsDict.replace(" ", "")

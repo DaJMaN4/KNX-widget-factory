@@ -3,12 +3,12 @@ import json
 import tarfile
 import yaml
 import os
-from scripts import main
+
 
 class InfoWidgetFactory:
     # Initialize TrendWidgetFactory class it sets all variables when creating the object in main class
     def __init__(self, roms, addPrefixToName, widgetName, addPrefixToWidgetNameInFiles, widgetNameInFiles,
-                 objectsNames, path, schematicName):
+                 objectsNames, path, schematicName, main):
         self.roms = roms
         self.addPrefixToName = addPrefixToName
         self.widgetName = widgetName
@@ -17,6 +17,7 @@ class InfoWidgetFactory:
         self.objectsNames = objectsNames
         self.path = path
         self.schematicName = schematicName
+        self.main = main
         self.disable = False
         self.dictionary = None
         # Check if file exists in schematics folder by running method of this class
@@ -64,7 +65,7 @@ class InfoWidgetFactory:
         if self.disable:
             return
         # Get from table in database called "objects" id and name of all objects
-        table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
+        table = self.main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
         valid = {}
         # Goes through all rows in table
         for row in table:
@@ -139,7 +140,7 @@ class InfoWidgetFactory:
             # Replace placeholders in file with room number
             self.dictionary["plan"]["name"] = widgetNameAdd
 
-            self.dictionary["plan"]["id"] = main.newBiggestWidgetID("trends", key)
+            self.dictionary["plan"]["id"] = self.main.newBiggestWidgetID("info", key)
 
             # Transform dictionary to json object
             json_object = json.dumps(self.dictionary, indent=4)

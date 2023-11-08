@@ -1,4 +1,3 @@
-from scripts import main
 from scripts.utils import importUtil
 import json
 import tarfile
@@ -6,7 +5,7 @@ import io
 
 
 class mainStructureManager:
-    def __init__(self, path, schematicNameFramework, schematicNameLevel, boxData, roomNames, doCreateTrend):
+    def __init__(self, path, schematicNameFramework, schematicNameLevel, boxData, roomNames, doCreateTrend, main):
         self.importUtil = importUtil.ImportManager(path)
         self.path = path
         self.schematicNameFramework = schematicNameFramework
@@ -14,6 +13,7 @@ class mainStructureManager:
         self.boxData = boxData
         self.roomNames = roomNames
         self.doCreateTrend = doCreateTrend
+        self.main = main
         self.isEnabled = True
         self.schematicFrameworkData = None
         self.schematicLevelData = None
@@ -87,7 +87,7 @@ class mainStructureManager:
                                     self.templateObjects[box].append(obj)  # templates room databox from config.yml
 
     def getObjectsPlacement(self):
-        table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
+        table = self.main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
         for row in table:
             ID = row[0]
             name = str(row[1])
@@ -135,7 +135,7 @@ class mainStructureManager:
                             continue
                         doneRoomObj = None
 
-                        table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
+                        table = self.main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
                         for row in table:
                             ID = row[0]
                             name = str(row[1])
@@ -152,7 +152,7 @@ class mainStructureManager:
                         self.iteratingThroughObjects(boxType, boxName, boxTemplate, singleObjNum, doneRoomObj)
 
     def iteratingThroughObjects(self, boxType, boxName, boxTemplate, singleObjNum, objName):
-        table = main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
+        table = self.main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
         for row in table:
             ID = row[0]
             name = str(row[1])
@@ -237,6 +237,6 @@ class mainStructureManager:
         if self.doCreateTrend:
             self.createTrendIcons()
         self.saveLevel()
-        main.setBoxesIDs(self.boxesIDs)
+        self.main.setBoxesIDs(self.boxesIDs)
 
 
