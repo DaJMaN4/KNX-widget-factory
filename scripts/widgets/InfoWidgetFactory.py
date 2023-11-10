@@ -3,6 +3,7 @@ import json
 import tarfile
 import yaml
 import os
+import copy
 
 
 class InfoWidgetFactory:
@@ -19,7 +20,8 @@ class InfoWidgetFactory:
         self.schematicName = schematicName
         self.main = main
         self.disable = False
-        self.dictionary = None
+        self.holdDictionary = {}
+        self.dictionary = {}
         # Check if file exists in schematics folder by running method of this class
         self.checkIfFileExists()
         self.theWord = ""
@@ -46,7 +48,7 @@ class InfoWidgetFactory:
                 # Open file as "r" which means read only. "file" is a variable name of opened file
                 with open(self.path + "/schematics/widgets/info/" + schematicFile, 'r') as file:
                     # Load yaml file to dictionary variable
-                    self.dictionary = yaml.safe_load(file)
+                    self.holdDictionary = yaml.safe_load(file)
                     # Close loop and end function
                     break
         # Runs if for didn't encounter break which means that file doesn't exist
@@ -90,26 +92,28 @@ class InfoWidgetFactory:
                                 valid[romName] = [[objectName, ID, name]]
 
         if valid == {}:
-            print("\033[93mNo objects with specified name in confi.yml were found in database\033[0m")
+            print("\033[93mNo objects with specified name in config.yml were found in database\033[0m")
             exit(1)
 
         # Goes through all room names
         for key in valid:
+            self.dictionary.clear()
+            self.dictionary = copy.deepcopy(self.holdDictionary)
             # Get all objects from
             Objs = valid.get(key)
 
             # Replace placeholders in file with room number
             if self.addPrefixToName:
-                widgetNameAdd = self.widgetNameInFiles.replace("%romName%", key)
+                widgetNameAdd = self.widgetNameInFiles.replace("%roomName%", key)
             else:
                 keyWithoutWord = key.replace(self.theWord, "")
-                widgetNameAdd = self.widgetNameInFiles.replace("%romName%", keyWithoutWord)
+                widgetNameAdd = self.widgetNameInFiles.replace("%roomName%", keyWithoutWord)
 
             if self.addPrefixToWidgetNameInFiles:
-                roomNameWidget = self.widgetName.replace("%romName%", key)
+                roomNameWidget = self.widgetName.replace("%roomName%", key)
             else:
                 keyWithoutWord = key.replace(self.theWord, "")
-                roomNameWidget = self.widgetName.replace("%romName%", keyWithoutWord)
+                roomNameWidget = self.widgetName.replace("%roomName%", keyWithoutWord)
 
             # Goes through all objects in dictionary with current room name
             for obj in self.dictionary["plan"]["objects"]:
@@ -124,6 +128,7 @@ class InfoWidgetFactory:
                                 # If object name is in name of object in current row
                                 if desiredObj in objectValid[0]:
                                     # Replace placeholders in file with object name, ID and
+                                    #print("Replacing ", desiredObj, " with ", objectValid[2])
                                     obj["object"] = objectValid[1]
                                     obj["statusobject"] = objectValid[1]
                 # Get name of object

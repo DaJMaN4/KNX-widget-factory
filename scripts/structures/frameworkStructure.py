@@ -78,8 +78,8 @@ class frameworkStructure:
         json_object = json.dumps(self.schematicFrameworkData, indent=4)
 
         # Create tar file with name Trend_Widget_Rom-<room number>.tar
-        file = tarfile.open(self.path + "/" + "output/frameworks/Frame_" + "bla" + ".tar", "w", None,
-                            tarfile.GNU_FORMAT)
+        file = tarfile.open(self.path + "/" + "output/frameworks/" + self.schematicNameFramework.replace(".yml", ".tar"),
+                            "w", None, tarfile.GNU_FORMAT)
 
         # Create file inside tar file called "."
         dir_info = tarfile.TarInfo(name='.')
@@ -101,6 +101,9 @@ class frameworkStructure:
     # Returns if module is enabled or disabled
     def isEnable(self):
         return not self.disable
+
+    def getName(self):
+        return self.schematicNameFramework.replace(".yml", ".tar")
 
     # Run function is called from main class and it contains everything to run successfully the module
     def run(self):

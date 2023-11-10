@@ -5,7 +5,8 @@ import io
 
 
 class mainStructureManager:
-    def __init__(self, path, schematicNameFramework, schematicNameLevel, boxData, roomNames, doCreateTrend, main):
+    def __init__(self, path, schematicNameFramework, schematicNameLevel, boxData, roomNames, doCreateTrend, activeRooms,
+                 main):
         self.importUtil = importUtil.ImportManager(path)
         self.path = path
         self.schematicNameFramework = schematicNameFramework
@@ -13,6 +14,7 @@ class mainStructureManager:
         self.boxData = boxData
         self.roomNames = roomNames
         self.doCreateTrend = doCreateTrend
+        self.activeRooms = activeRooms
         self.main = main
         self.isEnabled = True
         self.schematicFrameworkData = None
@@ -24,6 +26,7 @@ class mainStructureManager:
         self.sizeOfBoxes = {}
         self.objectPlacements = {}
         self.outPutDataLevel = {}
+        self.IDsOfObjectsInTemplates = {}
 
     def importSchematics(self):
         self.importUtil.open("frameworks")
@@ -39,10 +42,10 @@ class mainStructureManager:
     def getNamesLocations(self):
         for obj in self.schematicLevelData["objects"]:
             if obj.get("name") is not None:
-                for type in self.roomNames:
-                    for roomNum in self.roomNames[type]:
+                for roomType in self.roomNames:
+                    for roomNum in self.roomNames[roomType]:
                         if roomNum == obj["name"]:
-                            self.namesLocations[obj["name"]] = [obj["locx"], obj["locy"], type]
+                            self.namesLocations[obj["name"]] = [obj["locx"], obj["locy"], roomType]
 
     def getBoxesIDs(self):
         for obj in self.schematicFrameworkData["objects"]:
@@ -67,24 +70,28 @@ class mainStructureManager:
                                     self.boxesIDs[nameLocation] = [obj["id"], boxType, locationBoxY, locationBoxX]
 
     def getObjectsFromTemplates(self):
-        for obj in self.schematicLevelData["objects"]:
-            if obj.get("object") is not None and obj.get("statusobject") is not None:
-                for boxType in self.boxData:
-                    for box in self.boxesIDs:
-                        if self.boxesIDs.get(box)[0] == self.boxesIDs.get(self.boxData[boxType].get("template"))[0]:
-                            width = self.sizeOfBoxes.get(boxType)[0]
-                            height = self.sizeOfBoxes.get(boxType)[1]
-                            locationBoxX = self.boxesIDs.get(box)[3]
-                            locationBoxY = self.boxesIDs.get(box)[2]
-                            combinedX = width + locationBoxX
-                            combinedY = height + locationBoxY
-                            locationObjX = obj["locx"]
-                            locationObjY = obj["locy"]
-                            if combinedX >= locationObjX >= locationBoxX and combinedY >= locationObjY >= locationBoxY:
-                                if self.templateObjects.get(box) is None:
-                                    self.templateObjects[box] = [boxType, obj]
-                                else:
-                                    self.templateObjects[box].append(obj)  # templates room databox from config.yml
+        for obj in self.schematicLevelData["objects"]:  # get objects from level
+            for boxType in self.boxData:
+                for box in self.boxesIDs:
+                    if self.boxesIDs.get(box)[0] == self.boxesIDs.get(self.boxData[boxType].get("template"))[0]:
+                        width = self.sizeOfBoxes.get(boxType)[0]
+                        height = self.sizeOfBoxes.get(boxType)[1]
+                        locationBoxX = self.boxesIDs.get(box)[3]
+                        locationBoxY = self.boxesIDs.get(box)[2]
+                        combinedX = width + locationBoxX
+                        combinedY = height + locationBoxY
+                        locationObjX = obj["locx"]
+                        locationObjY = obj["locy"]
+                        if combinedX >= locationObjX >= locationBoxX and combinedY >= locationObjY >= locationBoxY:
+                            if self.templateObjects.get(box) is None:
+                                self.templateObjects[box] = [boxType, obj]
+                            else:
+                                self.templateObjects[box].append(obj)  # templates room databox from config.yml
+
+                            if self.IDsOfObjectsInTemplates.get(box) is None:
+                                self.IDsOfObjectsInTemplates[box] = [boxType, obj["id"]]
+                            else:
+                                self.IDsOfObjectsInTemplates[box].append(obj["id"])
 
     def getObjectsPlacement(self):
         table = self.main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
@@ -116,22 +123,74 @@ class mainStructureManager:
                                     3]
                                 placementY = int(self.templateObjects[obj][singleObjNum]["locy"]) - self.boxesIDs[obj][
                                     2]
+                                objectID = int(self.templateObjects[obj][singleObjNum]["id"])
                                 if self.objectPlacements.get(roomTypes) is None:
-                                    self.objectPlacements[roomTypes] = [[objectName, placementY, placementX]]
+                                    self.objectPlacements[roomTypes] = [[objectName, placementY, placementX, objectID]]
                                 else:
-                                    self.objectPlacements[roomTypes].append([objectName, placementY, placementX])
+                                    self.objectPlacements[roomTypes].append(
+                                        [objectName, placementY, placementX, objectID])
+
+    def getObjectsPlacementForClearObjects(self):
+        table = self.main.getDatabaseObject().getTableColumns(["id"], "visobjects")
+        for row in table:
+            ID = row[0]
+
+            for placement in self.objectPlacements:
+                for index in range(len(self.objectPlacements[placement])):
+                    if ID == self.objectPlacements[placement][index][3]:
+                        break
+                else:
+                    continue
+                break
+            else:
+                for objectTemplateID in self.IDsOfObjectsInTemplates:
+                    for templateID in self.IDsOfObjectsInTemplates[objectTemplateID]:
+
+                        if templateID != ID:
+                            continue
+
+                        for obj in self.templateObjects:
+                            for singleObjNum in range(len(self.templateObjects[obj])):
+                                if singleObjNum == 0:
+                                    continue
+
+                                if self.templateObjects[obj][singleObjNum].get("id") == ID:
+                                    for nameObject in self.namesLocations:
+                                        if (self.namesLocations[nameObject][0] ==
+                                                self.templateObjects[obj][singleObjNum]["locx"] and
+                                                self.namesLocations[nameObject][1] ==
+                                                self.templateObjects[obj][singleObjNum]["locy"]):
+                                            break
+                                    else:
+                                        placementX = int(self.templateObjects[obj][singleObjNum]["locx"]) - \
+                                                     self.boxesIDs[obj][3]
+                                        placementY = int(self.templateObjects[obj][singleObjNum]["locy"]) - \
+                                                     self.boxesIDs[obj][2]
+
+                                        for roomTypes in self.roomNames:
+                                            for roomName in self.roomNames[roomTypes]:
+                                                if roomName == obj:
+                                                    self.objectPlacements[roomTypes].append(
+                                                        ["custom", placementY, placementX, ID, roomName])
 
     def createObjects(self):
         for boxType in self.roomNames:
             for boxName in self.roomNames[boxType]:
                 for boxTemplate in self.templateObjects:
-                    if self.templateObjects[boxTemplate][0] != boxType:
-                        continue
-
                     for singleObjNum in range(len(self.templateObjects[boxTemplate])):  # good
                         if singleObjNum == 0:
                             continue
-                        if self.templateObjects[boxTemplate][singleObjNum].get("object") is None:
+                        if self.templateObjects[boxTemplate][singleObjNum].get("object") is None or \
+                                self.templateObjects[boxTemplate][0] != boxType:
+                            for nameLocation in self.namesLocations:
+                                if (self.namesLocations[nameLocation][0] ==
+                                        self.templateObjects[boxTemplate][singleObjNum]["locx"] and
+                                        self.namesLocations[nameLocation][1] ==
+                                        self.templateObjects[boxTemplate][singleObjNum]["locy"]):
+                                    break
+                            else:
+                                pass
+
                             continue
                         doneRoomObj = None
 
@@ -149,6 +208,40 @@ class mainStructureManager:
                                 else:
                                     continue
                                 break
+
+                        if doneRoomObj is None:
+                            newObject = self.templateObjects[boxTemplate][singleObjNum].copy()
+
+                            for placement in self.objectPlacements[boxType]:
+                                if newObject["id"] == placement[3]:
+                                    newObject["locx"] = self.boxesIDs[boxName][3] + placement[2]
+                                    newObject["locy"] = self.boxesIDs[boxName][2] + placement[1]
+
+                                    if self.boxData[boxType].get("trendIcon") is not None and \
+                                            self.boxData[boxType].get("trendIcon") != "":
+
+                                        for room in self.activeRooms:
+                                            if room == boxName:
+                                                break
+                                        else:
+                                            continue
+
+                                        paramsDict = newObject["params"].replace("\\", "")
+                                        paramsDict = json.loads(paramsDict)
+
+                                        if paramsDict["icon_default"] == self.boxData[boxType]["trendIcon"]:
+                                            paramsDict["widget"] = self.main.getTrendWidgetDictionary(boxName)
+                                            paramsDict = str(paramsDict)
+                                            paramsDict = paramsDict.replace("'", '"')
+                                            paramsDict = paramsDict.replace(" ", "")
+                                            paramsDict = paramsDict.replace("False", "false")
+                                            paramsDict = paramsDict.replace("True", "true")
+                                            paramsDict = paramsDict.replace("None", "null")
+                                            newObject["params"] = paramsDict
+
+                            self.outPutDataLevel["plan"]["objects"].append(newObject)
+                            continue
+
                         self.iteratingThroughObjects(boxType, boxName, boxTemplate, singleObjNum, doneRoomObj)
 
     def iteratingThroughObjects(self, boxType, boxName, boxTemplate, singleObjNum, objName):
@@ -156,6 +249,7 @@ class mainStructureManager:
         for row in table:
             ID = row[0]
             name = str(row[1])
+
             if boxName not in name:
                 continue
 
@@ -172,6 +266,16 @@ class mainStructureManager:
                     newObject["locy"] = self.boxesIDs[boxName][2] + placement[1]
                     break
             self.outPutDataLevel["plan"]["objects"].append(newObject)
+
+    def addAdditionalObjects(self):
+        for boxType in self.roomNames:
+            for boxName in self.roomNames[boxType]:
+                for boxTemplate in self.templateObjects:
+                    if self.templateObjects[boxTemplate][0] != boxType:
+                        continue
+
+                    for singleObjNum in range(len(self.templateObjects[boxTemplate])):
+                        pass
 
     def changeRoomNamesPlace(self):
         placements = {}
@@ -195,15 +299,15 @@ class mainStructureManager:
                                 break
 
     def createTrendIcons(self):
-        pass
-        #self.trendDictionary = main.g
+        return
+        # self.trendDictionary = main.g
 
     def saveLevel(self):
         json_object = json.dumps(self.outPutDataLevel, indent=4)
 
         # Create tar file with name Trend_Widget_Rom-<room number>.tar
-        file = tarfile.open(self.path + "/" + "output/levels/Levels_" + "bla" + ".tar", "w", None,
-                            tarfile.GNU_FORMAT)
+        file = tarfile.open(self.path + "/" + "output/levels/" + self.schematicNameLevel.replace(".yml", ".tar"),
+                            "w", None, tarfile.GNU_FORMAT)
 
         # Create file inside tar file called "."
         dir_info = tarfile.TarInfo(name='.')
@@ -225,6 +329,9 @@ class mainStructureManager:
     def isEnable(self):
         return self.isEnabled
 
+    def getName(self):
+        return self.schematicNameLevel.replace(".tar", ".yml")
+
     def run(self):
         self.importSchematics()
         self.getData()
@@ -232,11 +339,10 @@ class mainStructureManager:
         self.getBoxesIDs()
         self.getObjectsFromTemplates()
         self.getObjectsPlacement()
+        self.getObjectsPlacementForClearObjects()
         self.createObjects()
         self.changeRoomNamesPlace()
         if self.doCreateTrend:
             self.createTrendIcons()
         self.saveLevel()
         self.main.setBoxesIDs(self.boxesIDs)
-
-

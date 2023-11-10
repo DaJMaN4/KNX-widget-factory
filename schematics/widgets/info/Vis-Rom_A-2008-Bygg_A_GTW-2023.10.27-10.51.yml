@@ -126,7 +126,7 @@ plan:
     id: 1452
     locx: 80
     locy: 10
-    name: Kontor A-2008
+    name: room
     nobg: 1
     params: '{"size":20,"color":"","font":"Tahoma","bold":1,"italic":0,"underline":0}'
     pincode: ''

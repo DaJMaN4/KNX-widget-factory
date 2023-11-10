@@ -1,6 +1,6 @@
 
 # names of the rooms used for the widgets
-rooms: ["A2017_A"]
+rooms: ["A3001", "A3011", "A3018"]
 
 #-----------------------------------------------------------------------------------------------------------------------
 #                                         Config for Info Room widgets
@@ -11,14 +11,14 @@ createInfoRoomWidgets: True # True if room widgets should be created, False if n
 
 roomWidgets:
   # prefix to the name of the widget
-  widgetName: "Kontor A-%romName%"
+  widgetName: "Kontor A-%roomName%"
 
   # True if widget name should be added unchanged to the widget. i.e. "Kontor A-A2001" with current settings
   # False if room prefix should be deleted from the widget name. i.e. "Kontor A-2001" with current settings
   addPrefixToWidgetName: False
 
   # prefix for name of the widget in files on LM
-  widgetNameInFiles: "Rom A-%romName%"
+  widgetNameInFiles: "Rom A-%roomName%"
 
   # True if prefix should be added to the widget name in files on LM, False if not
   addPrefixToWidgetNameInFiles: False
@@ -42,7 +42,7 @@ createTrendWidgets: True # True if trend widgets should be created, False if not
 
 trendWidgets:
   # prefix for name of the widget in files on LM
-  widgetNameInFiles: "Trend A-%romName% boom"
+  widgetNameInFiles: "Trend A-%roomName%"
 
   # The prefix is A if the room name is A2002 inside array rooms
   # If true and the room name is A2002 then placeholder %romName% will be replaced with A2002
@@ -67,7 +67,7 @@ createStructures: True
 structure:
   # if there is just one schematic inside the folder, then you can leave this empty
   # name of the schematic to use for the trend widget
-  schematicLevel: "Vis-Romvisualisering_3_etg_for_testing-Bygg_A_GTW-2023.11.02-11.18.yml"
+  schematicLevel: "Vis-Romvisualisering_3_etg_for_testing_old-Bygg_A_GTW-2023.11.09-13.18.yml"
 
   schematicFramework: "Vis-Rammeverk_romstyring_3_etg_for_testing-Bygg_A_GTW-2023.11.02-11.18.yml"
 
@@ -79,12 +79,16 @@ structure:
 
       normal: "Boksmidten.png"
 
+      trendIcon: "trend_ikon.png"
+
     lying:
       template: "A3017"
       objectsNames: ["Romtemperatur - Verdi", "Varmeaktuator - Tilbakemelding",
                             "Kjoleaktuator - Tilbakemelding", "CO2 i rom - Verdi", "Tilstedesensor -"]
 
       normal: "boks_rom_liggende.png"
+
+      trendIcon: "trend_ikon.png"
 
   # names of roms and corresponding names of the objects in the database that are needed for the level widget
   roomNames:

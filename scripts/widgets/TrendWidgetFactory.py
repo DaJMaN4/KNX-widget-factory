@@ -3,11 +3,14 @@ import json
 import tarfile
 import yaml
 import os
+import copy
+
 
 class TrendWidgetFactory:
     # Initialize TrendWidgetFactory class it sets all variables when creating the object in the main class
     def __init__(self, roomNumber, widgetName, addPrefix, objectsNames, path, schematicName, main):
-        self.dictionary = None
+        self.holdDictionary = {}
+        self.dictionary = {}
         self.prime_service = None
         self.roomNumber = roomNumber
         self.widgetName = widgetName
@@ -42,7 +45,7 @@ class TrendWidgetFactory:
                 # Open file as "r" which means read only. "file" is a variable name of opened file
                 with open(self.path + "/schematics/widgets/trends/" + schematicFile, 'r') as file:
                     # Load yaml file to dictionary variable
-                    self.dictionary = yaml.safe_load(file)
+                    self.holdDictionary = yaml.safe_load(file)
                     # Close loop and end function
                     break
         # Runs if for didn't encounter break which means that file doesn't exist
@@ -127,11 +130,13 @@ class TrendWidgetFactory:
                         assigned[key] = [ID]
 
         if assigned == {}:
-            print("\033[93mNo objects with specified name in config.yml were found in database\033[0m")
+            print("\033[93mNo objects with specified name in configggg.yml were found in database\033[0m")
             exit(1)
 
         # Go through all room numbers defined in config.yml
         for key in valid:
+            self.dictionary.clear()
+            self.dictionary = copy.deepcopy(self.holdDictionary)
             # assigned[key] is array of trend IDs
             addresses = assigned.get(key)
             # Create empty string for trend IDs
@@ -150,10 +155,10 @@ class TrendWidgetFactory:
 
             # Set widget name according to config.yml
             if self.addPrefix:
-                widgetName = self.widgetName.replace("%romName%", key)
+                widgetName = self.widgetName.replace("%roomName%", key)
             else:
                 keyWithoutWord = key.replace(self.theWord, "")
-                widgetName = self.widgetName.replace("%romName%", keyWithoutWord)
+                widgetName = self.widgetName.replace("%roomName%", keyWithoutWord)
 
             # Replace placeholders in file with room number
             self.dictionary["plan"]["name"] = widgetName

@@ -9,7 +9,7 @@ except ImportError:
     pip.main(['install', "pyyaml"])
     import yaml
 
-import ConfigManager, databaseManager
+import ConfigManager, databaseManager, webManagement
 from widgets import ImportWidgets, InfoWidgetFactory, TrendWidgetFactory
 from structures import mainStructure, frameworkStructure
 
@@ -19,19 +19,20 @@ class Main:
         self.trendWidgetDictionary = {}
         self.infoWidgetDictionary = {}
         self.boxesIDs = None
-        # Get path of WidgetFactory folder
+        self.mainStructureName = None
+        self.frameworkName = None
         self.path = os.path.dirname(os.path.dirname(__file__))
-
-        # Create object of DatabaseManager class
         self.databaseManagerObject = databaseManager.DatabaseManager(self.path)
         self.databaseManagerObject.unZipData()
-
         self.biggestWidgetID = self.databaseManagerObject.getBiggestWidgetID()
 
     # Runs everything
     def run(self):
         # Create object of Config class
         config = ConfigManager.Config(self.path)
+
+        if config.getCreateStructures():
+            self.biggestWidgetID += 2
 
         # Create object of ImportManager class
         importManager = ImportWidgets.ImportManager(
@@ -60,35 +61,6 @@ class Main:
                 pass
                 # print("All trend widgets created and saved in output folder")
 
-        if config.getCreateStructures():
-            mainStructureManagerObject = mainStructure.mainStructureManager(
-                self.path,
-                config.getStructureSchematicFramework(),
-                config.getStructureSchematicLevel(),
-                config.getStructureBoxData(),
-                config.getStructureRoomNames(),
-                config.getCreateTrendWidgets(),
-                self
-            )
-            if mainStructureManagerObject.isEnable():
-                mainStructureManagerObject.run()
-                pass
-                # print("Level and framework created and saved in output folder")
-            else:
-                pass
-                # print("Level and framework creation disabled in config.yml")
-
-        frameworkStructureObject = frameworkStructure.frameworkStructure(
-            self.path,
-            config.getStructureSchematicFramework(),
-            config.getStructureSchematicLevel(),
-            config.getStructureBoxData(),
-            config.getStructureRoomNames(),
-            self
-        )
-        frameworkStructureObject.run()
-
-        # Create object of InfoWidgetFactory class
         if config.getCreateInfoRoomWidgets():
             infoWidgetFactory = InfoWidgetFactory.InfoWidgetFactory(
                 config.getRooms(),
@@ -106,8 +78,45 @@ class Main:
             # If module is enabled then print message
             if infoWidgetFactory.isEnable():
                 print("All info widgets created and saved in output folder")
-        print("saawdawdawdawdadawdwafafwaga")
-        print(self.biggestWidgetID, " ", self.trendWidgetDictionary, " ", self.infoWidgetDictionary)
+
+        if config.getCreateStructures():
+            mainStructureManagerObject = mainStructure.mainStructureManager(
+                self.path,
+                config.getStructureSchematicFramework(),
+                config.getStructureSchematicLevel(),
+                config.getStructureBoxData(),
+                config.getStructureRoomNames(),
+                config.getCreateTrendWidgets(),
+                config.getRooms(),
+                self
+            )
+            if mainStructureManagerObject.isEnable():
+                mainStructureManagerObject.run()
+                self.mainStructureName = mainStructureManagerObject.getName()
+                print("Level created and saved in output folder")
+
+        frameworkStructureObject = frameworkStructure.frameworkStructure(
+            self.path,
+            config.getStructureSchematicFramework(),
+            config.getStructureSchematicLevel(),
+            config.getStructureBoxData(),
+            config.getStructureRoomNames(),
+            self
+        )
+        if frameworkStructureObject.isEnable():
+            frameworkStructureObject.run()
+            self.frameworkName = frameworkStructureObject.getName()
+
+        # Create object of InfoWidgetFactory class
+        print(self.trendWidgetDictionary)
+        print(self.infoWidgetDictionary)
+        webManagementObject = webManagement.WebManagement(
+            self.path,
+            self.mainStructureName,
+            self.frameworkName,
+            self.infoWidgetDictionary,
+            self.trendWidgetDictionary
+        )
 
         # global infoWidgetDictionary, trendWidgetDictionary, biggestWidgetID
 
@@ -137,12 +146,13 @@ class Main:
         self.biggestWidgetID += 1
         if widgetType == "trend":
             self.trendWidgetDictionary[room] = self.biggestWidgetID
+            print("Trend widget for room ", room, " has ID ", self.biggestWidgetID)
         elif widgetType == "info":
             self.infoWidgetDictionary[room] = self.biggestWidgetID
+            print("Info widget for room ", room, " has ID ", self.biggestWidgetID)
         else:
             print("Something went very wrong, it cannot be determined what ID of widgets are")
             exit(1)
-        print(self.biggestWidgetID, " ", self.trendWidgetDictionary, " ", self.infoWidgetDictionary)
         return self.biggestWidgetID
 
     def setBoxesIDs(self, ids):
