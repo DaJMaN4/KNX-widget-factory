@@ -13,7 +13,7 @@ class WebManagement:
         self.infoWidgets = infoWidgets
         self.trendWidgets = trendWidgets
         self.driver = webdriver.Chrome()
-        self.driver.get('link')
+        self.driver.get('')
         self.driver.find_element(By.ID, "ext-comp-2349__Buildings").click()
         self.driver.maximize_window()
         self.loadedFramework = False
@@ -127,4 +127,4 @@ class WebManagement:
             self.frameworkName = self.frameworkName.replace(".yml", ".tar")
             self.loadFramework()
         self.loadWidgets()
-        sleep(10)
+

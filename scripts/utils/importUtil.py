@@ -43,6 +43,7 @@ class ImportManager:
         onlyOne = False
         if len(os.listdir(self.path + "/schematics/" + folder)) == 1:
             onlyOne = True
+            print("There is only one file in schematics/" + folder + " folder")
         elif len(os.listdir(self.path + "/schematics/" + folder)) == 0:
             print("There is no files in schematics/" + folder + " folder")
             exit(1)

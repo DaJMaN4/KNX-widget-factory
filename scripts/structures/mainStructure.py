@@ -218,7 +218,8 @@ class mainStructureManager:
                                     newObject["locy"] = self.boxesIDs[boxName][2] + placement[1]
 
                                     if self.boxData[boxType].get("trendIcon") is not None and \
-                                            self.boxData[boxType].get("trendIcon") != "":
+                                            self.boxData[boxType].get("trendIcon") != "" and \
+                                            self.doCreateTrend:
 
                                         for room in self.activeRooms:
                                             if room == boxName:
@@ -267,16 +268,6 @@ class mainStructureManager:
                     break
             self.outPutDataLevel["plan"]["objects"].append(newObject)
 
-    def addAdditionalObjects(self):
-        for boxType in self.roomNames:
-            for boxName in self.roomNames[boxType]:
-                for boxTemplate in self.templateObjects:
-                    if self.templateObjects[boxTemplate][0] != boxType:
-                        continue
-
-                    for singleObjNum in range(len(self.templateObjects[boxTemplate])):
-                        pass
-
     def changeRoomNamesPlace(self):
         placements = {}
         for obj in self.schematicLevelData["objects"]:
@@ -297,10 +288,6 @@ class mainStructureManager:
                                 obj["locx"] = placements[placementsType][0] + self.boxesIDs[name][3]
                                 obj["locy"] = placements[placementsType][1] + self.boxesIDs[name][2]
                                 break
-
-    def createTrendIcons(self):
-        return
-        # self.trendDictionary = main.g
 
     def saveLevel(self):
         json_object = json.dumps(self.outPutDataLevel, indent=4)
@@ -342,7 +329,5 @@ class mainStructureManager:
         self.getObjectsPlacementForClearObjects()
         self.createObjects()
         self.changeRoomNamesPlace()
-        if self.doCreateTrend:
-            self.createTrendIcons()
         self.saveLevel()
         self.main.setBoxesIDs(self.boxesIDs)

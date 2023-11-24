@@ -1,6 +1,6 @@
 
 # names of the rooms used for the widgets
-rooms: ["A3001","A3002","A3003","A3004","A3005","A3001","A3001", "A3011", "A3018"]
+#rooms: ["A3001", "A3011", "A3018"]
 
 #----------------------------------------------------------------------------------------------------------------------#
 #                                         Config for Info Room widgets                                                 #
@@ -24,8 +24,7 @@ roomWidgets:
   addPrefixToWidgetNameInFiles: False
 
   # name of the schematic to use for the trend widget
-  # if there is just one schematic inside the folder, then you can leave this empty
-  schematicToUse:
+  schematicToUse: #"Vis-Rom_A-2008-Bygg_A_GTW-2023.10.27-10.51.yml"
 
   # names of the objects in the database that are needed for the widget
   objectsNamesWidget: ["Driftsmodus - Rom", "Tilstedesensor -", "Romtemperatur - Verdi",
@@ -51,7 +50,6 @@ trendWidgets:
   addPrefixToWidgetName: False
 
   # name of the schematic to use for the trend widget
-  # if there is just one schematic inside the folder, then you can leave this empty
   schematicToUse: ""
 
   # names of the objects in the database that are needed for the trend widget
@@ -71,7 +69,7 @@ structure:
   # name of the schematic to use for the trend widget
   schematicLevel: "Vis-Romvisualisering_3_etg_for_testing_old-Bygg_A_GTW-2023.11.09-13.18.yml"
 
-  schematicFramework: "Vis-Rammeverk_romstyring_3_etg_for_testing_old-Bygg_A_GTW-2023.11.06-10.59.yml"
+  schematicFramework: "Vis-Rammeverk_romstyring_3_etg_for_testing-Bygg_A_GTW-2023.11.02-11.18.yml"
 
   boxData:
     standard:

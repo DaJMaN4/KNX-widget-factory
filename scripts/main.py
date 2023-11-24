@@ -9,6 +9,13 @@ except ImportError:
     pip.main(['install', "pyyaml"])
     import yaml
 
+try:
+    import selenium
+except ImportError:
+    print("Trying to Install required module: selenium\n")
+    pip.main(['install', "selenium"])
+    import selenium
+
 import ConfigManager, databaseManager, webManagement
 from widgets import ImportWidgets, InfoWidgetFactory, TrendWidgetFactory
 from structures import mainStructure, frameworkStructure
@@ -108,8 +115,7 @@ class Main:
             self.frameworkName = frameworkStructureObject.getName()
 
         # Create object of InfoWidgetFactory class
-        print(self.trendWidgetDictionary)
-        print(self.infoWidgetDictionary)
+
         webManagementObject = webManagement.WebManagement(
             self.path,
             self.mainStructureName,
@@ -126,13 +132,13 @@ class Main:
 
     def getTrendWidgetDictionary(self, roomNumber):
         if self.trendWidgetDictionary.get(roomNumber) is None:
-            print("Room Number ", roomNumber, " Does not have corresponding widget that was created in this runtime")
+            print("Room Number ", roomNumber, " Does not have corresponding trend widget that was created in this runtime")
             return ""
         return self.trendWidgetDictionary[roomNumber]
 
     def getInfoWidgetDictionary(self, roomNumber):
         if self.infoWidgetDictionary.get(roomNumber) is None:
-            print("Room Number ", roomNumber, " Does not have corresponding widget that was created in this runtime")
+            print("Room Number ", roomNumber, " Does not have corresponding info widget that was created in this runtime")
             return ""
         return self.infoWidgetDictionary[roomNumber]
 
@@ -146,12 +152,10 @@ class Main:
         self.biggestWidgetID += 1
         if widgetType == "trend":
             self.trendWidgetDictionary[room] = self.biggestWidgetID
-            print("Trend widget for room ", room, " has ID ", self.biggestWidgetID)
         elif widgetType == "info":
             self.infoWidgetDictionary[room] = self.biggestWidgetID
-            print("Info widget for room ", room, " has ID ", self.biggestWidgetID)
         else:
-            print("Something went very wrong, it cannot be determined what ID of widgets are")
+            print("Something went very wrong, ID of widgets cannot be determined")
             exit(1)
         return self.biggestWidgetID
 
@@ -166,6 +170,4 @@ class Main:
 if __name__ == '__main__':
     main = Main()
     main.run()
-
-
 
