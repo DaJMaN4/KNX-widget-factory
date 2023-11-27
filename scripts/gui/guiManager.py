@@ -4,11 +4,11 @@ from tkinter.filedialog import askopenfile
 
 
 root = Tk()
-root.columnconfigure(1, weight=0)
+root.columnconfigure(1, weight=1)
 root.rowconfigure(1, weight=1)
 root.columnconfigure(2, weight=1)
 root.rowconfigure(2, weight=1)
-root.columnconfigure(3, weight=0)
+root.columnconfigure(3, weight=1)
 root.rowconfigure(3, weight=1)
 root.columnconfigure(4, weight=1)
 root.rowconfigure(4, weight=1)
@@ -97,7 +97,7 @@ def on_item_double_click(event):
     entry.focus()
 
 
-tree = ttk.Treeview(frame, columns=("knxName"))
+tree = ttk.Treeview(master=frame, columns=("knxName"))
 
 tree.column("#0", width=80, minwidth=80)
 tree.column("knxName", anchor=W, width=80, minwidth=80)
@@ -108,15 +108,23 @@ tree.heading("knxName", text="Knx Name", anchor=W)
 tree.insert("", "end", text="60", values=("Item 1",))
 tree.insert("", "end", text="26", values=("Item 68",))
 
+for x in range(0, 30):
+    tree.insert("", "end", text=str(x), values=("Item " + str(x),))
+
+tree.insert("", "end", text="", values=("",))
+
 tree.bind("<Double-1>", on_item_double_click)
 
-tree.grid(row=1, column=1, sticky="nsew", columnspan=2)
+frame.grid_rowconfigure(1, weight=1)
+frame.grid_rowconfigure(2, weight=1)
 
-button = Button(master=frame, text='new')
-button.grid(row=2, column=2, sticky="se")
+tree.grid(row=1, column=1, sticky="nsew", columnspan=2, rowspan=4)
 
+# button = Button(master=frame, text='new')
+# button.grid(row=2, column=2, sticky="se")
 
-frame.grid(column=1, row=1, sticky="nsew", rowspan=4)
+frame.grid(column=1, row=1, sticky="nsew")
+
 
 button = Button(text='import database', command=lambda: importDatabase())
 button.grid(row=1, column=3, sticky="n")
@@ -130,7 +138,7 @@ def add_item():
 
 
 frame2 = Frame(root)
-frame2.grid(row=2, column=3, sticky="nsew")
+frame2.grid(row=1, column=3, sticky="nsew")
 
 scrollbar = Scrollbar(frame2, orient=VERTICAL)
 
@@ -151,7 +159,7 @@ add_button.grid(row=1, column=0, sticky="ne")
 
 
 radioBox = ttk.Radiobutton(root, text="One")
-radioBox.grid(row=3, column=3, sticky="n")
+radioBox.grid(row=1, column=4, sticky="n")
 
 
 root.mainloop()
