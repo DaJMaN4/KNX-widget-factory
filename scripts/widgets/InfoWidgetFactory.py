@@ -38,24 +38,17 @@ class InfoWidgetFactory:
 
     # Checks if file exists in schematics folder
     def checkIfFileExists(self):
-        onlyOne = False
-        if len(os.listdir(self.path + "/schematics/widgets/info")) == 1:
-            onlyOne = True
-        # Goes through all files in schematics folder
-        for schematicFile in os.listdir(self.path + "/schematics/widgets/info"):
-            # If file with the same name as defined in config.yml
-            if schematicFile == self.schematicName or onlyOne or self.schematicName == "":
+        if self.schematicName == "" or self.schematicName is None:
+            # Goes through all files in schematics folder
+            for schematicFile in os.listdir(self.path + "/schematics/widgets/info"):
                 # Open file as "r" which means read only. "file" is a variable name of opened file
                 with open(self.path + "/schematics/widgets/info/" + schematicFile, 'r') as file:
                     # Load yaml file to dictionary variable
                     self.holdDictionary = yaml.safe_load(file)
-                    # Close loop and end function
-                    break
-        # Runs if for didn't encounter break which means that file doesn't exist
         else:
-            # Print error message and disable InfoWidget module
-            print("File ", self.schematicName, " doesn't exists. Disabling InfoWidget module")
-            self.disable = True
+            with open(self.schematicName, 'r') as file:
+                # Load yaml file to dictionary variable
+                self.holdDictionary = yaml.safe_load(file)
 
     # Returns if module is enabled or disabled
     def isEnable(self):
@@ -171,4 +164,5 @@ class InfoWidgetFactory:
             # Close and save tar file
             file.close()
 
-            print("Info_Widget_Rom-" + key + ".tar created")
+            self.main.TabInfo.insertCreatedWidget(key)
+            self.main.log("Info_Widget_Rom-" + key + ".tar created")
