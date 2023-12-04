@@ -25,6 +25,7 @@ from structures import mainStructure, frameworkStructure
 from gui import guiElements, guiRightBar, guiTabInfo, guiTabTrend, guiTabStructure, guiBoxDataTab
 from utils import guiUtilities
 
+
 # if config.getCreateStructures():
 #    self.biggestWidgetID += 2
 
@@ -36,10 +37,10 @@ class Main:
         self.boxesIDs = None
         self.mainStructureFile = None
         self.frameworkFile = None
+        self.schematicInfoName = None
         self.path = os.path.dirname(os.path.dirname(__file__))
         self.databaseManagerObject = databaseManager.DatabaseManager(self.path, self)
         self.biggestWidgetID = 0  # self.databaseManagerObject.getBiggestWidgetID()
-        self.schematicInfoName = None
         self.boxDataTabs = {}
         self.boxDataTabsLabelsForResize = []
         self.roomNumbers = []
@@ -52,7 +53,7 @@ class Main:
         self.root.columnconfigure(2, weight=0)
         self.root.rowconfigure(2, weight=1)
         self.root.columnconfigure(3, weight=1)
-        self.root.rowconfigure(3, weight=1)
+
         self.root.geometry("1000x700")
         self.root.title('LM Widget Creator')
 
@@ -73,15 +74,14 @@ class Main:
             tab.config(wraplength=tab.winfo_width())
 
     def createOutput(self):
-        self.output = Text(self.TabFrame, height=15, width=50)
+        self.output = Text(self.root, height=15, width=50)  # self.TabFrame
         self.output.config()  # Start with the Text widget in read-only mode
 
-        self.output.pack(fill=BOTH, expand=True)
+        # self.output.pack(fill=BOTH, expand=True)
+        self.output.grid(row=2, column=3, sticky="nsew")
 
         self.output.insert(END, "Welcome!\n")
         self.output.config(state=DISABLED)  # Disable editing to prevent user input
-
-
 
     def createTab(self):
         self.TabFrame = Frame(self.root)
@@ -111,7 +111,6 @@ class Main:
         self.tabInfo.columnconfigure(1, weight=2)
         self.tabInfo.columnconfigure(2, weight=14)
 
-
         self.TabTrend = guiTabTrend.guiTabTrend(self, self.root, self.tabTrend, self.guiUtilities, )
         self.TabInfo = guiTabInfo.guiTabInfo(self, self.root, self.tabInfo, self.guiUtilities)
         self.TabStructure = guiTabStructure.guiTabStructure(self, self.root, self.tabStructure, self.guiUtilities)
@@ -121,22 +120,6 @@ class Main:
         self.output.insert(END, text + "\n")
         self.output.config(state=DISABLED)
 
-    # Runs everything
-    def run(self):
-        # Create object of Config class
-
-
-        return
-        config = ConfigManager.Config(self.path)
-
-        # Create object of ImportManager class
-        importManager = ImportWidgets.ImportManager(
-            self.path,
-            config.getRoomWidgetsObjectsNamesWidget(),
-            main
-        )
-        # Run open function of ImportManager class
-        importManager.open()
 
     def checksBeforeCreating(self):
         if self.databaseManagerObject.connection is None:
@@ -180,7 +163,7 @@ class Main:
             self.TabInfo.getWidgetNameInFiles(),
             self.TabInfo.getObjects(),
             self.path,
-            self.schematicInfoName,   # config.getRoomWidgetsSchematicToUse(),
+            self.schematicInfoName,  # config.getRoomWidgetsSchematicToUse(),
             self
         )
 
@@ -192,22 +175,20 @@ class Main:
 
     def createStructure(self):
         boxData = {}
-        rooms = []
+        rooms = {}
         for tab in self.boxDataTabs:
             tab = self.boxDataTabs[tab]
-            boxData[tab.name] = [{"template":"A3001", "objectsNames":tab.objectsNames, "normal":tab.boxIcon,
-                                  "trendIcon":tab.trendIcon, "rooms":tab.selectedRooms}]
-            for room in tab.selectedRooms:
-                if room not in self.roomNumbers:
-                    self.roomNumbers.append(room)
+            boxData[tab.name] = {"template": tab.template, "objectsNames": tab.objectsNames, "normal": tab.boxIcon,
+                                 "trendIcon": tab.trendIcon, "rooms": tab.selectedRooms}
+            rooms[tab.name] = tab.selectedRooms
         mainStructureManagerObject = mainStructure.mainStructureManager(
             self.path,
             self.frameworkFile,
             self.mainStructureFile,
             boxData,
-            tab.selectedRooms,
-            config.getCreateTrendWidgets(),
-            config.getRooms(),
+            rooms,
+            self.rightBar.createTrendWidget == 1,
+            self.roomNumbers,
             self
         )
         if mainStructureManagerObject.isEnable():
@@ -215,19 +196,20 @@ class Main:
             self.mainStructureName = mainStructureManagerObject.getName()
             print("Level created and saved in output folder")
 
+
         frameworkStructureObject = frameworkStructure.frameworkStructure(
             self.path,
-            config.getStructureSchematicFramework(),
-            config.getStructureSchematicLevel(),
-            config.getStructureBoxData(),
-            config.getStructureRoomNames(),
+            self.frameworkFile,
+            self.mainStructureFile,
+            boxData,
+            self.roomNumbers,
             self
         )
         if frameworkStructureObject.isEnable():
             frameworkStructureObject.run()
             self.frameworkName = frameworkStructureObject.getName()
 
-    def crateWebManagement(self, login, password, ip):
+    def createWebManagement(self, login, password, ip):
         webManagementObject = webManagement.WebManagement(
             self.path,
             login,
@@ -242,13 +224,15 @@ class Main:
 
     def getTrendWidgetDictionary(self, roomNumber):
         if self.trendWidgetDictionary.get(roomNumber) is None:
-            print("Room Number ", roomNumber, " Does not have corresponding trend widget that was created in this runtime")
+            print("Room Number ", roomNumber,
+                  " Does not have corresponding trend widget that was created in this runtime")
             return ""
         return self.trendWidgetDictionary[roomNumber]
 
     def getInfoWidgetDictionary(self, roomNumber):
         if self.infoWidgetDictionary.get(roomNumber) is None:
-            print("Room Number ", roomNumber, " Does not have corresponding info widget that was created in this runtime")
+            print("Room Number ", roomNumber,
+                  " Does not have corresponding info widget that was created in this runtime")
             return ""
         return self.infoWidgetDictionary[roomNumber]
 
@@ -277,15 +261,18 @@ class Main:
         return self.path
 
     def createNewBoxDataTab(self, frame, item, name):
-        self.boxDataTabs[item] = (guiBoxDataTab.GuiBoxDataTab(frame, self, self.tabStructure, self.guiUtilities, self.databaseManagerObject.getAllImages(), name))
+        self.boxDataTabs[item] = (guiBoxDataTab.GuiBoxDataTab(frame, self, self.tabStructure, self.guiUtilities,
+                                                              self.databaseManagerObject.getAllImages(), name))
 
     def updateImportedLevelStructure(self, file):
         file = file.name
+        self.mainStructureFile = file
         for tab in self.boxDataTabs:
             self.boxDataTabs[tab].updateImportedLevel(file)
 
     def updateImportedFrameworkStructure(self, file):
         file = file.name
+        self.frameworkFile = file
         for tab in self.boxDataTabs:
             self.boxDataTabs[tab].updateImportedFramework(file)
 
@@ -300,8 +287,16 @@ class Main:
             for tab in self.boxDataTabs:
                 if self.boxDataTabs[tab].name == boxName:
                     self.boxDataTabs[tab].selectRooms(selectedItems)
-        #for tab in self.boxDataTabs:
+        # for tab in self.boxDataTabs:
         #    self.boxDataTabs[tab].triesToSelectRooms()
+
+    def createImportWidgetSchematic(self):
+        importManager = ImportWidgets.ImportManager(
+            self.path,
+            self.TabInfo.getObjects(),
+            self
+        )
+        return importManager
 
 
 if __name__ == '__main__':

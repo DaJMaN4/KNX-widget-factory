@@ -9,8 +9,8 @@ class WebManagement:
     def __init__(self, path, login, password, ip):
         self.path = path
         self.driver = webdriver.Chrome()
-        self.driver.get('http://' + login + ':' + password + '@' + ip + '/scada-main')
-        self.driver.get('')
+        #self.driver.get('http://' + login + ':' + password + '@' + ip + '/scada-main')
+        self.driver.get('http://admin:Sb2019LM@10.41.160.247/scada-main')
         self.driver.find_element(By.ID, "ext-comp-2349__Buildings").click()
         self.driver.maximize_window()
         self.loadedFramework = False
@@ -26,9 +26,9 @@ class WebManagement:
 
     def uploadFramework(self, frameworkName):
         self.wait.until(EC.element_to_be_clickable((By.ID, "ext-comp-1651__ext-comp-1606"))).click()
-        self.wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@data-record-id='layout']")))
-        self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='ext-comp-1664']")))
-        self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@value='keep']")))
+        self.wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@data-record-id='layout']"))).click()
+        self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='ext-comp-1664']"))).click()
+        self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@value='keep']"))).click()
         choose_file = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@accept='.tar']")))
         choose_file.send_keys(r"C:\Users\Damian\PycharmProjects\KNX-widget-factory\output\frameworks" + "\\" + frameworkName)
         self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='buildings-import-submit']"))).click()
@@ -86,36 +86,26 @@ class WebManagement:
 
     def uploadInfoWidgets(self, infoWidgets):
         for widget in infoWidgets:
-            self.driver.find_element(By.ID, "ext-comp-1651__ext-comp-1606").click()
-            sleep(0.5)
-            self.driver.find_element(By.XPATH, "//div[@data-record-id='widget']").click()
-            sleep(0.2)
-            self.driver.find_element(By.XPATH, "//table[@id='ext-comp-1664']").click()
-            sleep(0.2)
-            self.driver.find_element(By.XPATH, "//input[@value='keep']").click()
-            sleep(0.2)
-            choose_file = self.driver.find_element(By.XPATH, "//input[@accept='.tar']")
+            self.wait.until(EC.element_to_be_clickable((By.ID, "ext-comp-1651__ext-comp-1606"))).click()
+            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@data-record-id='widget']"))).click()
+            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='ext-comp-1664']"))).click()
+            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@value='keep']"))).click()
+            choose_file = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@accept='.tar']")))
             choose_file.send_keys(
                 r"C:\Users\Damian\PycharmProjects\KNX-widget-factory\output\widgets" + "\\Info_Widget_Rom-" + widget + ".tar")
-            sleep(0.2)
-            self.driver.find_element(By.XPATH, "//table[@id='buildings-import-submit']").click()
+            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='buildings-import-submit']"))).click()
             sleep(0.5)
 
     def uploadTrendWidgets(self, trendWidgets):
         for widget in trendWidgets:
-            self.driver.find_element(By.ID, "ext-comp-1651__ext-comp-1606").click()
-            sleep(0.5)
-            self.driver.find_element(By.XPATH, "//div[@data-record-id='widget']").click()
-            sleep(0.2)
-            self.driver.find_element(By.XPATH, "//table[@id='ext-comp-1664']").click()
-            sleep(0.2)
-            self.driver.find_element(By.XPATH, "//input[@value='keep']").click()
-            sleep(0.2)
-            choose_file = self.driver.find_element(By.XPATH, "//input[@accept='.tar']")
+            self.wait.until(EC.element_to_be_clickable((By.ID, "ext-comp-1651__ext-comp-1606"))).click()
+            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@data-record-id='widget']"))).click()
+            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='ext-comp-1664']"))).click()
+            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@value='keep']"))).click()
+            choose_file = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@accept='.tar']")))
             choose_file.send_keys(
                 r"C:\Users\Damian\PycharmProjects\KNX-widget-factory\output\widgets" + "\\Trend_Widget_Rom-" + widget + ".tar")
-            sleep(0.2)
-            self.driver.find_element(By.XPATH, "//table[@id='buildings-import-submit']").click()
+            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='buildings-import-submit']"))).click()
             sleep(0.5)
 
     def isEnable(self):

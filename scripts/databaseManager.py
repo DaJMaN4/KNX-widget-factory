@@ -48,6 +48,9 @@ class DatabaseManager:
 
     # Get chosen columns from chosen table
     def getTableColumns(self, columns: list, table: str = "objects"):
+        if self.connection is None:
+            self.main.log("No connection to database")
+            return None
         # Convert list to string
         columns = str(columns)
         # Remove all unnecessary characters from string
@@ -65,9 +68,9 @@ class DatabaseManager:
         return table.fetchone()[0]
 
     def getAllImages(self):
-        if os.path.exists(self.path + "/data/storage/img"):
+        if os.path.exists(self.path + "/data/storage/icons"):
             images = []
-            for filename in os.listdir(self.path + "/data/storage/img"):
+            for filename in os.listdir(self.path + "/data/storage/icons"):
                 images.append(filename)
             return images
         return None

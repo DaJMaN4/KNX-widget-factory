@@ -20,14 +20,14 @@ class guiTabTrend:
 
     def createTabTrend(self):
         self.tabTrendTreeCreatedWidgets = ttk.Treeview(master=self.tabTrend)
-        self.tabTrendTreeCreatedWidgets.column("#0", width=100, minwidth=150, stretch=NO)
+        self.tabTrendTreeCreatedWidgets.column("#0", width=100, minwidth=150)
         self.tabTrendTreeCreatedWidgets.heading("#0", text="Created Widgets", anchor=W)
 
         self.tabTrendTreeCreatedWidgets.bind("<Double-1>", self.onItemDoubleClickTreeCreated)
         self.tabTrendTreeCreatedWidgets.grid(row=1, column=1, sticky="nsew", rowspan=8)
 
         self.tabTrendTreeObjectsNames = ttk.Treeview(master=self.tabTrend)
-        self.tabTrendTreeObjectsNames.column("#0", width=300, minwidth=150, stretch=NO)
+        self.tabTrendTreeObjectsNames.column("#0", width=300, minwidth=150)
         self.tabTrendTreeObjectsNames.heading("#0", text="Object Names", anchor=W)
 
         self.tabTrendTreeObjectsNames.insert("", "end", text="Romtemperatur - Verdi")
@@ -62,7 +62,6 @@ class guiTabTrend:
             if self.addPrefixTrend.get() == 1:
                 num = 0
                 for c in roomName:
-                    print(c)
                     if not c.isdigit():
                         # Delete character from string at index num
                         roomName = roomName[:num] + roomName[num + 1:]
@@ -89,8 +88,6 @@ class guiTabTrend:
         self.tabTrend.grid_rowconfigure(5, weight=1, minsize=10)
         self.tabTrend.grid_columnconfigure(3, weight=1, minsize=30)
         self.tabTrend.grid_rowconfigure(7, weight=1, minsize=150)
-
-
 
     def insertCreatedWidget(self, text):
         for child in self.tabTrendTreeCreatedWidgets.get_children():

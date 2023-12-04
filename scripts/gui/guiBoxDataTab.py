@@ -59,12 +59,12 @@ class GuiBoxDataTab:
 
         self.tabStructureTreeObjectsNames.insert("", "end", text="")
         self.tabStructureTreeObjectsNames.bind("<Double-1>", self.onItemDoubleClickObjectsNames)
-        self.tabStructureTreeObjectsNames.grid(row=1, column=1, sticky="nsew", rowspan=30)
+        self.tabStructureTreeObjectsNames.grid(row=1, column=1, sticky="nsew", rowspan=40)
 
         self.tabStructureTreeRooms = ttk.Treeview(master=self.frame)
         self.tabStructureTreeRooms.column("#0", width=110, minwidth=110)
         self.tabStructureTreeRooms.heading("#0", text="Selected Rooms", anchor=W)
-        self.tabStructureTreeRooms.grid(row=1, column=2, sticky="nsew", rowspan=30)
+        self.tabStructureTreeRooms.grid(row=1, column=2, sticky="nsew", rowspan=40)
 
         title_font = Font(family="Helvetica", size=15, weight="bold")
         label = Label(self.frame, text="Structure", font=title_font)
@@ -85,10 +85,9 @@ class GuiBoxDataTab:
         self.templateTabTextStructure.grid(column=3, row=3, sticky="")
 
 
-        template = StringVar()
+        self.template = StringVar()
 
-        self.templateChoicer = ttk.Combobox(self.frame, width=27,
-                                        textvariable=template)
+        self.templateChoicer = ttk.Combobox(self.frame, width=27, textvariable=self.template)
         # Adding combobox drop down list
         self.templateChoicer['values'] = self.main.roomNumbers
 

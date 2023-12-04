@@ -12,70 +12,63 @@ class ImportManager:
         self.main = main
         self.type = None
 
-    # Open function is called from main class and it contains everything to run successfully the module it goes
+    # Open function is called from main class, and it contains everything to run successfully the module it goes
     # through all files in import folder and checks if file with the same name exists in schematics folder, if it
     # exists then it skips this file and continues to next file in import folder, if it doesn't exist then it
     # checks if file is .tar format, if it is then it opens file and goes through all files in it and if it finds
     # data.json file then it reads it and writes it to schematics folder in .yml format, if file is not .tar format
     # then it prints error message and exits program.
-    def open(self):
-        # Goes through all files in import folder
-        for file in os.listdir(self.path + "/import/widgets"):
+    def open(self, file):
+        fileAlreadyExist = False
+        fileName = file.split("/")[-1].replace(".tar", ".yml")
+        # Goes through all files in schematics folder
+        for fileSchematics in os.listdir(self.path + "/schematics/widgets/info"):
+            # If file with the same name as defined in config.yml
+            if fileName == fileSchematics:
+                os.remove(self.path + "/schematics/widgets/info/" + fileSchematics)
+                self.main.log("File with name " + fileName + " exists in schematics, replacing...")
+                fileAlreadyExist = True
+                break
 
-            fileAlreadyExist = False
+        for fileSchematics in os.listdir(self.path + "/schematics/widgets/trends"):
+            # If file with the same name as defined in config.yml
+            if fileName == fileSchematics:
+                os.remove(self.path + "/schematics/widgets/trends/" + fileSchematics)
+                self.main.log("File with name " + fileName + " exists in schematics, replacing...")
+                fileAlreadyExist = True
+                break
 
-            # Goes through all files in schematics folder
-            for fileSchematics in os.listdir(self.path + "/schematics/widgets/info"):
-                # Create string with changed extension from .tar to .yml
-                fileImport = file.replace(".tar", ".yml")
-                # If file with the same name as defined in config.yml
-                if fileImport == fileSchematics:
-                    # Skip this file and continue to next file in import folder
-                    print("File with name " + file + " already exists in schematics, skipping...")
-                    fileAlreadyExist = True
-                    break
-
-            for fileSchematics in os.listdir(self.path + "/schematics/widgets/trends"):
-                # Create string with changed extension from .tar to .yml
-                fileImport = file.replace(".tar", ".yml")
-                # If file with the same name as defined in config.yml
-                if fileImport == fileSchematics:
-                    # Skip this file and continue to next file in import folder
-                    print("File with name " + file + " already exists in schematics, skipping...")
-                    fileAlreadyExist = True
-                    break
-
-            if not fileAlreadyExist:
-                # If file is .tar format
-                if file.endswith(".tar"):
-                    # Open file as "r" which means read only. tar is a variable name of opened file
-                    tar = tarfile.open(os.path.join(self.path + "/import/widgets", file), "r")
-                    # Goes through all files in tar file
-                    for member in tar.getmembers():
-                        # If file is data.json
-                        if member.name == "./data.json":
-                            # Extract file from tar file
-                            f = tar.extractfile(member)
-                            # If file is not None
-                            if f is not None:
-                                # Read file and decode it from bytes to string
-                                content = f.read()
-                                # Write file to schematics folder
-                                self.write(ast.literal_eval(content.decode('utf-8')), file)
-                    # Close tar file
-                    tar.close()
-                # If file is not .tar format
-                else:
-                    # Print error message and exit program
-                    print("File" + file + " is not supported, use .tar format")
-                    exit(1)
+        if not fileAlreadyExist:
+            # If file is .tar format
+            if file.endswith(".tar"):
+                # Open file as "r" which means read only. tar is a variable name of opened file
+                tar = tarfile.open(file, "r")
+                # Goes through all files in tar file
+                for member in tar.getmembers():
+                    # If file is data.json
+                    if member.name == "./data.json":
+                        # Extract file from tar file
+                        f = tar.extractfile(member)
+                        # If file is not None
+                        if f is not None:
+                            # Read file and decode it from bytes to string
+                            content = f.read()
+                            # Write file to schematics folder
+                            self.write(ast.literal_eval(content.decode('utf-8')), file)
+                # Close tar file
+                tar.close()
+            # If file is not .tar format
+            else:
+                # Print error message and exit program
+                self.main.log("File" + file + " is not supported, use .tar format")
+                return
 
     # This method is for writing file to schematics folder with placeholders it checks if file is trend widget or
     # info widget, and then it calls method for replacing data either for trend widget or info widget, and then it
     # writes file to schematics folder in .yml format.
-    def write(self, data: dict, name):
+    def write(self, data: dict, filePath):
         # Replace .tar extension to .yml
-        name = name.replace(".tar", ".yml")
+        fileName = filePath.split("/")[-1].replace(".tar", ".yml")
 
         # Try to write placeholders into file
         try:
@@ -93,18 +86,22 @@ class ImportManager:
         # If something goes wrong
         except Exception as e:
             # Print error message and raise exception
-            print("\033[93mFailed to automatically write placeholders into files \033[0m")
-            raise e
+            self.main.log("Failed to automatically write placeholders into files")
+            # print("\033[93mFailed to automatically write placeholders into files \033[0m")
+            return
+            # raise e
 
         if self.type == "trend":
             # Open file as "x" which means write only. "file" is a variable name of opened file
-            file = open(self.path + "/schematics/widgets/trends/" + name, "x")
+            file = open(self.path + "/schematics/widgets/trends/" + fileName, "x")
+            # self.main.schematicInfoName= fileName
         else:
-            file = open(self.path + "/schematics/widgets/info/" + name, "x")
+            file = open(self.path + "/schematics/widgets/info/" + fileName, "x")
+            self.main.schematicInfoName = fileName
         # Write file to schematics folder
         yaml.dump(data, file, allow_unicode=True)
 
-        print("File " + name + " has been successfully written to schematics")
+        self.main.log("File " + fileName + " has been successfully written to schematics")
 
     # This method is for getting addresses form params for trends widget and replacing it with a placeholder
     # It goes through all characters in params to find string "id=" which can appear only once, and it means that

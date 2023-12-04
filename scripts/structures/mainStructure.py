@@ -5,12 +5,12 @@ import io
 
 
 class mainStructureManager:
-    def __init__(self, path, schematicNameFramework, schematicNameLevel, boxData, roomNames, doCreateTrend, activeRooms,
+    def __init__(self, path, schematicFileFramework, schematicFileLevel, boxData, roomNames, doCreateTrend, activeRooms,
                  main):
         self.importUtil = importUtil.ImportManager(path)
         self.path = path
-        self.schematicNameFramework = schematicNameFramework
-        self.schematicNameLevel = schematicNameLevel
+        self.schematicFileFramework = schematicFileFramework
+        self.schematicFileLevel = schematicFileLevel
         self.boxData = boxData
         self.roomNames = roomNames
         self.doCreateTrend = doCreateTrend
@@ -28,9 +28,12 @@ class mainStructureManager:
         self.outPutDataLevel = {}
         self.IDsOfObjectsInTemplates = {}
 
+        self.schematicNameFramework = self.schematicFileFramework.split("/")[-1]
+        self.schematicNameLevel = self.schematicFileLevel.split("/")[-1]
+
     def importSchematics(self):
-        self.importUtil.open("frameworks")
-        self.importUtil.open("levels")
+        self.importUtil.open(self.schematicFileFramework, "frameworks")
+        self.importUtil.open(self.schematicFileLevel, "levels")
 
     def getData(self):
         self.schematicFrameworkData = self.importUtil.getData(self.schematicNameFramework, "frameworks")

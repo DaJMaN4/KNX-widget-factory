@@ -18,15 +18,17 @@ class guiTabInfo:
     def onItemDoubleClickTabInfoObjects(self, event):
         self.guiUtilities.onItemDoubleClick(event, self.tabInfoTreeObjectsNames, self.tabInfoTreeObjectsNames)
 
-    def importSchematic(self, info):
-        file = askopenfile(mode='r', filetypes=[(info, '*.tar')])
+    def importSchematic(self):
+        file = askopenfile(mode='r', filetypes=[("Info Widget", '*.tar')])
         if file is not None:
+            importWidgets = self.main.createImportWidgetSchematic()
+            importWidgets.open(file.name)
             self.main.schematicInfoName = file
 
     def createTabInfo(self):
         self.tabInfoTreeCreatedWidgets = ttk.Treeview(master=self.tabInfo)
 
-        self.tabInfoTreeCreatedWidgets.column("#0", width=100, minwidth=150, stretch=NO)
+        self.tabInfoTreeCreatedWidgets.column("#0", width=100, minwidth=150)
 
         self.tabInfoTreeCreatedWidgets.heading("#0", text="Created Widgets", anchor=W)
 
@@ -35,7 +37,7 @@ class guiTabInfo:
 
 
         self.tabInfoTreeObjectsNames = ttk.Treeview(master=self.tabInfo)
-        self.tabInfoTreeObjectsNames.column("#0", width=300, minwidth=150, stretch=NO)
+        self.tabInfoTreeObjectsNames.column("#0", width=300, minwidth=150)
         self.tabInfoTreeObjectsNames.heading("#0", text="Object Names", anchor=W)
 
         self.tabInfoTreeObjectsNames.insert("", "end", text="Driftsmodus - Rom")
@@ -52,6 +54,27 @@ class guiTabInfo:
         # objectsNames: ["Romtemperatur - Verdi", "Varmeaktuator - Tilbakemelding",
         #               "Kjoleaktuator - Tilbakemelding", "CO2 i rom - Verdi", "Tilstedesensor -"]
 
+        self.tabInfo.grid_rowconfigure(0, weight=0)
+        self.tabInfo.grid_rowconfigure(1, weight=0)
+        self.tabInfo.grid_rowconfigure(2, weight=0)
+        self.tabInfo.grid_rowconfigure(3, weight=0)
+        self.tabInfo.grid_rowconfigure(4, weight=0)
+        self.tabInfo.grid_rowconfigure(5, weight=0)
+        self.tabInfo.grid_rowconfigure(7, weight=0)
+        self.tabInfo.grid_rowconfigure(8, weight=0)
+        self.tabInfo.grid_rowconfigure(9, weight=0)
+        self.tabInfo.grid_rowconfigure(10, weight=0)
+        self.tabInfo.grid_rowconfigure(11, weight=0)
+        self.tabInfo.grid_rowconfigure(12, weight=0)
+        self.tabInfo.grid_rowconfigure(13, weight=0)
+        self.tabInfo.grid_rowconfigure(14, weight=0)
+        self.tabInfo.grid_rowconfigure(15, weight=0)
+        self.tabInfo.grid_rowconfigure(16, weight=0)
+        self.tabInfo.grid_rowconfigure(17, weight=0)
+        self.tabInfo.grid_rowconfigure(19, weight=0)
+        self.tabInfo.grid_rowconfigure(21, weight=0)
+        self.tabInfo.grid_rowconfigure(22, weight=0)
+        self.tabInfo.grid_rowconfigure(23, weight=1)
 
         self.tabInfoTreeObjectsNames.insert("", "end", text="")
         self.tabInfoTreeObjectsNames.bind("<Double-1>", self.onItemDoubleClickTabInfoObjects)
@@ -103,7 +126,7 @@ class guiTabInfo:
         button = ttk.Checkbutton(self.tabInfo, text="Add Prefix to widget name", variable=self.addPrefixInfoFiles, command=on_entry_change_files)
         button.grid(row=5, column=3, sticky="n")
 
-        self.tabInfo.grid_rowconfigure(6, weight=1, minsize=30)
+        self.tabInfo.grid_rowconfigure(6, weight=0, minsize=30)
 
         def on_entry_change_visible(*args):
             value = entry_text_visible.get()
@@ -136,13 +159,13 @@ class guiTabInfo:
         radioBox = ttk.Checkbutton(self.tabInfo, text="Add Prefix to widget name", variable=self.addPrefixInfoVisible, command=on_entry_change_visible)
         radioBox.grid(row=17, column=3)
 
-        self.tabInfo.grid_rowconfigure(18, weight=1, minsize=30)
+        self.tabInfo.grid_rowconfigure(18, weight=0, minsize=30)
 
-        add_button = Button(self.tabInfo, text="import schematic", command=lambda: self.importSchematic)
+        add_button = Button(self.tabInfo, text="import schematic", command=lambda: self.importSchematic())
         add_button.grid(row=19, column=3)
 
         self.tabInfo.grid_columnconfigure(3, weight=1, minsize=30)
-        self.tabInfo.grid_rowconfigure(20, weight=1, minsize=20)
+        self.tabInfo.grid_rowconfigure(20, weight=0, minsize=20)
 
     def insertCreatedWidget(self, text):
         for child in self.tabInfoTreeCreatedWidgets.get_children():

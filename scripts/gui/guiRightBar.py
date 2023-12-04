@@ -26,17 +26,27 @@ class GuiRightBar:
             self.main.createInfoWidgets()
 
         if self.createStructure.get() == 1:
-            pass
+            self.main.createStructure()
 
     def createObjectsAndUpload(self):
+        webManagement = self.main.createWebManagement(self.login.get(), self.password.get(), self.ipAddress.get())
+        if self.createTrendWidget.get() == 1 and self.createInfoWidget.get() == 1 and self.createStructure.get() == 1:
+            self.main.createTrendWidgets()
+            self.main.createInfoWidgets()
+            self.main.createStructure()
+            webManagement.uploadAllInOrder(self.main.getTrendWidgets(), self.main.getInfoWidgets(), self.main.getStructure())
+
         if self.createTrendWidget.get() == 1:
-            pass
+            self.main.createTrendWidgets()
+            webManagement.uploadTrendWidgets(self.main.trendWidgetDictionary)
 
         if self.createInfoWidget.get() == 1:
-            pass
+            self.main.createInfoWidgets()
+            webManagement.uploadInfoWidgets(self.main.infoWidgetDictionary)
 
         if self.createStructure.get() == 1:
-            pass
+            self.main.createStructure()
+
 
     def createRightBar(self):
 
