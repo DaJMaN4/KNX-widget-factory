@@ -73,7 +73,7 @@ class ImportManager:
         # Try to write placeholders into file
         try:
             # Change name of room to placeholder
-            data["plan"]["name"] = "%roomName%"
+            data["plan"]["name"] = "%name%"
 
             # If file is trend widget
             if data["plan"]["objects"][0].get("params") is not None and "id=" in data["plan"]["objects"][0].get(

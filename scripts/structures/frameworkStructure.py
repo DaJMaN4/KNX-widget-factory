@@ -19,8 +19,9 @@ class frameworkStructure:
         self.boxObjects = {}
         self.boxParameters = {}
         if self.boxesIDs is None:
-            print("Boxes IDs are not loaded, exiting...")
-            exit(1)
+            self.main.log("Boxes IDs are not loaded, this might make the whole application not functioning. Disabling Framework Structure module.")
+            self.disable = True
+            return
 
         self.schematicNameFramework = self.schematicFileFramework.split("/")[-1]
         self.schematicNameLevel = self.schematicFileLevel.split("/")[-1]

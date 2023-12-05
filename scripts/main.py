@@ -19,7 +19,7 @@ except ImportError:
     pip.main(['install', "selenium"])
     import selenium
 
-import ConfigManager, databaseManager, webManagement
+import databaseManager, webManagement
 from widgets import ImportWidgets, InfoWidgetFactory, TrendWidgetFactory
 from structures import mainStructure, frameworkStructure
 from gui import guiElements, guiRightBar, guiTabInfo, guiTabTrend, guiTabStructure, guiBoxDataTab
@@ -38,6 +38,8 @@ class Main:
         self.mainStructureFile = None
         self.frameworkFile = None
         self.schematicInfoName = None
+        self.mainStructureFileName = None
+        self.frameworkFileName = None
         self.path = os.path.dirname(os.path.dirname(__file__))
         self.databaseManagerObject = databaseManager.DatabaseManager(self.path, self)
         self.biggestWidgetID = 0  # self.databaseManagerObject.getBiggestWidgetID()
@@ -59,7 +61,7 @@ class Main:
 
         self.createTab()
         self.createOutput()
-        self.rightBar = guiRightBar.GuiRightBar(self, self.root, self.guiUtilities, self.databaseManagerObject)
+        self.rightBar = guiRightBar.GuiRightBar(self, self.root, self.guiUtilities, self.databaseManagerObject, self.path)
 
         self.guiElements = guiElements.guiElements(self.guiUtilities, self)
 
@@ -120,14 +122,16 @@ class Main:
         self.output.insert(END, text + "\n")
         self.output.config(state=DISABLED)
 
-
     def checksBeforeCreating(self):
         if self.databaseManagerObject.connection is None:
             self.log("Database is not imported. Aborting")
-            return
+            return False
+        if self.guiElements.getRoomNumbers() == []:
+            self.log("Rooms are not selected. Aborting")
+            return False
 
     def createTrendWidgets(self):
-        if self.tabTrend.widgetName == "":
+        if self.TabTrend.name == "":
             self.log("Widget name is not specified. Aborting")
             return
         trendWidgetFactory = TrendWidgetFactory.TrendWidgetFactory(
@@ -166,20 +170,19 @@ class Main:
             self.schematicInfoName,  # config.getRoomWidgetsSchematicToUse(),
             self
         )
-
         # Run run function of InfoWidgetFactory class
         infoWidgetFactory.run()
         # If module is enabled then print message
         if infoWidgetFactory.isEnable():
-            print("All info widgets created and saved in output folder")
+            self.log("All info widgets created and saved in output folder")
 
     def createStructure(self):
         boxData = {}
         rooms = {}
         for tab in self.boxDataTabs:
             tab = self.boxDataTabs[tab]
-            boxData[tab.name] = {"template": tab.template, "objectsNames": tab.objectsNames, "normal": tab.boxIcon,
-                                 "trendIcon": tab.trendIcon, "rooms": tab.selectedRooms}
+            boxData[tab.name] = {"template": tab.template.get(), "objectsNames": tab.objectsNames, "normal": tab.boxIcon.get(),
+                                 "trendIcon": tab.trendIcon.get(), "rooms": tab.selectedRooms}
             rooms[tab.name] = tab.selectedRooms
         mainStructureManagerObject = mainStructure.mainStructureManager(
             self.path,
@@ -187,14 +190,14 @@ class Main:
             self.mainStructureFile,
             boxData,
             rooms,
-            self.rightBar.createTrendWidget == 1,
-            self.roomNumbers,
+            self.rightBar.createTrendWidget.get() == 1,
+            self.guiElements.getRoomNumbers(),
             self
         )
         if mainStructureManagerObject.isEnable():
             mainStructureManagerObject.run()
             self.mainStructureName = mainStructureManagerObject.getName()
-            print("Level created and saved in output folder")
+            self.log("Level created and saved in output folder")
 
 
         frameworkStructureObject = frameworkStructure.frameworkStructure(
@@ -202,7 +205,7 @@ class Main:
             self.frameworkFile,
             self.mainStructureFile,
             boxData,
-            self.roomNumbers,
+            rooms,
             self
         )
         if frameworkStructureObject.isEnable():
@@ -224,14 +227,14 @@ class Main:
 
     def getTrendWidgetDictionary(self, roomNumber):
         if self.trendWidgetDictionary.get(roomNumber) is None:
-            print("Room Number ", roomNumber,
+            self.log("Room Number " + roomNumber +
                   " Does not have corresponding trend widget that was created in this runtime")
             return ""
         return self.trendWidgetDictionary[roomNumber]
 
     def getInfoWidgetDictionary(self, roomNumber):
         if self.infoWidgetDictionary.get(roomNumber) is None:
-            print("Room Number ", roomNumber,
+            self.log("Room Number " + roomNumber +
                   " Does not have corresponding info widget that was created in this runtime")
             return ""
         return self.infoWidgetDictionary[roomNumber]
@@ -249,8 +252,7 @@ class Main:
         elif widgetType == "info":
             self.infoWidgetDictionary[room] = self.biggestWidgetID
         else:
-            print("Something went very wrong, ID of widgets cannot be determined")
-            exit(1)
+            self.log("Something went very wrong, ID of widgets cannot be determined. This might make the whole application not functioning properly")
         return self.biggestWidgetID
 
     def setBoxesIDs(self, ids):
@@ -282,6 +284,9 @@ class Main:
             self.boxDataTabs[tab].updateRoomNames(self.roomNumbers)
 
     def triesToSelectRooms(self, selectedItems):
+        for item in selectedItems:
+            if item == "" or item == None:
+                selectedItems.remove(item)
         if self.tabControl.tab(self.tabControl.select(), "text") == "Framework & Level":
             boxName = self.TabStructure.tabControlBoxData.tab(self.TabStructure.tabControlBoxData.select(), "text")
             for tab in self.boxDataTabs:
@@ -297,6 +302,9 @@ class Main:
             self
         )
         return importManager
+
+    def creatingStructure(self):
+        self.biggestWidgetID += 2
 
 
 if __name__ == '__main__':

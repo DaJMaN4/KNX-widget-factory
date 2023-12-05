@@ -121,12 +121,6 @@ class GuiBoxDataTab:
 
         trendIconChoicer.grid(column=3, row=8)
 
-        self.createTrendIcons = IntVar()
-
-        checkButtonCreateTrendIcons = ttk.Checkbutton(self.frame, text="Create Trend Icons", variable=self.createTrendIcons)
-                                   #command=on_entry_change)
-        checkButtonCreateTrendIcons.grid(column=3, row=9)
-
         separator = ttk.Separator(self.frame, orient='horizontal')
         separator.grid(column=3, row=10, sticky="nsew")
 

@@ -10,6 +10,9 @@ class guiTabTrend:
         self.root = root
         self.tabTrend = tabTrend
         self.guiUtilities = guiUtilities
+
+        self.name = ""
+
         self.createTabTrend()
 
     def onItemDoubleClickTreeCreated(self, event):
@@ -58,7 +61,7 @@ class guiTabTrend:
 
         def on_entry_change(*args):
             value = entry_text.get()
-            roomName = "A2004"
+            roomName = self.main.guiElements.getRoomNumbers()[0]
             if self.addPrefixTrend.get() == 1:
                 num = 0
                 for c in roomName:
@@ -68,6 +71,7 @@ class guiTabTrend:
                     else:
                         break
                     num = num + 1
+            self.name = value
             value = value.replace("%name%", roomName)
             self.labelPreviewTrend.config(text="Preview: " + value)
 
@@ -82,7 +86,7 @@ class guiTabTrend:
 
         self.addPrefixTrend = IntVar()
 
-        radioBox = ttk.Checkbutton(self.tabTrend, text="Add Prefix to widget name", variable=self.addPrefixTrend, command=on_entry_change)
+        radioBox = ttk.Checkbutton(self.tabTrend, text="Do not add prefix to widget name", variable=self.addPrefixTrend, command=on_entry_change)
         radioBox.grid(row=5, column=3)
 
         self.tabTrend.grid_rowconfigure(5, weight=1, minsize=10)
@@ -104,7 +108,7 @@ class guiTabTrend:
         return objects
 
     def getWidgetNameInFiles(self):
-        return self.labelPreviewTrend.cget("text").replace("Preview: ", "")
+        return self.name
 
     def getAddPrefixToWidgetNameInFiles(self):
         if self.addPrefixTrend.get() == 1:

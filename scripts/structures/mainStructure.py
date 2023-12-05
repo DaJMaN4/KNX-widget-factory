@@ -30,6 +30,8 @@ class mainStructureManager:
 
         self.schematicNameFramework = self.schematicFileFramework.split("/")[-1]
         self.schematicNameLevel = self.schematicFileLevel.split("/")[-1]
+        self.main.mainStructureFileName = self.schematicNameLevel
+        self.main.frameworkFileName = self.schematicNameFramework
 
     def importSchematics(self):
         self.importUtil.open(self.schematicFileFramework, "frameworks")
@@ -180,6 +182,8 @@ class mainStructureManager:
         for boxType in self.roomNames:
             for boxName in self.roomNames[boxType]:
                 for boxTemplate in self.templateObjects:
+                    if boxTemplate == boxName:
+                        continue
                     for singleObjNum in range(len(self.templateObjects[boxTemplate])):  # good
                         if singleObjNum == 0:
                             continue

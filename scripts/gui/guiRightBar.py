@@ -2,15 +2,17 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.filedialog import askopenfile
 from tkinter.font import Font
+import os
 
 
 class GuiRightBar:
-    def __init__(self, main, root, guiUtilities, databaseManager):
+    def __init__(self, main, root, guiUtilities, databaseManager, path):
         self.main = main
         self.root = root
         self.guiUtilities = guiUtilities
         self.databaseManager = databaseManager
         self.createRightBar()
+        self.path = path
 
     def importDatabase(self):
         file = askopenfile(mode='r', filetypes=[('LM back-up', '*.zip')])
@@ -30,22 +32,42 @@ class GuiRightBar:
 
     def createObjectsAndUpload(self):
         webManagement = self.main.createWebManagement(self.login.get(), self.password.get(), self.ipAddress.get())
+        done = False
         if self.createTrendWidget.get() == 1 and self.createInfoWidget.get() == 1 and self.createStructure.get() == 1:
+            self.main.creatingStructure()
             self.main.createTrendWidgets()
             self.main.createInfoWidgets()
             self.main.createStructure()
-            webManagement.uploadAllInOrder(self.main.getTrendWidgets(), self.main.getInfoWidgets(), self.main.getStructure())
+            webManagement.uploadAllInOrder(self.main.mainStructureFileName, self.main.frameworkFileName, self.main.infoWidgetDictionary, self.main.trendWidgetDictionary)
+            for file in os.listdir(self.path + r"\output\widgets"):
+                os.remove(self.path + r"\output\widgets" + "\\" + file)
+            done = True
 
-        if self.createTrendWidget.get() == 1:
+        elif self.createTrendWidget.get() == 1 and self.createInfoWidget.get() == 1 and self.createStructure.get() == 0:
+            self.main.createTrendWidgets()
+            self.main.createInfoWidgets()
+            webManagement.uploadTrendWidgets(self.main.trendWidgetDictionary)
+            webManagement.uploadInfoWidgets(self.main.infoWidgetDictionary)
+            for file in os.listdir(self.path + r"\output\widgets"):
+                os.remove(self.path + r"\output\widgets" + "\\" + file)
+            done = True
+
+        if self.createTrendWidget.get() == 1 and not done:
             self.main.createTrendWidgets()
             webManagement.uploadTrendWidgets(self.main.trendWidgetDictionary)
+            for file in os.listdir(self.path + r"\output\widgets"):
+                os.remove(self.path + r"\output\widgets" + "\\" + file)
 
-        if self.createInfoWidget.get() == 1:
+        if self.createInfoWidget.get() == 1 and not done:
             self.main.createInfoWidgets()
             webManagement.uploadInfoWidgets(self.main.infoWidgetDictionary)
+            for file in os.listdir(self.path + r"\output\widgets"):
+                os.remove(self.path + r"\output\widgets" + "\\" + file)
 
-        if self.createStructure.get() == 1:
+        if self.createStructure.get() == 1 and not done:
             self.main.createStructure()
+            webManagement.uploadLevel(self.main.mainStructureFileName)
+            webManagement.uploadFramework(self.main.frameworkFileName)
 
 
     def createRightBar(self):

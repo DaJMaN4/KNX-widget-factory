@@ -160,18 +160,21 @@ class TrendWidgetFactory:
                 "%trendAddresses%", stringAddresses)
 
             # Set widget name according to config.yml
-            if self.addPrefix:
-                widgetName = self.widgetName.replace("%roomName%", key)
+            if not self.addPrefix:
+                widgetName = self.widgetName.replace("%name%", key)
+
             else:
                 num = 0
                 widgetName = self.widgetName
-                for c in widgetName:
+                roomName = key
+                for c in roomName:
                     if not c.isdigit():
                         # Delete character from string at index num
-                        widgetName = widgetName[:num] + widgetName[num + 1:]
+                        roomName = roomName[:num] + roomName[num + 1:]
                     else:
                         break
                     num = num + 1
+                widgetName = widgetName.replace("%name%", roomName)
 
                 #keyWithoutWord = key.replace(self.theWord, "")
                 #widgetName = self.widgetName.replace("%roomName%", keyWithoutWord)
@@ -207,4 +210,13 @@ class TrendWidgetFactory:
 
             self.main.TabTrend.insertCreatedWidget(key)
             self.main.log("Trend_Widget_Rom-" + key + ".tar created")
+
+
+
+
+
+
+
+
+
 

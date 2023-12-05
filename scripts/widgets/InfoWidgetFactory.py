@@ -38,7 +38,7 @@ class InfoWidgetFactory:
 
     # Checks if file exists in schematics folder
     def checkIfFileExists(self):
-        if self.schematicName == "" or self.schematicName is None:
+        if self.schematicName != "" or self.schematicName is not None:
             # Goes through all files in schematics folder
             for schematicFile in os.listdir(self.path + "/schematics/widgets/info"):
                 # Open file as "r" which means read only. "file" is a variable name of opened file
@@ -46,9 +46,8 @@ class InfoWidgetFactory:
                     # Load yaml file to dictionary variable
                     self.holdDictionary = yaml.safe_load(file)
         else:
-            with open(self.schematicName, 'r') as file:
-                # Load yaml file to dictionary variable
-                self.holdDictionary = yaml.safe_load(file)
+            self.main.log("Schematic name is not defined in config.yml, exiting...")
+            self.disable = True
 
     # Returns if module is enabled or disabled
     def isEnable(self):
@@ -97,16 +96,32 @@ class InfoWidgetFactory:
 
             # Replace placeholders in file with room number
             if self.addPrefixToName:
-                widgetNameAdd = self.widgetNameInFiles.replace("%roomName%", key)
+                widgetNameAdd = self.widgetNameInFiles.replace("%name%", key)
             else:
-                keyWithoutWord = key.replace(self.theWord, "")
-                widgetNameAdd = self.widgetNameInFiles.replace("%roomName%", keyWithoutWord)
+                roomName = key
+                num = 0
+                for c in roomName:
+                    if not c.isdigit():
+                        # Delete character from string at index num
+                        roomName = roomName[:num] + roomName[num + 1:]
+                    else:
+                        break
+                    num = num + 1
+                widgetNameAdd = self.widgetNameInFiles.replace("%name%", roomName)
 
             if self.addPrefixToWidgetNameInFiles:
-                roomNameWidget = self.widgetName.replace("%roomName%", key)
+                roomNameWidget = self.widgetName.replace("%name%", key)
             else:
-                keyWithoutWord = key.replace(self.theWord, "")
-                roomNameWidget = self.widgetName.replace("%roomName%", keyWithoutWord)
+                roomName = key
+                num = 0
+                for c in roomName:
+                    if not c.isdigit():
+                        # Delete character from string at index num
+                        roomName = roomName[:num] + roomName[num + 1:]
+                    else:
+                        break
+                    num = num + 1
+                roomNameWidget = self.widgetName.replace("%name%", roomName)
 
             # Goes through all objects in dictionary with current room name
             for obj in self.dictionary["plan"]["objects"]:

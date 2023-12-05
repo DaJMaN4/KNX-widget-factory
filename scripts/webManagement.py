@@ -3,13 +3,14 @@ from selenium.webdriver.common.by import By
 from time import sleep
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+import os
 
 
 class WebManagement:
     def __init__(self, path, login, password, ip):
         self.path = path
         self.driver = webdriver.Chrome()
-        #self.driver.get('http://' + login + ':' + password + '@' + ip + '/scada-main')
+        # self.driver.get('http://' + login + ':' + password + '@' + ip + '/scada-main')
         self.driver.get('http://admin:Sb2019LM@10.41.160.247/scada-main')
         self.driver.find_element(By.ID, "ext-comp-2349__Buildings").click()
         self.driver.maximize_window()
@@ -17,27 +18,27 @@ class WebManagement:
         self.wait = WebDriverWait(self.driver, 10)
 
     def uploadLevel(self, levelName):
-        self.wait.until(EC.element_to_be_clickable((By.XPATH, "//td[@class='x-grid3-col x-grid3-cell x-grid3-td-5 scada-cell-down scada-cell-icon ']/following-sibling::td"))).click()
+        self.wait.until(EC.element_to_be_clickable((By.XPATH,
+                                                    "//td[@class='x-grid3-col x-grid3-cell x-grid3-td-5 scada-cell-down scada-cell-icon ']/following-sibling::td"))).click()
         self.wait.until(EC.element_to_be_clickable((By.ID, "ext-comp-1661"))).click()
         self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@value='keep']"))).click()
-        choose_file = self.wait.until(EC.element_to_be_clickable((By.ID, "ext-comp-1653"))).click()
-        choose_file.send_keys(r"C:\Users\Damian\PycharmProjects\KNX-widget-factory\output\levels" + "\\" + levelName)
+        choose_file = self.wait.until(EC.element_to_be_clickable((By.ID, "ext-comp-1653")))
+        choose_file.send_keys(self.path + r"\output\levels" + "\\" + levelName)
         self.wait.until(EC.element_to_be_clickable((By.ID, "buildings-import-submit"))).click()
+        sleep(0.5)
 
     def uploadFramework(self, frameworkName):
         self.wait.until(EC.element_to_be_clickable((By.ID, "ext-comp-1651__ext-comp-1606"))).click()
+        sleep(0.5)
         self.wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@data-record-id='layout']"))).click()
         self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='ext-comp-1664']"))).click()
         self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@value='keep']"))).click()
         choose_file = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@accept='.tar']")))
-        choose_file.send_keys(r"C:\Users\Damian\PycharmProjects\KNX-widget-factory\output\frameworks" + "\\" + frameworkName)
+        choose_file.send_keys(self.path + r"\output\frameworks" + "\\" + frameworkName)
         self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='buildings-import-submit']"))).click()
-        self.loadedFramework = True
+        sleep(0.5)
 
     def uploadWidgetsInOrder(self, infoWidgets, trendWidgets):
-        if not self.loadedFramework:
-            pass
-
         organizedTrendDictionary = trendWidgets.copy()
         for widget in infoWidgets:
             for widgetOrganized in organizedTrendDictionary:
@@ -52,14 +53,7 @@ class WebManagement:
             else:
                 organizedTrendDictionary[widget] = infoWidgets[widget]
 
-        for widget in organizedTrendDictionary:
-            self.wait.until(EC.element_to_be_clickable((By.ID, "ext-comp-1651__ext-comp-1606"))).click()
-            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@data-record-id='widget']"))).click()
-            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='ext-comp-1664']"))).click()
-            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@value='keep']"))).click()
-            choose_file = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@accept='.tar']")))
-            choose_file.send_keys(r"C:\Users\Damian\PycharmProjects\KNX-widget-factory\output\widgets" + "\\Trend_Widget_Rom-" + widget + ".tar")
-            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='buildings-import-submit']"))).click()
+        self.uploadTrendWidgets(organizedTrendDictionary)
 
         organizedInfoDictionary = infoWidgets.copy()
         for widget in infoWidgets:
@@ -75,14 +69,7 @@ class WebManagement:
             else:
                 organizedInfoDictionary[widget] = infoWidgets[widget]
 
-        for widget in organizedInfoDictionary:
-            self.wait.until(EC.element_to_be_clickable((By.ID, "ext-comp-1651__ext-comp-1606"))).click()
-            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@data-record-id='widget']"))).click()
-            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='ext-comp-1664']"))).click()
-            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@value='keep']"))).click()
-            choose_file = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@accept='.tar']")))
-            choose_file.send_keys(r"C:\Users\Damian\PycharmProjects\KNX-widget-factory\output\widgets" + "\\Info_Widget_Rom-" + widget + ".tar")
-            self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='buildings-import-submit']"))).click()
+        self.uploadInfoWidgets(organizedInfoDictionary)
 
     def uploadInfoWidgets(self, infoWidgets):
         for widget in infoWidgets:
@@ -91,10 +78,10 @@ class WebManagement:
             self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='ext-comp-1664']"))).click()
             self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@value='keep']"))).click()
             choose_file = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@accept='.tar']")))
-            choose_file.send_keys(
-                r"C:\Users\Damian\PycharmProjects\KNX-widget-factory\output\widgets" + "\\Info_Widget_Rom-" + widget + ".tar")
+            choose_file.send_keys(self.path + r"\output\widgets" + "\\Info_Widget_Rom-" + widget + ".tar")
             self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='buildings-import-submit']"))).click()
             sleep(0.5)
+            # delete everything in folder output/widgets
 
     def uploadTrendWidgets(self, trendWidgets):
         for widget in trendWidgets:
@@ -103,8 +90,7 @@ class WebManagement:
             self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='ext-comp-1664']"))).click()
             self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@value='keep']"))).click()
             choose_file = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@accept='.tar']")))
-            choose_file.send_keys(
-                r"C:\Users\Damian\PycharmProjects\KNX-widget-factory\output\widgets" + "\\Trend_Widget_Rom-" + widget + ".tar")
+            choose_file.send_keys(self.path + r"\output\widgets" + "\\Trend_Widget_Rom-" + widget + ".tar")
             self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='buildings-import-submit']"))).click()
             sleep(0.5)
 
@@ -120,5 +106,3 @@ class WebManagement:
             frameworkName = frameworkName.replace(".yml", ".tar")
             self.uploadFramework(frameworkName)
         self.uploadWidgetsInOrder(infoWidgets, trendWidgets)
-
-

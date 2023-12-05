@@ -6,15 +6,15 @@ plan:
   bgrepeat: 0
   building: 0
   height: 1080
-  id: 3
+  id: 414
   layout: 0
   locx: ''
   locy: ''
-  name: Rammeverk romstyring 2.etg
+  name: Rammeverk romstyring 2.etg tests
   objects:
   - cls: ''
-    floor: 3
-    id: 123
+    floor: 414
+    id: 12448
     locx: 40
     locy: 10
     name: ''
@@ -26,8 +26,8 @@ plan:
     sortorder: 2
     type: 2
   - cls: ''
-    floor: 3
-    id: 124
+    floor: 414
+    id: 12449
     locx: 110
     locy: 10
     nobg: 1
@@ -35,8 +35,8 @@ plan:
     pincode: ''
     type: 7
   - cls: ''
-    floor: 3
-    id: 189
+    floor: 414
+    id: 12450
     locx: 1470
     locy: 850
     name: Felles info hele bygg A
@@ -45,8 +45,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 3
-    id: 190
+    floor: 414
+    id: 12451
     locx: 1340
     locy: 910
     name: 'Høyeste temperatur:'
@@ -55,8 +55,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 3
-    id: 191
+    floor: 414
+    id: 12452
     locx: 1340
     locy: 950
     name: 'Laveste temperatur:'
@@ -65,8 +65,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 3
-    id: 192
+    floor: 414
+    id: 12453
     locx: 1340
     locy: 990
     name: 'Høyeste co2:'
@@ -75,8 +75,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 3
-    id: 489
+    floor: 414
+    id: 12454
     locx: 40
     locy: 120
     nobg: 1
@@ -84,8 +84,8 @@ plan:
     pincode: ''
     type: 7
   - cls: ''
-    floor: 3
-    id: 511
+    floor: 414
+    id: 12455
     locx: 1320
     locy: 20
     nobg: 1
@@ -93,8 +93,8 @@ plan:
     pincode: ''
     type: 7
   - cls: ''
-    floor: 3
-    id: 2394
+    floor: 414
+    id: 12456
     locx: 190
     locy: 780
     name: ''
@@ -109,8 +109,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 2396
+    floor: 414
+    id: 12457
     locx: 310
     locy: 935
     name: V
@@ -119,8 +119,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 3
-    id: 2397
+    floor: 414
+    id: 12458
     locx: 220
     locy: 770
     name: Ø
@@ -129,8 +129,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 3
-    id: 2398
+    floor: 414
+    id: 12459
     locx: 350
     locy: 810
     name: S
@@ -139,8 +139,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 3
-    id: 2399
+    floor: 414
+    id: 12460
     locx: 180
     locy: 892
     name: N
@@ -149,8 +149,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 3
-    id: 2493
+    floor: 414
+    id: 12461
     locx: 1760
     locy: 1041
     name: ''
@@ -165,8 +165,8 @@ plan:
     type: 1
     visparams: ''
   - cls: color_tekst_knx
-    floor: 3
-    id: 2494
+    floor: 414
+    id: 12462
     locx: 1504
     locy: 1041
     name: ''
@@ -181,8 +181,8 @@ plan:
     type: 0
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 2495
+    floor: 414
+    id: 12463
     locx: 1342
     locy: 1041
     name: 'KNX kommunikasjon: '
@@ -191,8 +191,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 3
-    id: 2496
+    floor: 414
+    id: 12464
     locx: 1320
     locy: 830
     nobg: 1
@@ -200,8 +200,8 @@ plan:
     pincode: ''
     type: 7
   - cls: ''
-    floor: 3
-    id: 2596
+    floor: 414
+    id: 12465
     locx: 1842
     locy: 852
     name: ''
@@ -216,8 +216,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 8085
+    floor: 414
+    id: 12466
     locx: 100
     locy: 280
     name: ''
@@ -232,8 +232,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 8086
+    floor: 414
+    id: 12467
     locx: 100
     locy: 563
     name: ''
@@ -248,40 +248,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 8087
-    locx: 205
-    locy: 563
-    name: ''
-    nobg: 1
-    notouch: 0
-    object: 65806
-    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":85,"height":120,"icon_default":"Boksmidten.png","icon_touch":"","icons_add":[{"min":0,"max":0,"icon":"Boksmidten.png"},{"min":1,"max":1,"icon":"Bokskald.png"},{"min":2,"max":2,"icon":"Boksvarm.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":228,"backdrop":0}'
-    pincode: ''
-    readonly: 0
-    sortorder: 7
-    statusobject: 65806
-    type: 1
-    visparams: ''
-  - cls: ''
-    floor: 3
-    id: 8088
-    locx: 311
-    locy: 563
-    name: ''
-    nobg: 1
-    notouch: 0
-    object: 65807
-    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":87,"height":122,"icon_default":"Boksmidten.png","icon_touch":"","icons_add":[{"min":0,"max":0,"icon":"Boksmidten.png"},{"min":1,"max":1,"icon":"Bokskald.png"},{"min":2,"max":2,"icon":"Boksvarm.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":229,"backdrop":0}'
-    pincode: ''
-    readonly: 0
-    sortorder: 6
-    statusobject: 65807
-    type: 1
-    visparams: ''
-  - cls: ''
-    floor: 3
-    id: 8089
+    floor: 414
+    id: 12470
     locx: 310
     locy: 280
     name: ''
@@ -296,24 +264,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 8090
-    locx: 440
-    locy: 563
-    name: ''
-    nobg: 1
-    notouch: 0
-    object: 65808
-    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":85,"height":120,"icon_default":"Boksmidten.png","icon_touch":"","icons_add":[{"min":0,"max":0,"icon":"Boksmidten.png"},{"min":1,"max":1,"icon":"Bokskald.png"},{"min":2,"max":2,"icon":"Boksvarm.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":231,"backdrop":0}'
-    pincode: ''
-    readonly: 0
-    sortorder: 5
-    statusobject: 65808
-    type: 1
-    visparams: ''
-  - cls: ''
-    floor: 3
-    id: 8091
+    floor: 414
+    id: 12472
     locx: 417
     locy: 280
     name: ''
@@ -328,8 +280,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 8092
+    floor: 414
+    id: 12473
     locx: 206
     locy: 280
     name: ''
@@ -344,8 +296,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 8093
+    floor: 414
+    id: 12474
     locx: 522
     locy: 200
     name: ''
@@ -360,8 +312,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 8094
+    floor: 414
+    id: 12475
     locx: 627
     locy: 200
     name: ''
@@ -376,8 +328,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 8095
+    floor: 414
+    id: 12476
     locx: 734
     locy: 200
     name: ''
@@ -392,8 +344,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 8096
+    floor: 414
+    id: 12477
     locx: 838
     locy: 200
     name: ''
@@ -408,8 +360,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 8097
+    floor: 414
+    id: 12478
     locx: 942
     locy: 200
     name: ''
@@ -424,8 +376,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 8098
+    floor: 414
+    id: 12479
     locx: 1048
     locy: 200
     name: ''
@@ -440,8 +392,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 8099
+    floor: 414
+    id: 12480
     locx: 1090
     locy: 447
     name: ''
@@ -456,24 +408,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 8100
-    locx: 1090
-    locy: 552
-    name: ''
-    nobg: 1
-    notouch: 0
-    object: 65820
-    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":120,"height":85,"icon_default":"boks_rom_liggende.png","icon_touch":"","icons_add":[{"min":0,"max":0,"icon":"boks_rom_liggende.png"},{"min":1,"max":1,"icon":"blue_boks_rom_liggende.png"},{"min":2,"max":2,"icon":"red_boks_rom_liggende.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":242,"backdrop":0}'
-    pincode: ''
-    readonly: 0
-    sortorder: 16
-    statusobject: 65820
-    type: 1
-    visparams: ''
-  - cls: ''
-    floor: 3
-    id: 8101
+    floor: 414
+    id: 12482
     locx: 1090
     locy: 657
     name: ''
@@ -488,40 +424,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 3
-    id: 8102
-    locx: 1090
-    locy: 764
-    name: ''
-    nobg: 1
-    notouch: 0
-    object: 65822
-    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":120,"height":85,"icon_default":"boks_rom_liggende.png","icon_touch":"","icons_add":[{"min":0,"max":0,"icon":"boks_rom_liggende.png"},{"min":1,"max":1,"icon":"blue_boks_rom_liggende.png"},{"min":2,"max":2,"icon":"red_boks_rom_liggende.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":244,"backdrop":0}'
-    pincode: ''
-    readonly: 0
-    sortorder: 17
-    statusobject: 65822
-    type: 1
-    visparams: ''
-  - cls: ''
-    floor: 3
-    id: 8103
-    locx: 1090
-    locy: 870
-    name: ''
-    nobg: 1
-    notouch: 0
-    object: 65823
-    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":120,"height":85,"icon_default":"boks_rom_liggende.png","icon_touch":"","icons_add":[{"min":0,"max":0,"icon":"Boksmidten.png"},{"min":1,"max":1,"icon":"Bokskald.png"},{"min":2,"max":2,"icon":"Boksvarm.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":245,"backdrop":0}'
-    pincode: ''
-    readonly: 0
-    sortorder: 18
-    statusobject: 65823
-    type: 1
-    visparams: ''
-  - cls: ''
-    floor: 3
-    id: 12188
+    floor: 414
+    id: 12485
     locx: 1550
     locy: 910
     name: ''
@@ -536,8 +440,8 @@ plan:
     type: 1
     visparams: '{"decimals":"1","control":"spinner","min":"-273","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
   - cls: ''
-    floor: 3
-    id: 12189
+    floor: 414
+    id: 12486
     locx: 1550
     locy: 950
     name: ''
@@ -552,8 +456,8 @@ plan:
     type: 1
     visparams: '{"decimals":"1","control":"spinner","min":"-273","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
   - cls: ''
-    floor: 3
-    id: 12190
+    floor: 414
+    id: 12487
     locx: 1550
     locy: 990
     name: ''
@@ -567,8 +471,104 @@ plan:
     statusobject: 65909
     type: 1
     visparams: '{"decimals":"0","control":"spinner","min":"-670760","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
+  - cls: ''
+    floor: 414
+    id: 12488
+    locx: 440
+    locy: 563
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 65794
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":85,"height":120,"icon_default":"Boksmidten.png","icon_touch":"","icons_add":[{"min":0,"max":0,"icon":"Boksmidten.png"},{"min":1,"max":1,"icon":"Bokskald.png"},{"min":2,"max":2,"icon":"Boksvarm.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":231,"backdrop":0}'
+    pincode: ''
+    readonly: 0
+    sortorder: 5
+    statusobject: 65794
+    type: 1
+    visparams: ''
+  - cls: ''
+    floor: 414
+    id: 12489
+    locx: 311
+    locy: 563
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 65794
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":87,"height":122,"icon_default":"Boksmidten.png","icon_touch":"","icons_add":[{"min":0,"max":0,"icon":"Boksmidten.png"},{"min":1,"max":1,"icon":"Bokskald.png"},{"min":2,"max":2,"icon":"Boksvarm.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":229,"backdrop":0}'
+    pincode: ''
+    readonly: 0
+    sortorder: 6
+    statusobject: 65794
+    type: 1
+    visparams: ''
+  - cls: ''
+    floor: 414
+    id: 12490
+    locx: 1090
+    locy: 764
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 65794
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":120,"height":85,"icon_default":"boks_rom_liggende.png","icon_touch":"","icons_add":[{"min":0,"max":0,"icon":"boks_rom_liggende.png"},{"min":1,"max":1,"icon":"blue_boks_rom_liggende.png"},{"min":2,"max":2,"icon":"red_boks_rom_liggende.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":244,"backdrop":0}'
+    pincode: ''
+    readonly: 0
+    sortorder: 17
+    statusobject: 65794
+    type: 1
+    visparams: ''
+  - cls: ''
+    floor: 414
+    id: 12491
+    locx: 1090
+    locy: 870
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 65794
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":120,"height":85,"icon_default":"boks_rom_liggende.png","icon_touch":"","icons_add":[{"min":0,"max":0,"icon":"Boksmidten.png"},{"min":1,"max":1,"icon":"Bokskald.png"},{"min":2,"max":2,"icon":"Boksvarm.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":245,"backdrop":0}'
+    pincode: ''
+    readonly: 0
+    sortorder: 18
+    statusobject: 65794
+    type: 1
+    visparams: ''
+  - cls: ''
+    floor: 414
+    id: 12492
+    locx: 1090
+    locy: 552
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 65794
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":120,"height":85,"icon_default":"boks_rom_liggende.png","icon_touch":"","icons_add":[{"min":0,"max":0,"icon":"boks_rom_liggende.png"},{"min":1,"max":1,"icon":"blue_boks_rom_liggende.png"},{"min":2,"max":2,"icon":"red_boks_rom_liggende.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":242,"backdrop":0}'
+    pincode: ''
+    readonly: 0
+    sortorder: 16
+    statusobject: 65794
+    type: 1
+    visparams: ''
+  - cls: ''
+    floor: 414
+    id: 12493
+    locx: 205
+    locy: 563
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 65794
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":85,"height":120,"icon_default":"Boksmidten.png","icon_touch":"","icons_add":[{"min":0,"max":0,"icon":"Boksmidten.png"},{"min":1,"max":1,"icon":"Bokskald.png"},{"min":2,"max":2,"icon":"Boksvarm.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":228,"backdrop":0}'
+    pincode: ''
+    readonly: 0
+    sortorder: 7
+    statusobject: 65794
+    type: 1
+    visparams: ''
   pincode: ''
-  sortorder: 1
+  sortorder: 195
   touch_bgcolor: ''
   touch_param: ''
   type: layout
