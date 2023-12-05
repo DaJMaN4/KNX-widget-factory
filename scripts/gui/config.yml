@@ -9,7 +9,7 @@
 #createInfoRoomWidgets: True # True if room widgets should be created, False if not
 
 
-roomWidgets:
+#roomWidgets:
   # prefix to the name of the widget
   #widgetName: "Kontor A-%roomName%"
 
@@ -24,7 +24,7 @@ roomWidgets:
   #addPrefixToWidgetNameInFiles: False
 
   # name of the schematic to use for the trend widget
-  schematicToUse: #"Vis-Rom_A-2008-Bygg_A_GTW-2023.10.27-10.51.yml"
+  #schematicToUse: #"Vis-Rom_A-2008-Bygg_A_GTW-2023.10.27-10.51.yml"
 
   # names of the objects in the database that are needed for the widget
   #objectsNamesWidget: ["Driftsmodus - Rom", "Tilstedesensor -", "Romtemperatur - Verdi",
@@ -64,7 +64,7 @@ trendWidgets:
 # True if mainStructure should be created, False if not
 #createStructures: True
 
-structure:
+#structure:
   # if there is just one schematic inside the folder, then you can leave this empty
   # name of the schematic to use for the trend widget
   #schematicLevel: "Vis-Romvisualisering_3_etg_for_testing_old-Bygg_A_GTW-2023.11.09-13.18.yml"

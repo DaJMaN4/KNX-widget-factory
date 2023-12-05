@@ -46,8 +46,6 @@ class guiTabStructure:
             elif not deleted:
                 tree.set(item, column=column, value=entry.get())
 
-
-
             if tree.get_children()[-1] == row and not (entry.get() == "" or entry.get().isspace()):
                 self.createNewBoxDataTab(tree, item, entry.get())
 
@@ -78,7 +76,7 @@ class guiTabStructure:
         newTabBoxData.rowconfigure(6, weight=0)
         newTabBoxData.rowconfigure(7, weight=0)
         newTabBoxData.rowconfigure(8, weight=0)
-        newTabBoxData.rowconfigure(9, weight=0)
+        newTabBoxData.rowconfigure(9, weight=0, minsize=10)
         newTabBoxData.rowconfigure(10, weight=0)
         newTabBoxData.rowconfigure(11, weight=0)
         newTabBoxData.rowconfigure(12, weight=0)
@@ -120,4 +118,5 @@ class guiTabStructure:
         self.tabStructure.columnconfigure(2, weight=5)
 
         self.createNewBoxDataTab(self.tabStructureTreeBoxTypes, "I001", "default", True)
+
 

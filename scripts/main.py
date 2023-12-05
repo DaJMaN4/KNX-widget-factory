@@ -2,6 +2,7 @@ import os
 import pip
 from tkinter import *
 from tkinter import ttk
+import copy
 
 # Check if yaml module is installed, if not then install it
 try:
@@ -23,7 +24,7 @@ import databaseManager, webManagement
 from widgets import ImportWidgets, InfoWidgetFactory, TrendWidgetFactory
 from structures import mainStructure, frameworkStructure
 from gui import guiElements, guiRightBar, guiTabInfo, guiTabTrend, guiTabStructure, guiBoxDataTab
-from utils import guiUtilities
+from utils import guiUtilities, importUtil
 
 
 # if config.getCreateStructures():
@@ -192,13 +193,13 @@ class Main:
             rooms,
             self.rightBar.createTrendWidget.get() == 1,
             self.guiElements.getRoomNumbers(),
-            self
+            self,
+            importUtil.ImportManager(self.path)
         )
         if mainStructureManagerObject.isEnable():
             mainStructureManagerObject.run()
             self.mainStructureName = mainStructureManagerObject.getName()
             self.log("Level created and saved in output folder")
-
 
         frameworkStructureObject = frameworkStructure.frameworkStructure(
             self.path,
@@ -206,7 +207,8 @@ class Main:
             self.mainStructureFile,
             boxData,
             rooms,
-            self
+            self,
+            importUtil.ImportManager(self.path)
         )
         if frameworkStructureObject.isEnable():
             frameworkStructureObject.run()
@@ -264,7 +266,7 @@ class Main:
 
     def createNewBoxDataTab(self, frame, item, name):
         self.boxDataTabs[item] = (guiBoxDataTab.GuiBoxDataTab(frame, self, self.tabStructure, self.guiUtilities,
-                                                              self.databaseManagerObject.getAllImages(), name))
+                                                              self.databaseManagerObject.getAllIcons(), name))
 
     def updateImportedLevelStructure(self, file):
         file = file.name
@@ -283,18 +285,27 @@ class Main:
         for tab in self.boxDataTabs:
             self.boxDataTabs[tab].updateRoomNames(self.roomNumbers)
 
+    # guiTabStructure object uses this function to add rooms to correct tab in guiBoxDataTab object
     def triesToSelectRooms(self, selectedItems):
         for item in selectedItems:
             if item == "" or item == None:
                 selectedItems.remove(item)
+        selectedItemsOutput = copy.deepcopy(selectedItems)
         if self.tabControl.tab(self.tabControl.select(), "text") == "Framework & Level":
             boxName = self.TabStructure.tabControlBoxData.tab(self.TabStructure.tabControlBoxData.select(), "text")
             for tab in self.boxDataTabs:
                 if self.boxDataTabs[tab].name == boxName:
-                    self.boxDataTabs[tab].selectRooms(selectedItems)
+                    for room in selectedItems:
+                        for secondTab in self.boxDataTabs:
+                            if self.boxDataTabs[tab].name != self.boxDataTabs[secondTab].name:
+                                if room in self.boxDataTabs[secondTab].selectedRooms:
+                                    self.log("Room " + room + " is already selected in " + self.boxDataTabs[secondTab].name + ". Skipping..")
+                                    selectedItemsOutput.remove(room)
+                    self.boxDataTabs[tab].selectRooms(selectedItemsOutput)
         # for tab in self.boxDataTabs:
         #    self.boxDataTabs[tab].triesToSelectRooms()
 
+    # Creates ImportManager object and returns it
     def createImportWidgetSchematic(self):
         importManager = ImportWidgets.ImportManager(
             self.path,
@@ -303,9 +314,29 @@ class Main:
         )
         return importManager
 
+    # guiRightBar object triggers this function when it's about to create and upload all data
+    # Currently it's used to compensate for uploading level and framework before widgets, it is needed to get the
+    # correct biggestWidgetID
     def creatingStructure(self):
         self.biggestWidgetID += 2
+
+    # DatabaseManager object triggers this function when it's done with updating database
+    # Currently it's used to update icons in boxDataTabs
+    def updateDatabase(self, icons):
+        for tab in self.boxDataTabs:
+            self.boxDataTabs[tab].databaseUpdate(icons)
 
 
 if __name__ == '__main__':
     main = Main()
+
+
+# TODO: make KNX name working
+
+# TODO: Changing name of tabs in boxDataTabs
+
+
+
+
+
+

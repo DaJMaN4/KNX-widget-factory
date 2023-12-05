@@ -1,14 +1,13 @@
 import io
 import tarfile
-from scripts.utils import importUtil
 import json
 
 
 class frameworkStructure:
-    def __init__(self, path, schematicFileFramework, schematicFileLevel, boxData, roomNames, main):
+    def __init__(self, path, schematicFileFramework, schematicFileLevel, boxData, roomNames, main, importUtil):
         self.schematicFrameworkData = None
         self.disable = False
-        self.importUtil = importUtil .ImportManager(path)
+        self.importUtil = importUtil
         self.path = path
         self.schematicFileFramework = schematicFileFramework
         self.schematicFileLevel = schematicFileLevel

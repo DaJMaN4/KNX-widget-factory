@@ -5,12 +5,12 @@ from tkinter.filedialog import askopenfile
 
 
 class GuiBoxDataTab:
-    def __init__(self, frame, main, mainTab, guiUtilities, images, name):
+    def __init__(self, frame, main, mainTab, guiUtilities, icons, name):
         self.frame = frame
         self.main = main
         self.mainTab = mainTab
         self.guiUtilities = guiUtilities
-        self.images = images
+        self.icons = icons
         self.name = name
 
         self.selectedRooms = []
@@ -21,8 +21,9 @@ class GuiBoxDataTab:
     def onItemDoubleClickObjectsNames(self, event):
         self.guiUtilities.onItemDoubleClick(event, self.tabStructureTreeObjectsNames, self.tabStructureTreeObjectsNames)
 
-    def databaseUpdated(self, images):
-        self.images = images
+    def databaseUpdate(self, icons):
+        self.trendIconChoicer['values'] = icons
+        self.boxIconChoicer['values'] = icons
 
     def unlink(self):
         self.main.boxDataTabsLabelsForResize.remove(self.tabTextStructure)
@@ -102,24 +103,24 @@ class GuiBoxDataTab:
 
         self.boxIcon = StringVar()
 
-        boxIconChoicer = ttk.Combobox(self.frame, width=27, textvariable=self.boxIcon)
+        self.boxIconChoicer = ttk.Combobox(self.frame, width=27, textvariable=self.boxIcon)
 
         # Adding combobox drop down list
-        boxIconChoicer['values'] = self.images
+        self.boxIconChoicer['values'] = self.icons
 
-        boxIconChoicer.grid(column=3, row=6)
+        self.boxIconChoicer.grid(column=3, row=6)
 
         self.trendTabTextStructure = Label(self.frame, text="Choose which icon will be used for trend widgets")
         self.trendTabTextStructure.grid(column=3, row=7, sticky="")
 
         self.trendIcon = StringVar()
 
-        trendIconChoicer = ttk.Combobox(self.frame, width=27,
+        self.trendIconChoicer = ttk.Combobox(self.frame, width=27,
                                       textvariable=self.trendIcon)
         # Adding combobox drop down list
-        trendIconChoicer['values'] = self.images
+        self.trendIconChoicer['values'] = self.icons
 
-        trendIconChoicer.grid(column=3, row=8)
+        self.trendIconChoicer.grid(column=3, row=8)
 
         separator = ttk.Separator(self.frame, orient='horizontal')
         separator.grid(column=3, row=10, sticky="nsew")

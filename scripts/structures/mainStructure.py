@@ -1,4 +1,3 @@
-from scripts.utils import importUtil
 import json
 import tarfile
 import io
@@ -6,8 +5,8 @@ import io
 
 class mainStructureManager:
     def __init__(self, path, schematicFileFramework, schematicFileLevel, boxData, roomNames, doCreateTrend, activeRooms,
-                 main):
-        self.importUtil = importUtil.ImportManager(path)
+                 main, importUtil):
+        self.importUtil = importUtil
         self.path = path
         self.schematicFileFramework = schematicFileFramework
         self.schematicFileLevel = schematicFileLevel

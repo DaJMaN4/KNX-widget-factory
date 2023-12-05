@@ -27,7 +27,7 @@ class guiTabTrend:
         self.tabTrendTreeCreatedWidgets.heading("#0", text="Created Widgets", anchor=W)
 
         self.tabTrendTreeCreatedWidgets.bind("<Double-1>", self.onItemDoubleClickTreeCreated)
-        self.tabTrendTreeCreatedWidgets.grid(row=1, column=1, sticky="nsew", rowspan=8)
+        self.tabTrendTreeCreatedWidgets.grid(row=1, column=1, sticky="nsew", rowspan=20)
 
         self.tabTrendTreeObjectsNames = ttk.Treeview(master=self.tabTrend)
         self.tabTrendTreeObjectsNames.column("#0", width=300, minwidth=150)
@@ -42,15 +42,11 @@ class guiTabTrend:
 
         self.tabTrendTreeObjectsNames.bind("<Double-1>", self.onItemDoubleClickTabObjects)
 
-        self.tabTrendTreeObjectsNames.grid(row=1, column=2, sticky="nsew", rowspan=8)
-
-
+        self.tabTrendTreeObjectsNames.grid(row=1, column=2, sticky="nsew", rowspan=20)
 
         title_font = Font(family="Helvetica", size=15, weight="bold")
         label = Label(self.tabTrend, text="Trend Widgets", font=title_font)
         label.grid(row=1, column=3, sticky="n")
-
-        self.tabTrend.grid_rowconfigure(1, weight=1)
 
         self.tabTextTrend = Label(self.tabTrend,
                                   text="To create Trend Widgets, specify on the most left column named 'Name' numbers of rooms. "
@@ -89,9 +85,16 @@ class guiTabTrend:
         radioBox = ttk.Checkbutton(self.tabTrend, text="Do not add prefix to widget name", variable=self.addPrefixTrend, command=on_entry_change)
         radioBox.grid(row=5, column=3)
 
-        self.tabTrend.grid_rowconfigure(5, weight=1, minsize=10)
         self.tabTrend.grid_columnconfigure(3, weight=1, minsize=30)
-        self.tabTrend.grid_rowconfigure(7, weight=1, minsize=150)
+        self.tabTrend.grid_rowconfigure(1, weight=0)
+        self.tabTrend.grid_rowconfigure(2, weight=0)
+        self.tabTrend.grid_rowconfigure(3, weight=0)
+        self.tabTrend.grid_rowconfigure(4, weight=0)
+        self.tabTrend.grid_rowconfigure(5, weight=0, minsize=10)
+        self.tabTrend.grid_rowconfigure(6, weight=0)
+        self.tabTrend.grid_rowconfigure(7, weight=0, minsize=150)
+
+        self.tabTrend.grid_rowconfigure(10, weight=1)
 
     def insertCreatedWidget(self, text):
         for child in self.tabTrendTreeCreatedWidgets.get_children():

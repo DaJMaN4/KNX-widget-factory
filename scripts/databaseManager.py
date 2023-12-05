@@ -45,6 +45,7 @@ class DatabaseManager:
             exit(1)
         # Set biggestWidgetID to the biggest widget id in database
         self.main.biggestWidgetID = self.getBiggestWidgetID()
+        self.main.updateDatabase(self.getAllIcons())
 
     # Get chosen columns from chosen table
     def getTableColumns(self, columns: list, table: str = "objects"):
@@ -67,7 +68,7 @@ class DatabaseManager:
         table = self.connection.execute("SELECT id from visfloors ORDER BY id DESC LIMIT 1")
         return table.fetchone()[0]
 
-    def getAllImages(self):
+    def getAllIcons(self):
         if os.path.exists(self.path + "/data/storage/icons"):
             images = []
             for filename in os.listdir(self.path + "/data/storage/icons"):

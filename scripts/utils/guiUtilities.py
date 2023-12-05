@@ -15,7 +15,12 @@ class guiUtilities:
         if row is None or row == "":
             return
         x, y, width, height = tree.bbox(item, column)
-        entry = Entry(frame)
+        entry_text = StringVar()
+        # get text from tree from item
+
+        entry_text.set(tree.item(item)["text"])
+        entry = Entry(frame, textvariable=entry_text)
+        entry.icursor(END)
         entry.place(x=x, y=y + tree.winfo_y(), width=width, height=height)
 
         def save_edit(event):
