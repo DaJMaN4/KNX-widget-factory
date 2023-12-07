@@ -6,15 +6,15 @@ plan:
   bgrepeat: 0
   building: 0
   height: 380
-  id: 227
+  id: 229
   layout: 0
   locx: ''
   locy: ''
   name: '%name%'
   objects:
   - cls: ''
-    floor: 227
-    id: 7439
+    floor: 229
+    id: 7483
     locx: 20
     locy: 50
     name: 'Rom modus:'
@@ -23,8 +23,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 227
-    id: 7440
+    floor: 229
+    id: 7484
     locx: 20
     locy: 80
     name: 'Tilstedeværelse:'
@@ -33,8 +33,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 227
-    id: 7441
+    floor: 229
+    id: 7485
     locx: 20
     locy: 140
     name: 'Aktivt SP:'
@@ -43,8 +43,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 227
-    id: 7442
+    floor: 229
+    id: 7486
     locx: 20
     locy: 110
     name: 'Rom temperatur:'
@@ -53,8 +53,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 227
-    id: 7443
+    floor: 229
+    id: 7487
     locx: 20
     locy: 200
     name: 'Ønsket SP:'
@@ -63,8 +63,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 227
-    id: 7444
+    floor: 229
+    id: 7488
     locx: 20
     locy: 320
     name: 'Fukt i rom:'
@@ -73,8 +73,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 227
-    id: 7445
+    floor: 229
+    id: 7489
     locx: 20
     locy: 170
     name: 'Lokal justering: '
@@ -83,8 +83,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 227
-    id: 7446
+    floor: 229
+    id: 7490
     locx: 20
     locy: 290
     name: 'Co2 i rom:'
@@ -93,8 +93,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 227
-    id: 7447
+    floor: 229
+    id: 7491
     locx: 0
     locy: 0
     nobg: 1
@@ -102,8 +102,8 @@ plan:
     pincode: ''
     type: 7
   - cls: ''
-    floor: 227
-    id: 7448
+    floor: 229
+    id: 7492
     locx: 20
     locy: 230
     name: 'Varmepådrag:'
@@ -112,8 +112,8 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 227
-    id: 7449
+    floor: 229
+    id: 7493
     locx: 20
     locy: 260
     name: 'Kjølepådrag:'
@@ -122,18 +122,18 @@ plan:
     pincode: ''
     type: 6
   - cls: ''
-    floor: 227
-    id: 7857
+    floor: 229
+    id: 7879
     locx: 80
     locy: 10
-    name: Kontor A2001
+    name: Kontor A2003
     nobg: 1
     params: '{"size":20,"color":"","font":"Tahoma","bold":1,"italic":0,"underline":0}'
     pincode: ''
     type: 6
   - cls: ''
-    floor: 227
-    id: 7858
+    floor: 229
+    id: 7880
     locx: 180
     locy: 50
     name: ''
@@ -148,8 +148,8 @@ plan:
     type: 1
     visparams: ''
   - cls: ''
-    floor: 227
-    id: 7859
+    floor: 229
+    id: 7881
     locx: 180
     locy: 80
     name: ''
@@ -164,8 +164,8 @@ plan:
     type: 0
     visparams: ''
   - cls: ''
-    floor: 227
-    id: 7860
+    floor: 229
+    id: 7882
     locx: 180
     locy: 110
     name: ''
@@ -180,8 +180,8 @@ plan:
     type: 1
     visparams: '{"decimals":"1","control":"spinner","min":"-670760","max":"670760","step":""}'
   - cls: ''
-    floor: 227
-    id: 7861
+    floor: 229
+    id: 7883
     locx: 180
     locy: 140
     name: ''
@@ -196,8 +196,8 @@ plan:
     type: 1
     visparams: '{"address_list_menu":"0 object(s) selected","decimals":"1","control":"spinner","min":"-670760","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
   - cls: ''
-    floor: 227
-    id: 7862
+    floor: 229
+    id: 7884
     locx: 180
     locy: 170
     name: ''
@@ -212,8 +212,8 @@ plan:
     type: 1
     visparams: '{"address_list_menu":"0 object(s) selected","decimals":"0","control":"spinner","min":"-273","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
   - cls: ''
-    floor: 227
-    id: 7863
+    floor: 229
+    id: 7885
     locx: 160
     locy: 195
     name: ''
@@ -228,8 +228,8 @@ plan:
     type: 1
     visparams: '{"decimals":"1","control":"spinner","min":"10","max":"30","step":"0.5","popover_bgcolor":"","popover_bgtransparency":"0","scale":"60"}'
   - cls: ''
-    floor: 227
-    id: 7864
+    floor: 229
+    id: 7886
     locx: 180
     locy: 230
     name: ''
@@ -244,8 +244,8 @@ plan:
     type: 1
     visparams: '{"decimals":"1","control":"spinner","min":"-670760","max":"670760","step":""}'
   - cls: ''
-    floor: 227
-    id: 7865
+    floor: 229
+    id: 7887
     locx: 180
     locy: 260
     name: ''
@@ -260,8 +260,8 @@ plan:
     type: 1
     visparams: '{"decimals":"1","control":"spinner","min":"-670760","max":"670760","step":""}'
   - cls: ''
-    floor: 227
-    id: 7866
+    floor: 229
+    id: 7888
     locx: 180
     locy: 290
     name: ''
@@ -276,8 +276,8 @@ plan:
     type: 1
     visparams: '{"address_list_menu":"0 object(s) selected","decimals":"0","control":"spinner","min":"-670760","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
   - cls: ''
-    floor: 227
-    id: 7867
+    floor: 229
+    id: 7889
     locx: 180
     locy: 320
     name: ''
@@ -292,7 +292,7 @@ plan:
     type: 1
     visparams: '{"address_list_menu":"0 object(s) selected","decimals":"0","control":"spinner","min":"-670760","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
   pincode: ''
-  sortorder: 20
+  sortorder: 22
   touch_bgcolor: ''
   touch_param: ''
   type: widget

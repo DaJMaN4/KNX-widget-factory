@@ -8,7 +8,7 @@ class guiElements:
         self.guiUtilities = guiUtilities
         self.main = main
         self.root = self.main.root
-        self.createMenuBar()
+        #self.createMenuBar()
         self.createLeftTree()
 
     def do_nothing(self):
@@ -29,10 +29,10 @@ class guiElements:
 
         self.uploadMenu = Menu(self.menu_bar, tearoff=0)
 
-        self.uploadMenu.add_command(label="Import Database", command=self.do_nothing)
-        self.uploadMenu.add_command(label="Open", command=self.do_nothing)
-        self.uploadMenu.add_command(label="Save", command=self.do_nothing)
-        self.menu_bar.add_cascade(label="Upload", menu=self.uploadMenu)
+        # self.uploadMenu.add_command(label="Import Database", command=self.do_nothing)
+        # self.uploadMenu.add_command(label="Open", command=self.do_nothing)
+        # self.uploadMenu.add_command(label="Save", command=self.do_nothing)
+        # self.menu_bar.add_cascade(label="Upload", menu=self.uploadMenu)
 
         self.menu_bar.add_command(label="help", command=self.do_nothing)
         self.menu_bar.add_separator()
@@ -46,9 +46,12 @@ class guiElements:
         self.leftTree.heading("#0", text="Name", anchor=W)
         self.leftTree.heading("knxName", text="Knx Name", anchor=W)
 
+        rooms = []
         for x in range(2001, 2008):
             self.leftTree.insert("", "end", text="A"+str(x), values=("Rom" + str(x),))
-            self.main.addRoom("A"+str(x))
+            rooms.append("A"+str(x))
+        self.main.addRoom(rooms)
+
 
         self.leftTree.insert("", "end", text="", values=("",))
 
@@ -58,12 +61,17 @@ class guiElements:
         self.leftTree.grid(row=1, column=1, sticky="nsew", columnspan=2, rowspan=4)
 
     def getRoomNumbers(self):
+        roomNumbers = []
+        for child in self.leftTree.get_children():
+            roomNumbers.append(self.leftTree.item(child)["text"])
+        roomNumbers.pop()
+        return roomNumbers
+
+    def getRoomNumbersDict(self):
         roomNumbers = {}
-        roomNumbersList = []
         for child in self.leftTree.get_children():
             roomNumbers[self.leftTree.item(child)["text"]] = self.leftTree.item(child)["values"][0]
-            roomNumbersList.append(self.leftTree.item(child)["text"])
-        roomNumbersList.pop()
-        return roomNumbersList
+        roomNumbers.pop("")
+        return roomNumbers
 
 

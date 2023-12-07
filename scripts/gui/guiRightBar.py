@@ -21,6 +21,9 @@ class GuiRightBar:
             self.databaseName.config(text=file.name.split("/")[-1])
 
     def createObjects(self):
+        if self.createTrendWidget.get() == 0 and self.createInfoWidget.get() == 0 and self.createStructure.get() == 0:
+            self.main.log("No creation checkbox is checked")
+            return
         if not self.main.checksBeforeCreating():
             return
         if self.createTrendWidget.get() == 1:
@@ -33,7 +36,12 @@ class GuiRightBar:
             self.main.createStructure()
 
     def createObjectsAndUpload(self):
+        if self.createTrendWidget.get() == 0 and self.createInfoWidget.get() == 0 and self.createStructure.get() == 0:
+            self.main.log("No creation checkbox is checked")
+            return
         webManagement = self.main.createWebManagement(self.login.get(), self.password.get(), self.ipAddress.get())
+        if webManagement.isDisable():
+            return
         if not self.main.checksBeforeCreating():
             return
         done = False

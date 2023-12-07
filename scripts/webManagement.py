@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from time import sleep
 from selenium.webdriver.support import expected_conditions as EC
@@ -7,14 +8,35 @@ import os
 
 
 class WebManagement:
-    def __init__(self, path, login, password, ip):
+    def __init__(self, path, login, password, ip, main):
         self.path = path
+        self.disable = False
+        if ip == "":
+            main.log("IP address is missing")
+            self.disable = True
+            return
         self.driver = webdriver.Chrome()
-        self.driver.get('http://' + login + ':' + password + '@' + ip + '/scada-main')
-        self.driver.find_element(By.ID, "ext-comp-2349__Buildings").click()
+        print("login  ", login)
+        try:
+            self.driver.get('http://' + login + ':' + password + '@' + ip + '/scada-main')
+
+        except:
+            main.log("Wrong login, password or ip")
+            self.disable = True
+            return
+
+        try:
+            self.driver.find_element(By.ID, "ext-comp-2349__Buildings").click()
+        except:
+            main.log("Wrong login, password or ip")
+            self.disable = True
+            return
         self.driver.maximize_window()
         self.loadedFramework = False
         self.wait = WebDriverWait(self.driver, 10)
+
+    def isDisable(self):
+        return self.disable
 
     def uploadLevel(self, levelName):
         self.wait.until(EC.element_to_be_clickable((By.XPATH,

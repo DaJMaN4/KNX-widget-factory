@@ -77,16 +77,16 @@ class Main:
             os.mkdir(self.path + "/output")
         if not os.path.exists(self.path + "/output/widgets"):
             os.mkdir(self.path + "/output/widgets")
-        if not os.path.exists(self.path + "/output/level"):
-            os.mkdir(self.path + "/output/level")
+        if not os.path.exists(self.path + "/output/levels"):
+            os.mkdir(self.path + "/output/levels")
         if not os.path.exists(self.path + "/output/frameworks"):
             os.mkdir(self.path + "/output/frameworks")
         if not os.path.exists(self.path + "/schematics"):
             os.mkdir(self.path + "/schematics")
         if not os.path.exists(self.path + "/schematics/levels"):
             os.mkdir(self.path + "/schematics/levels")
-        if not os.path.exists(self.path + "/schematics/framework"):
-            os.mkdir(self.path + "/schematics/framework")
+        if not os.path.exists(self.path + "/schematics/frameworks"):
+            os.mkdir(self.path + "/schematics/frameworks")
         if not os.path.exists(self.path + "/schematics/widgets"):
             os.mkdir(self.path + "/schematics/widgets")
         if not os.path.exists(self.path + "/schematics/widgets/info"):
@@ -159,6 +159,7 @@ class Main:
         if self.databaseManagerObject.connection is None:
             self.log("Database is not imported. Aborting")
             return False
+
         if self.guiElements.getRoomNumbers() == []:
             self.log("Rooms are not selected. Aborting")
             return False
@@ -166,7 +167,7 @@ class Main:
 
     def createTrendWidgets(self):
         if self.TabTrend.name == "":
-            self.log("Widget name is not specified. Aborting")
+            self.log("Trend widget name is not specified. Aborting")
             return
         trendWidgetFactory = TrendWidgetFactory.TrendWidgetFactory(
             self.guiElements.getRoomNumbers(),
@@ -186,11 +187,15 @@ class Main:
 
     def createInfoWidgets(self):
         if self.TabInfo.getWidgetNameVisible() == "":
-            self.log("Widget name is not specified. Aborting")
+            self.log("Info widget name is not specified. Aborting")
             return
 
         if self.TabInfo.getWidgetNameInFiles() == "":
-            self.log("Widget name is not specified. Aborting")
+            self.log("Info widget name is not specified. Aborting")
+            return
+
+        if self.schematicInfoName is None:
+            self.log("Info widget schematic is not imported. Aborting")
             return
 
         infoWidgetFactory = InfoWidgetFactory.InfoWidgetFactory(
@@ -255,6 +260,7 @@ class Main:
             login,
             password,
             ip,
+            self
         )
         return webManagementObject
 
@@ -326,10 +332,11 @@ class Main:
             self.boxDataTabs[tab].updateImportedFramework(file)
 
     # Adds room to roomNumbers list for all guiBoxDataTab objects
-    def addRoom(self, room):
-        self.roomNumbers.append(room)
+    def addRoom(self, rooms):
+        self.roomNumbers = rooms
         for tab in self.boxDataTabs:
             self.boxDataTabs[tab].updateRoomNames(self.roomNumbers)
+
 
     # guiTabStructure object uses this function to add rooms to correct tab in guiBoxDataTab object
     def triesToSelectRooms(self, selectedItems):
