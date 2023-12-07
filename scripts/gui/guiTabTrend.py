@@ -49,10 +49,15 @@ class guiTabTrend:
         label.grid(row=1, column=3, sticky="n")
 
         self.tabTextTrend = Label(self.tabTrend,
-                                  text="To create Trend Widgets, specify on the most left column named 'Name' numbers of rooms. "
-                                       "If in KNX file identifier of this room is diffrent then just room name specify the knx name of the widget in column "
-                                       "'Knx Name'. Remember that column 'Name' is used to find category of trend logs in LM database."
-                                       " Use %roomname% as placeholder for setting name of room in files on LM. ")
+                                  text="This module does not create trend logs, it only creates widgets associated with"
+                                       "already existing trend logs. To create trends use automated trend log creation. "
+                                       "For the program to find trend logs, they must be named as follows: "
+                                       "They must have room name in their category, "
+                                       "they must have object name as part of name of object used in trend log. "
+                                       "Use %name% as placeholder for setting name of the room, this name will only "
+                                       "appear in the widget name in the files."
+                                       "When ran, it will create widget for every room that is inside 'Name' column. "
+                                  )
         self.tabTextTrend.grid(row=2, column=3, sticky="new")
 
         def on_entry_change(*args):
@@ -85,7 +90,9 @@ class guiTabTrend:
         radioBox = ttk.Checkbutton(self.tabTrend, text="Do not add prefix to widget name", variable=self.addPrefixTrend, command=on_entry_change)
         radioBox.grid(row=5, column=3)
 
-        self.tabTrend.grid_columnconfigure(3, weight=1, minsize=30)
+        self.tabTrend.grid_columnconfigure(1, weight=1, minsize=30)
+        self.tabTrend.grid_columnconfigure(2, weight=3, minsize=30)
+        self.tabTrend.grid_columnconfigure(3, weight=3, minsize=30)
         self.tabTrend.grid_rowconfigure(1, weight=0)
         self.tabTrend.grid_rowconfigure(2, weight=0)
         self.tabTrend.grid_rowconfigure(3, weight=0)

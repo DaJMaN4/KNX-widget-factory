@@ -72,13 +72,16 @@ class GuiBoxDataTab:
         label.grid(row=1, column=3, sticky="n")
 
         self.tabTextStructure = Label(self.frame,
-                                      text="To create Info Widgets, specify on the most left column named 'Name' numbers of rooms. "
-                                           "If in KNX file identifier of this room is diffrent then just room name specify the knx name of the widget in column "
-                                           "'Knx Name'. Remember that column 'Name' is used to find objects in LM database."
-                                           " Use %name% as placeholder for setting name of rooms on LM."
-                                           " Import schematic file that will be use as template for creating widgets."
-                                           " In the place of widget name write 'room' to signalize that that label will be replaced by room name."
-                                           " Remember that objects assigned to that widget must be for the same room as widget. ")
+                                      text="In order to create Structure, you must first create a framework and level "
+                                           "which will be used as schematics to create objects and assign group addresses to them. "
+                                           "In framework there must be boxes for each room, and in level there must be "
+                                           "text labels on each box with room name, same room name as in column 'level'. "
+                                           "For each box type there must be a box with everything done, it will be used as template for the rest. "
+                                           "To add new box type, double click under newest box type, insert name and click enter. "
+                                           "To select rooms, click ctrl and click on rooms and then click enter."
+                                           "If trend widget creation is chosen then the program will automatically connect them to icons. "
+                                           "Choices for icons will appear only when database is imported. "
+                                      )
         self.tabTextStructure.grid(row=2, column=3, sticky="new")
 
 
@@ -110,7 +113,7 @@ class GuiBoxDataTab:
 
         self.boxIconChoicer.grid(column=3, row=6)
 
-        self.trendTabTextStructure = Label(self.frame, text="Choose which icon will be used for trend widgets")
+        self.trendTabTextStructure = Label(self.frame, text="Choose which icon will be used for trend widgets.")
         self.trendTabTextStructure.grid(column=3, row=7, sticky="")
 
         self.trendIcon = StringVar()

@@ -64,10 +64,12 @@ class DatabaseManager:
         # Return table with chosen columns
         return table
 
+    # Returns biggest widget id in database
     def getBiggestWidgetID(self):
         table = self.connection.execute("SELECT id from visfloors ORDER BY id DESC LIMIT 1")
         return table.fetchone()[0]
 
+    # Returns list of all icons in the database
     def getAllIcons(self):
         if os.path.exists(self.path + "/data/storage/icons"):
             images = []
@@ -75,6 +77,3 @@ class DatabaseManager:
                 images.append(filename)
             return images
         return None
-
-
-

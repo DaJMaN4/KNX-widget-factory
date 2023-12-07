@@ -21,6 +21,8 @@ class GuiRightBar:
             self.databaseName.config(text=file.name.split("/")[-1])
 
     def createObjects(self):
+        if not self.main.checksBeforeCreating():
+            return
         if self.createTrendWidget.get() == 1:
             self.main.createTrendWidgets()
 
@@ -32,6 +34,8 @@ class GuiRightBar:
 
     def createObjectsAndUpload(self):
         webManagement = self.main.createWebManagement(self.login.get(), self.password.get(), self.ipAddress.get())
+        if not self.main.checksBeforeCreating():
+            return
         done = False
         if self.createTrendWidget.get() == 1 and self.createInfoWidget.get() == 1 and self.createStructure.get() == 1:
             self.main.creatingStructure()
@@ -52,6 +56,12 @@ class GuiRightBar:
                 os.remove(self.path + r"\output\widgets" + "\\" + file)
             done = True
 
+        if self.createStructure.get() == 1 and not done:
+            self.main.creatingStructure()
+            self.main.createStructure()
+            webManagement.uploadLevel(self.main.mainStructureFileName)
+            webManagement.uploadFramework(self.main.frameworkFileName)
+
         if self.createTrendWidget.get() == 1 and not done:
             self.main.createTrendWidgets()
             webManagement.uploadTrendWidgets(self.main.trendWidgetDictionary)
@@ -63,12 +73,6 @@ class GuiRightBar:
             webManagement.uploadInfoWidgets(self.main.infoWidgetDictionary)
             for file in os.listdir(self.path + r"\output\widgets"):
                 os.remove(self.path + r"\output\widgets" + "\\" + file)
-
-        if self.createStructure.get() == 1 and not done:
-            self.main.createStructure()
-            webManagement.uploadLevel(self.main.mainStructureFileName)
-            webManagement.uploadFramework(self.main.frameworkFileName)
-
 
     def createRightBar(self):
 

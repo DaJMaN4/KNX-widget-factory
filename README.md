@@ -25,7 +25,8 @@ lokal interpreter.
 ## Hvordan kjøre programmet
 
 ### Hva kan det brukes til 
-
+Dette kan brukes til å generere widgets som viser informasjon om et rom og widgets som viser trender for et rom.
+Målsetningen er å gjøre det enkelt å lage widgeter som differ fra hverandre bare i objekter 
 
 ### Trend Widgets 
 
@@ -40,7 +41,7 @@ Programmet henter ut alle objekter som inneholder navnet til rom og navnet til e
 Deretter henter han ut alle categorier og ser etter de som inneholder navnet til rom. Hvis det finnes en slik
 category, så lager han en widget for den. 
 
-Så objekter må ha navnet til rommet og navnet til objektet som skal være i widgeten.
+Objekter må ha navnet til rommet og navnet til objektet som skal være i widgeten.
 Samtidig må categori inneholde navnet til rommet.
 
 ### Info Widgets 

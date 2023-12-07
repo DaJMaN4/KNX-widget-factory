@@ -10,8 +10,7 @@ class WebManagement:
     def __init__(self, path, login, password, ip):
         self.path = path
         self.driver = webdriver.Chrome()
-        # self.driver.get('http://' + login + ':' + password + '@' + ip + '/scada-main')
-        self.driver.get('http://admin:Sb2019LM@10.41.160.247/scada-main')
+        self.driver.get('http://' + login + ':' + password + '@' + ip + '/scada-main')
         self.driver.find_element(By.ID, "ext-comp-2349__Buildings").click()
         self.driver.maximize_window()
         self.loadedFramework = False
@@ -72,6 +71,7 @@ class WebManagement:
         self.uploadInfoWidgets(organizedInfoDictionary)
 
     def uploadInfoWidgets(self, infoWidgets):
+
         for widget in infoWidgets:
             self.wait.until(EC.element_to_be_clickable((By.ID, "ext-comp-1651__ext-comp-1606"))).click()
             self.wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@data-record-id='widget']"))).click()

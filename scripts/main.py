@@ -3,6 +3,8 @@ import pip
 from tkinter import *
 from tkinter import ttk
 import copy
+from time import sleep
+
 
 # Check if yaml module is installed, if not then install it
 try:
@@ -14,21 +16,18 @@ except ImportError:
 
 # Check if selenium module is installed, if not then install it
 try:
-    import selenium
+    #import selenium
+    ...
 except ImportError:
     print("Trying to Install required module: selenium\n")
-    pip.main(['install', "selenium"])
+
     import selenium
 
 import databaseManager, webManagement
-from widgets import ImportWidgets, InfoWidgetFactory, TrendWidgetFactory
+from widgets import ImportWidgets, InfoWidgetFactory, TrendWidgetFactory, CreateSchematics
 from structures import mainStructure, frameworkStructure
 from gui import guiElements, guiRightBar, guiTabInfo, guiTabTrend, guiTabStructure, guiBoxDataTab
 from utils import guiUtilities, importUtil
-
-
-# if config.getCreateStructures():
-#    self.biggestWidgetID += 2
 
 
 class Main:
@@ -43,10 +42,12 @@ class Main:
         self.frameworkFileName = None
         self.path = os.path.dirname(os.path.dirname(__file__))
         self.databaseManagerObject = databaseManager.DatabaseManager(self.path, self)
-        self.biggestWidgetID = 0  # self.databaseManagerObject.getBiggestWidgetID()
+        self.biggestWidgetID = 0
         self.boxDataTabs = {}
         self.boxDataTabsLabelsForResize = []
         self.roomNumbers = []
+
+        self.createFolders()
 
         self.guiUtilities = guiUtilities.guiUtilities(self)
 
@@ -69,6 +70,33 @@ class Main:
         self.root.bind("<Configure>", self.resizeLabels)
         self.root.mainloop()
 
+    def createFolders(self):
+        if not os.path.exists(self.path + "/data"):
+            os.mkdir(self.path + "/data")
+        if not os.path.exists(self.path + "/output"):
+            os.mkdir(self.path + "/output")
+        if not os.path.exists(self.path + "/output/widgets"):
+            os.mkdir(self.path + "/output/widgets")
+        if not os.path.exists(self.path + "/output/level"):
+            os.mkdir(self.path + "/output/level")
+        if not os.path.exists(self.path + "/output/frameworks"):
+            os.mkdir(self.path + "/output/frameworks")
+        if not os.path.exists(self.path + "/schematics"):
+            os.mkdir(self.path + "/schematics")
+        if not os.path.exists(self.path + "/schematics/levels"):
+            os.mkdir(self.path + "/schematics/levels")
+        if not os.path.exists(self.path + "/schematics/framework"):
+            os.mkdir(self.path + "/schematics/framework")
+        if not os.path.exists(self.path + "/schematics/widgets"):
+            os.mkdir(self.path + "/schematics/widgets")
+        if not os.path.exists(self.path + "/schematics/widgets/info"):
+            os.mkdir(self.path + "/schematics/widgets/info")
+        if not os.path.exists(self.path + "/schematics/widgets/trends"):
+            os.mkdir(self.path + "/schematics/widgets/trends")
+        if not os.path.exists(self.path + "/schematics/widgets/trends/default.yml"):
+            CreateSchematics.CreateSchematics(self)
+
+    # Resizes labels to fit their text
     def resizeLabels(self, event):
         # Update the label's wraplength to its current width
         self.TabTrend.tabTextTrend.config(wraplength=self.TabTrend.tabTextTrend.winfo_width())
@@ -76,6 +104,7 @@ class Main:
         for tab in self.boxDataTabsLabelsForResize:
             tab.config(wraplength=tab.winfo_width())
 
+    # Creates output text box
     def createOutput(self):
         self.output = Text(self.root, height=15, width=50)  # self.TabFrame
         self.output.config()  # Start with the Text widget in read-only mode
@@ -86,6 +115,7 @@ class Main:
         self.output.insert(END, "Welcome!\n")
         self.output.config(state=DISABLED)  # Disable editing to prevent user input
 
+    # Creates tabbed interface
     def createTab(self):
         self.TabFrame = Frame(self.root)
         self.TabFrame.grid(row=3, column=3, sticky="nsew", columnspan=2, rowspan=2)
@@ -118,11 +148,13 @@ class Main:
         self.TabInfo = guiTabInfo.guiTabInfo(self, self.root, self.tabInfo, self.guiUtilities)
         self.TabStructure = guiTabStructure.guiTabStructure(self, self.root, self.tabStructure, self.guiUtilities)
 
+    # Logs text to output text box in gui
     def log(self, text):
         self.output.config(state=NORMAL)
         self.output.insert(END, text + "\n")
         self.output.config(state=DISABLED)
 
+    # Checks if all required fields are filled to start any creation
     def checksBeforeCreating(self):
         if self.databaseManagerObject.connection is None:
             self.log("Database is not imported. Aborting")
@@ -130,6 +162,7 @@ class Main:
         if self.guiElements.getRoomNumbers() == []:
             self.log("Rooms are not selected. Aborting")
             return False
+        return True
 
     def createTrendWidgets(self):
         if self.TabTrend.name == "":
@@ -177,6 +210,7 @@ class Main:
         if infoWidgetFactory.isEnable():
             self.log("All info widgets created and saved in output folder")
 
+    # Creates dictionary boxdata and rooms with mainStructureManager object and runs it
     def createStructure(self):
         boxData = {}
         rooms = {}
@@ -214,6 +248,7 @@ class Main:
             frameworkStructureObject.run()
             self.frameworkName = frameworkStructureObject.getName()
 
+    # Creates webManagement object and returns it
     def createWebManagement(self, login, password, ip):
         webManagementObject = webManagement.WebManagement(
             self.path,
@@ -227,6 +262,7 @@ class Main:
     def getDatabaseObject(self):
         return self.databaseManagerObject
 
+    # Returns ID of trend widget for room number
     def getTrendWidgetDictionary(self, roomNumber):
         if self.trendWidgetDictionary.get(roomNumber) is None:
             self.log("Room Number " + roomNumber +
@@ -234,6 +270,7 @@ class Main:
             return ""
         return self.trendWidgetDictionary[roomNumber]
 
+    # Returns ID of info widget for room number
     def getInfoWidgetDictionary(self, roomNumber):
         if self.infoWidgetDictionary.get(roomNumber) is None:
             self.log("Room Number " + roomNumber +
@@ -241,12 +278,16 @@ class Main:
             return ""
         return self.infoWidgetDictionary[roomNumber]
 
+    # Getter for boxesIDs
     def getBoxesIDs(self):
         return self.boxesIDs
 
+    # Getter for biggestWidgetID
     def getBiggestWidgetID(self):
         return self.biggestWidgetID
 
+    # Used to get new bigges widget ID which that is used to assign widgets to objects in level and framework
+    # Also adds corresponding widget ID to dictionary of widgets types
     def newBiggestWidgetID(self, widgetType, room):
         self.biggestWidgetID += 1
         if widgetType == "trend":
@@ -257,6 +298,7 @@ class Main:
             self.log("Something went very wrong, ID of widgets cannot be determined. This might make the whole application not functioning properly")
         return self.biggestWidgetID
 
+    # Setter for boxesIDs
     def setBoxesIDs(self, ids):
         self.boxesIDs = ids
 
@@ -264,22 +306,26 @@ class Main:
     def getPath(self):
         return self.path
 
+    # Creates new guiBoxDataTab object and adds it to boxDataTabs dictionary
     def createNewBoxDataTab(self, frame, item, name):
         self.boxDataTabs[item] = (guiBoxDataTab.GuiBoxDataTab(frame, self, self.tabStructure, self.guiUtilities,
                                                               self.databaseManagerObject.getAllIcons(), name))
 
+    # Updates label showing name of imported level for all guiBoxDataTab objects
     def updateImportedLevelStructure(self, file):
         file = file.name
         self.mainStructureFile = file
         for tab in self.boxDataTabs:
             self.boxDataTabs[tab].updateImportedLevel(file)
 
+    # Updates label showing name of imported framework for all guiBoxDataTab objects
     def updateImportedFrameworkStructure(self, file):
         file = file.name
         self.frameworkFile = file
         for tab in self.boxDataTabs:
             self.boxDataTabs[tab].updateImportedFramework(file)
 
+    # Adds room to roomNumbers list for all guiBoxDataTab objects
     def addRoom(self, room):
         self.roomNumbers.append(room)
         for tab in self.boxDataTabs:
@@ -302,8 +348,6 @@ class Main:
                                     self.log("Room " + room + " is already selected in " + self.boxDataTabs[secondTab].name + ". Skipping..")
                                     selectedItemsOutput.remove(room)
                     self.boxDataTabs[tab].selectRooms(selectedItemsOutput)
-        # for tab in self.boxDataTabs:
-        #    self.boxDataTabs[tab].triesToSelectRooms()
 
     # Creates ImportManager object and returns it
     def createImportWidgetSchematic(self):

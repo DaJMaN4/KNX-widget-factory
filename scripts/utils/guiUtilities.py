@@ -8,6 +8,10 @@ class guiUtilities:
     def __init__(self, root):
         self.root = root
 
+    """
+    Creates a new tab in the notebook
+    
+    """
     def onItemDoubleClick(self, event, frame, tree, function=None):
         item = tree.focus()
         column = tree.identify_column(event.x)

@@ -8,8 +8,8 @@ class ImportManager:
     def __init__(self, path):
         self.path = path
 
+    # Opens file and extracts data.json from it
     def open(self, fileInFolder, folder):
-
         if fileInFolder.endswith(".tar"):
             tar = tarfile.open(fileInFolder, "r")
             for member in tar.getmembers():
@@ -23,6 +23,7 @@ class ImportManager:
             print("File " + "file" + " is not supported, use .tar format")
             exit(1)
 
+    # Writes data to file in schematics folder
     def write(self, data: dict, name, folder):
         # Replace .tar extension to .yml
         name = name.replace(".tar", ".yml")
@@ -36,6 +37,7 @@ class ImportManager:
 
         print("File " + name + " has been successfully written to schematics")
 
+    # Gets data from file in schematics folder
     def getData(self, schematicName, folder):
         onlyOne = False
         if len(os.listdir(self.path + "/schematics/" + folder)) == 1:

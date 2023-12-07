@@ -79,6 +79,7 @@ class guiTabInfo:
         self.tabInfo.grid_rowconfigure(16, weight=0)
         self.tabInfo.grid_rowconfigure(17, weight=0)
         self.tabInfo.grid_rowconfigure(19, weight=0)
+        self.tabInfo.grid_rowconfigure(20, weight=0)
         self.tabInfo.grid_rowconfigure(21, weight=0)
         self.tabInfo.grid_rowconfigure(22, weight=0)
         self.tabInfo.grid_rowconfigure(23, weight=1)
@@ -95,12 +96,14 @@ class guiTabInfo:
 
         self.tabTextInfo = Label(self.tabInfo,
                                  text="To create Info Widgets, specify on the most left column named 'Name' numbers of rooms. "
-                                      "If in KNX file identifier of this room is diffrent then just room name specify the knx name of the widget in column "
-                                      "'Knx Name'. Remember that column 'Name' is used to find objects in LM database."
-                                      " Use %name% as placeholder for setting name of rooms on LM."
-                                      " Import schematic file that will be use as template for creating widgets."
-                                      " In the place of widget name write 'room' to signalize that that label will be replaced by room name."
-                                      " Remember that objects assigned to that widget must be for the same room as widget. ")
+                                      "Objects for this room must exist in imported database"
+                                      "Use %name% as placeholder for setting name of rooms on LM." 
+                                      "This placeholder will be replaced by room name."
+                                      "\nIn the place of name of the room in schematic widget write 'room' or 'rom' as a placeholder, it will be"
+                                      " replaced by the text shown in preview of name visible. If there is none text label named 'room' or 'rom'"
+                                      " in schematic widget then it will be ignored."
+                                      "Remember that objects assigned to that widget must be for the same room as widget."
+                                      "\nImport schematic file that will be use as template for creating widgets.")
         self.tabTextInfo.grid(row=2, column=3, sticky="new")
 
         def on_entry_change_files(*args):
@@ -130,10 +133,10 @@ class guiTabInfo:
 
         self.addPrefixInfoFiles = IntVar()
 
-        button = ttk.Checkbutton(self.tabInfo, text="Do not add prefix to widget name", variable=self.addPrefixInfoFiles, command=on_entry_change_files)
+        button = ttk.Checkbutton(self.tabInfo, text="Do not add prefix to widget name in widget", variable=self.addPrefixInfoFiles, command=on_entry_change_files)
         button.grid(row=5, column=3, sticky="n")
 
-        self.tabInfo.grid_rowconfigure(6, weight=0, minsize=30)
+        self.tabInfo.grid_rowconfigure(6, weight=0, minsize=10)
 
         def on_entry_change_visible(*args):
             value = entry_text_visible.get()
@@ -171,8 +174,9 @@ class guiTabInfo:
         add_button = Button(self.tabInfo, text="import schematic", command=lambda: self.importSchematic())
         add_button.grid(row=19, column=3)
 
-        self.tabInfo.grid_columnconfigure(3, weight=1, minsize=30)
-        self.tabInfo.grid_rowconfigure(20, weight=0, minsize=20)
+        self.tabInfo.grid_columnconfigure(1, weight=1, minsize=30)
+        self.tabInfo.grid_columnconfigure(2, weight=1, minsize=30)
+        self.tabInfo.grid_columnconfigure(3, weight=6, minsize=30)
 
         self.chosenSchematicLabel = Label(self.tabInfo, text="No schematic imported")
         self.chosenSchematicLabel.grid(row=21, column=3, sticky="n")

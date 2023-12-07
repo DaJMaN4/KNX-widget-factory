@@ -61,9 +61,9 @@ class TrendWidgetFactory:
 
     # Run function is called from main class and it contains everything to run successfully the module
     def run(self):
-        # If module is disabled then return
-        global oldKey
+        oldKey = ""
         self.checkIfFileExists()
+        # If module is disabled then return
         if self.disable:
             return
         table = self.main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
@@ -210,13 +210,3 @@ class TrendWidgetFactory:
 
             self.main.TabTrend.insertCreatedWidget(key)
             self.main.log("Trend_Widget_Rom-" + key + ".tar created")
-
-
-
-
-
-
-
-
-
-
