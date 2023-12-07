@@ -1,6 +1,6 @@
 
 # names of the rooms used for the widgets
-rooms: ["A3001","A3002","A3003","A3004","A3005","A3001","A3001", "A3011", "A3018"]
+rooms: ["A7001","A7002","A7006"]
 
 #----------------------------------------------------------------------------------------------------------------------#
 #                                         Config for Info Room widgets                                                 #
@@ -64,18 +64,18 @@ trendWidgets:
 #----------------------------------------------------------------------------------------------------------------------#
 
 # True if mainStructure should be created, False if not
-createStructures: True
+createStructures: false
 
 structure:
   # if there is just one schematic inside the folder, then you can leave this empty
   # name of the schematic to use for the trend widget
-  schematicLevel: "Vis-Romvisualisering_3_etg_for_testing_old-Bygg_A_GTW-2023.11.09-13.18.yml"
+  schematicLevel: "Vis-Romvisualisering_6_etg-Bygg_A_GTW-2023.11.24-08.33.yml"
 
-  schematicFramework: "Vis-Rammeverk_romstyring_3_etg_for_testing_old-Bygg_A_GTW-2023.11.06-10.59.yml"
+  schematicFramework: "Vis-Rammeverk_romstyring_6_etg-Bygg_A_GTW-2023.11.24-08.33.yml"
 
   boxData:
     standard:
-      template: "A3001"
+      template: "A6001"
       objectsNames: ["Romtemperatur - Verdi", "Varmeaktuator - Tilbakemelding",
                             "Kjoleaktuator - Tilbakemelding", "CO2 i rom - Verdi", "Tilstedesensor -"]
 
@@ -84,7 +84,7 @@ structure:
       trendIcon: "trend_ikon.png"
 
     lying:
-      template: "A3017"
+      template: "A6014"
       objectsNames: ["Romtemperatur - Verdi", "Varmeaktuator - Tilbakemelding",
                             "Kjoleaktuator - Tilbakemelding", "CO2 i rom - Verdi", "Tilstedesensor -"]
 
@@ -95,24 +95,21 @@ structure:
   # names of roms and corresponding names of the objects in the database that are needed for the level widget
   roomNames:
     standard:
-      A3001: A3001
-      A3002: A3002
-      A3003: A3003
-      A3004: A3004
-      A3006: A3006
-      A3007: A3007
-      A3008: A3008
-      A3009: A3009
-      A3011: A3011
-      A3012: A3012
-      A3013: A3013
-      A3014: A3014
-      A3016: A3016
+      A6001: A6001
+      A6002: A6002
+      A6003: A6003
+      A6004: A6004
+      A6006: A6006
+      A6007: A6007
+      A6008: A6008
+      A6009: A6009
+      A6011: A6011
+      A6012: A6012
+      A6013: A6013
     lying:
-      A3017: A3017
-      A3018: A3018
-      A3019: A3019
-      A3020: A3020
-
+      A6014: A6014
+      A6015: A6015
+      A6016: A6016
+      A6017: A6017
 
 

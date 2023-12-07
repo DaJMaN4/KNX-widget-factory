@@ -1,0 +1,2 @@
+('C:\\Users\\Damian\\PycharmProjects\\KNX-widget-factory\\scripts\\build\\main\\PYZ-00.pyz',
+ [])

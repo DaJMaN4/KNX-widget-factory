@@ -31,7 +31,6 @@ class TrendWidgetFactory:
                 if s.isdigit():
                     break
                 self.theWord += s
-        self.checkIfFileExists()
 
     # Check if file exists in schematics folder
     def checkIfFileExists(self):
@@ -42,6 +41,8 @@ class TrendWidgetFactory:
         for schematicFile in os.listdir(self.path + "/schematics/widgets/trends"):
             # If file with the same name as defined in config.yml
             if schematicFile == self.schematicName or onlyOne or self.schematicName == "":
+                if onlyOne:
+                    self.main.log("No schematic was added by user. Using default schematic file for trend widget")
                 # Open file as "r" which means read only. "file" is a variable name of opened file
                 with open(self.path + "/schematics/widgets/trends/" + schematicFile, 'r') as file:
                     # Load yaml file to dictionary variable
@@ -60,8 +61,9 @@ class TrendWidgetFactory:
 
     # Run function is called from main class and it contains everything to run successfully the module
     def run(self):
+        oldKey = ""
+        self.checkIfFileExists()
         # If module is disabled then return
-        global oldKey
         if self.disable:
             return
         table = self.main.getDatabaseObject().getTableColumns(["id", "name"], "objects")
@@ -130,8 +132,12 @@ class TrendWidgetFactory:
                         assigned[key] = [ID]
 
         if assigned == {}:
-            print("\033[93mNo objects with specified name in configggg.yml were found in database\033[0m")
-            exit(1)
+            #self.main.log("\033[93mNo objects with specified name in configggg.yml were found in database\033[0m")
+            self.main.log("No objects with specified name were found in database. To fix it:")
+            self.main.log("Check if you are using the correct database")
+            self.main.log("Check if trend logs are made for the rooms you specified")
+            self.main.log("Check if spelling of trend logs is correct and corresponds to rooms specified at the most left column")
+            return
 
         # Go through all room numbers defined in config.yml
         for key in valid:
@@ -154,11 +160,24 @@ class TrendWidgetFactory:
                 "%trendAddresses%", stringAddresses)
 
             # Set widget name according to config.yml
-            if self.addPrefix:
-                widgetName = self.widgetName.replace("%roomName%", key)
+            if not self.addPrefix:
+                widgetName = self.widgetName.replace("%name%", key)
+
             else:
-                keyWithoutWord = key.replace(self.theWord, "")
-                widgetName = self.widgetName.replace("%roomName%", keyWithoutWord)
+                num = 0
+                widgetName = self.widgetName
+                roomName = key
+                for c in roomName:
+                    if not c.isdigit():
+                        # Delete character from string at index num
+                        roomName = roomName[:num] + roomName[num + 1:]
+                    else:
+                        break
+                    num = num + 1
+                widgetName = widgetName.replace("%name%", roomName)
+
+                #keyWithoutWord = key.replace(self.theWord, "")
+                #widgetName = self.widgetName.replace("%roomName%", keyWithoutWord)
 
             # Replace placeholders in file with room number
             self.dictionary["plan"]["name"] = widgetName
@@ -189,4 +208,5 @@ class TrendWidgetFactory:
             # Close and save tar file
             file.close()
 
-            print("Trend_Widget_Rom-" + key + ".tar created")
+            self.main.TabTrend.insertCreatedWidget(key)
+            self.main.log("Trend_Widget_Rom-" + key + ".tar created")

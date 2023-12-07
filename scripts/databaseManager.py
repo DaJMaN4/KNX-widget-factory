@@ -5,13 +5,17 @@ import shutil
 
 
 class DatabaseManager:
-    def __init__(self, path):
+    def __init__(self, path, main):
         self.connection = None
         self.path = path
+        self.main = main
 
     # Unzips file from database folder to data folder and then connects to database
-    def unZipData(self):
+    def unZipData(self, file):
         # Delete all files in data folder before unzipping
+        if self.connection is not None:
+            self.main.log("Closing connection to database")
+            self.connection.close()
         for filename in os.listdir(self.path + "/data"):
             file_path = os.path.join(self.path + "/data", filename)
             # tries to delete a file or folder in data folder if it fails then it prints error message
@@ -21,35 +25,33 @@ class DatabaseManager:
                 elif os.path.isdir(file_path):
                     shutil.rmtree(file_path)
             except Exception as e:
-                print('Failed to delete %s. Reason: %s' % (file_path, e))
+                self.main.log('Failed to delete old data: %s. Reason: %s' % (file_path, e))
         # Goes through all files in database folder
-        for file in os.listdir(self.path + "/database"):
-            # If file is .zip format
-            if file.endswith(".zip"):
-                # loading the temp.zip and creating a zip object
-                with ZipFile(self.path + "/database/" + file, 'r') as zObject:
-                    # Extract all the contents of zip file in data directory
-                    zObject.extractall(self.path + "/data/")
-                    break
-        # If loop didn't encounter break which means that file doesn't exist, then print error message and exit program
-        else:
-            print("No zip file found in database folder")
-            exit(1)
 
+        with ZipFile(file, 'r') as zObject:
+            # Extract all the contents of zip file in data directory
+            zObject.extractall(self.path + "/data/")
+        self.main.log("Unzipped file to data folder")
         # Check if database file exists in data folder
         if os.path.exists(self.path + "/data/storage/db/current.db"):
             # Connect to database
-            print("Found database: " + file)
+            self.main.log("Successfully connected to the database")
             self.connection = sqlite3.connect(self.path + "/data/storage/db/current.db")
             # Set text factory to bytes, it's a mode that can read special characters like å and ø
             self.connection.text_factory = bytes
         # If database file doesn't exist then print error message and exit program
         else:
-            print("No data found in database folder")
+            self.main.log("No data found in database folder")
             exit(1)
+        # Set biggestWidgetID to the biggest widget id in database
+        self.main.biggestWidgetID = self.getBiggestWidgetID()
+        self.main.updateDatabase(self.getAllIcons())
 
     # Get chosen columns from chosen table
     def getTableColumns(self, columns: list, table: str = "objects"):
+        if self.connection is None:
+            self.main.log("No connection to database")
+            return None
         # Convert list to string
         columns = str(columns)
         # Remove all unnecessary characters from string
@@ -62,6 +64,16 @@ class DatabaseManager:
         # Return table with chosen columns
         return table
 
+    # Returns biggest widget id in database
     def getBiggestWidgetID(self):
         table = self.connection.execute("SELECT id from visfloors ORDER BY id DESC LIMIT 1")
         return table.fetchone()[0]
+
+    # Returns list of all icons in the database
+    def getAllIcons(self):
+        if os.path.exists(self.path + "/data/storage/icons"):
+            images = []
+            for filename in os.listdir(self.path + "/data/storage/icons"):
+                images.append(filename)
+            return images
+        return None

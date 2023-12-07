@@ -1,16 +1,15 @@
-from scripts.utils import importUtil
 import json
 import tarfile
 import io
 
 
 class mainStructureManager:
-    def __init__(self, path, schematicNameFramework, schematicNameLevel, boxData, roomNames, doCreateTrend, activeRooms,
-                 main):
-        self.importUtil = importUtil.ImportManager(path)
+    def __init__(self, path, schematicFileFramework, schematicFileLevel, boxData, roomNames, doCreateTrend, activeRooms,
+                 main, importUtil):
+        self.importUtil = importUtil
         self.path = path
-        self.schematicNameFramework = schematicNameFramework
-        self.schematicNameLevel = schematicNameLevel
+        self.schematicFileFramework = schematicFileFramework
+        self.schematicFileLevel = schematicFileLevel
         self.boxData = boxData
         self.roomNames = roomNames
         self.doCreateTrend = doCreateTrend
@@ -28,9 +27,14 @@ class mainStructureManager:
         self.outPutDataLevel = {}
         self.IDsOfObjectsInTemplates = {}
 
+        self.schematicNameFramework = self.schematicFileFramework.split("/")[-1]
+        self.schematicNameLevel = self.schematicFileLevel.split("/")[-1]
+        self.main.mainStructureFileName = self.schematicNameLevel
+        self.main.frameworkFileName = self.schematicNameFramework
+
     def importSchematics(self):
-        self.importUtil.open("frameworks")
-        self.importUtil.open("levels")
+        self.importUtil.open(self.schematicFileFramework, "frameworks")
+        self.importUtil.open(self.schematicFileLevel, "levels")
 
     def getData(self):
         self.schematicFrameworkData = self.importUtil.getData(self.schematicNameFramework, "frameworks")
@@ -177,6 +181,8 @@ class mainStructureManager:
         for boxType in self.roomNames:
             for boxName in self.roomNames[boxType]:
                 for boxTemplate in self.templateObjects:
+                    if boxTemplate == boxName:
+                        continue
                     for singleObjNum in range(len(self.templateObjects[boxTemplate])):  # good
                         if singleObjNum == 0:
                             continue

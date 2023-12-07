@@ -8,30 +8,28 @@ class ImportManager:
     def __init__(self, path):
         self.path = path
 
-    def open(self, folder):
-        for file in os.listdir(self.path + "/import/" + folder):
+    # Opens file and extracts data.json from it
+    def open(self, fileInFolder, folder):
+        if fileInFolder.endswith(".tar"):
+            tar = tarfile.open(fileInFolder, "r")
+            for member in tar.getmembers():
+                if member.name == "./data.json":
+                    f = tar.extractfile(member)
+                    if f is not None:
+                        content = f.read()
+                        self.write(ast.literal_eval(content.decode('utf-8')), fileInFolder.split("/")[-1], folder)
+            tar.close()
+        else:
+            print("File " + "file" + " is not supported, use .tar format")
+            exit(1)
 
-            for fileSchematics in os.listdir(self.path + "/schematics/" + folder):
-                fileImport = file.replace(".tar", ".yml")
-                if fileImport == fileSchematics:
-                    print("File with name " + file + " already exists in schematics, skipping...")
-                    return
-            if file.endswith(".tar"):
-                tar = tarfile.open(os.path.join(self.path + "/import/" + folder, file), "r")
-                for member in tar.getmembers():
-                    if member.name == "./data.json":
-                        f = tar.extractfile(member)
-                        if f is not None:
-                            content = f.read()
-                            self.write(ast.literal_eval(content.decode('utf-8')), file, folder)
-                tar.close()
-            else:
-                print("File" + file + " is not supported, use .tar format")
-                exit(1)
-
+    # Writes data to file in schematics folder
     def write(self, data: dict, name, folder):
         # Replace .tar extension to .yml
         name = name.replace(".tar", ".yml")
+        # Delete every file in schematics folder
+        for file in os.listdir(self.path + "/schematics/" + folder):
+            os.remove(self.path + "/schematics/" + folder + "/" + file)
         # Open file as "x" which means write only. "file" is a variable name of opened file
         file = open(self.path + "/schematics/" + folder + "/" + name, "x")
         # Write file to schematics folder
@@ -39,6 +37,7 @@ class ImportManager:
 
         print("File " + name + " has been successfully written to schematics")
 
+    # Gets data from file in schematics folder
     def getData(self, schematicName, folder):
         onlyOne = False
         if len(os.listdir(self.path + "/schematics/" + folder)) == 1:
