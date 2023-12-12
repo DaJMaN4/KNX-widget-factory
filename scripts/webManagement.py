@@ -46,7 +46,7 @@ class WebManagement:
         choose_file = self.wait.until(EC.element_to_be_clickable((By.ID, "ext-comp-1653")))
         choose_file.send_keys(self.path + r"\output\levels" + "\\" + levelName)
         self.wait.until(EC.element_to_be_clickable((By.ID, "buildings-import-submit"))).click()
-        sleep(0.5)
+        sleep(1)
 
     def uploadFramework(self, frameworkName):
         self.wait.until(EC.element_to_be_clickable((By.ID, "ext-comp-1651__ext-comp-1606"))).click()
@@ -57,7 +57,7 @@ class WebManagement:
         choose_file = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@accept='.tar']")))
         choose_file.send_keys(self.path + r"\output\frameworks" + "\\" + frameworkName)
         self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='buildings-import-submit']"))).click()
-        sleep(0.5)
+        sleep(1)
 
     def uploadWidgetsInOrder(self, infoWidgets, trendWidgets):
         organizedTrendDictionary = trendWidgets.copy()
@@ -93,7 +93,6 @@ class WebManagement:
         self.uploadInfoWidgets(organizedInfoDictionary)
 
     def uploadInfoWidgets(self, infoWidgets):
-
         for widget in infoWidgets:
             self.wait.until(EC.element_to_be_clickable((By.ID, "ext-comp-1651__ext-comp-1606"))).click()
             self.wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@data-record-id='widget']"))).click()
@@ -102,7 +101,7 @@ class WebManagement:
             choose_file = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@accept='.tar']")))
             choose_file.send_keys(self.path + r"\output\widgets" + "\\Info_Widget_Rom-" + widget + ".tar")
             self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='buildings-import-submit']"))).click()
-            sleep(0.5)
+            sleep(1)
             # delete everything in folder output/widgets
 
     def uploadTrendWidgets(self, trendWidgets):
@@ -114,7 +113,7 @@ class WebManagement:
             choose_file = self.wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@accept='.tar']")))
             choose_file.send_keys(self.path + r"\output\widgets" + "\\Trend_Widget_Rom-" + widget + ".tar")
             self.wait.until(EC.element_to_be_clickable((By.XPATH, "//table[@id='buildings-import-submit']"))).click()
-            sleep(0.5)
+            sleep(1)
 
     def isEnable(self):
         pass

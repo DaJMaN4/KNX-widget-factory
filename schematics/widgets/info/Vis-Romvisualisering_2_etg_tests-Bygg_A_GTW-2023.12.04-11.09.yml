@@ -1,0 +1,626 @@
+plan:
+  background: ''
+  background_add: ''
+  bgcolor: ''
+  bgfixed: 0
+  bgrepeat: 0
+  building: 1
+  height: 1080
+  id: 413
+  layout: 3
+  locx: ''
+  locy: ''
+  name: '%name%'
+  objects:
+  - cls: ''
+    floor: 413
+    id: 12297
+    locx: 130
+    locy: 570
+    name: A2001
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12298
+    locx: 70
+    locy: 140
+    name: 2.Etg
+    nobg: 1
+    params: '{"size":28,"color":"","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12299
+    locx: 1520
+    locy: 590
+    name: Felles info 2.etg
+    nobg: 1
+    params: '{"size":24,"color":"","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12300
+    locx: 1340
+    locy: 670
+    name: 'Høyeste temperatur:'
+    nobg: 1
+    params: '{"size":18,"color":"","font":"","bold":0,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12301
+    locx: 1340
+    locy: 720
+    name: 'Laveste temperatur:'
+    nobg: 1
+    params: '{"size":18,"color":"","font":"","bold":0,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12302
+    locx: 1340
+    locy: 770
+    name: 'Høyeste co2:'
+    nobg: 1
+    params: '{"size":18,"color":"","font":"","bold":0,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12303
+    locx: 232
+    locy: 598
+    name: A2002
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12304
+    locx: 327
+    locy: 640
+    name: A2003
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12305
+    locx: 456
+    locy: 605
+    name: A2005
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12306
+    locx: 127
+    locy: 318
+    name: A2007
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12307
+    locx: 232
+    locy: 325
+    name: A2008
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12308
+    locx: 327
+    locy: 321
+    name: A2004
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12309
+    locx: 438
+    locy: 296
+    name: A2006
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12310
+    locx: 536
+    locy: 231
+    name: A2011
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12311
+    locx: 648
+    locy: 228
+    name: A2012
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12312
+    locx: 765
+    locy: 210
+    name: A2013
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12313
+    locx: 868
+    locy: 210
+    name: A2014
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12314
+    locx: 971
+    locy: 210
+    name: A2016
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12315
+    locx: 1073
+    locy: 210
+    name: A2016A
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12316
+    locx: 1123
+    locy: 875
+    name: A2021
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12317
+    locx: 1123
+    locy: 768
+    name: A2019
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12318
+    locx: 1123
+    locy: 661
+    name: A2018
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12319
+    locx: 1123
+    locy: 556
+    name: A2017B
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12320
+    locx: 1320
+    locy: 570
+    nobg: 1
+    params: '{"source":"local","src":"boksinfoetg.png","width":"593","height":"250","link":"","refresh":""}'
+    pincode: ''
+    type: 7
+  - cls: ''
+    floor: 413
+    id: 12321
+    locx: 1550
+    locy: 772
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 65796
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 3
+    statusobject: 65796
+    type: 1
+    visparams: '{"decimals":"0","control":"spinner","min":"-670760","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
+  - cls: ''
+    floor: 413
+    id: 12322
+    locx: 1550
+    locy: 722
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 65800
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 2
+    statusobject: 65800
+    type: 1
+    visparams: '{"decimals":"1","control":"spinner","min":"-273","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
+  - cls: ''
+    floor: 413
+    id: 12323
+    locx: 1550
+    locy: 672
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 65795
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 1
+    statusobject: 65795
+    type: 1
+    visparams: '{"decimals":"1","control":"spinner","min":"-273","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
+  - cls: ''
+    floor: 413
+    id: 12324
+    locx: 1431
+    locy: 312
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 96
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":87,"height":27,"displaymode":"icon","icon":"seethrough.png","icon_active":""}'
+    pincode: ''
+    sortorder: 2
+    type: 2
+  - cls: ''
+    floor: 413
+    id: 12325
+    locx: 1430
+    locy: 353
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 6
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":103,"height":31,"displaymode":"icon","icon":"seethrough.png","icon_active":""}'
+    pincode: ''
+    sortorder: 2
+    type: 2
+  - cls: ''
+    floor: 413
+    id: 12326
+    locx: 1429
+    locy: 397
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 5
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":104,"height":40,"displaymode":"icon","icon":"seethrough.png","icon_active":""}'
+    pincode: ''
+    sortorder: 1
+    type: 2
+  - cls: ''
+    floor: 413
+    id: 12327
+    locx: 100
+    locy: 570
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Tilstedesensor -
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":30,"height":30,"icon_on":"tilstede_paa.png","icon_off":"tilstede_av.png","icon_touch":"","icons_add":[{"min":1,"max":100,"icon":"varme_pil_paa.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 1
+    statusobject: Tilstedesensor -
+    type: 0
+    visparams: ''
+  - cls: ''
+    floor: 413
+    id: 12328
+    locx: 120
+    locy: 600
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Romtemperatur - Verdi
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 2
+    statusobject: Romtemperatur - Verdi
+    type: 1
+    visparams: '{"decimals":"1","control":"spinner","min":"-670760","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
+  - cls: ''
+    floor: 413
+    id: 12329
+    locx: 112
+    locy: 620
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: CO2 i rom - Verdi
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 3
+    statusobject: CO2 i rom - Verdi
+    type: 1
+    visparams: '{"decimals":"0","control":"spinner","min":"-670760","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
+  - cls: ''
+    floor: 413
+    id: 12330
+    locx: 109
+    locy: 643
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Kjoleaktuator - Tilbakemelding
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":30,"height":30,"icon_default":"kjoling_av.png","icon_touch":"","icons_add":[{"min":1,"max":100,"icon":"kjoling_paa.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 1
+    statusobject: Kjoleaktuator - Tilbakemelding
+    type: 1
+    visparams: ''
+  - cls: ''
+    floor: 413
+    id: 12331
+    locx: 149
+    locy: 643
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Varmeaktuator - Tilbakemelding
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":30,"height":30,"icon_default":"varme_pil_av.png","icon_touch":"","icons_add":[{"min":1,"max":100,"icon":"varme_pil_paa.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 1
+    statusobject: Varmeaktuator - Tilbakemelding
+    type: 1
+    visparams: ''
+  - cls: ''
+    floor: 413
+    id: 12337
+    locx: 1123
+    locy: 450
+    name: A2017A
+    nobg: 1
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 413
+    id: 12403
+    locx: 1126
+    locy: 677
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Romtemperatur - Verdi
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 2
+    statusobject: Romtemperatur - Verdi
+    type: 1
+    visparams: '{"decimals":"1","control":"spinner","min":"-670760","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
+  - cls: ''
+    floor: 413
+    id: 12404
+    locx: 1092
+    locy: 663
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Tilstedesensor -
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":29,"height":30,"icon_on":"tilstede_paa.png","icon_off":"tilstede_av.png","icon_touch":"","icons_add":[{"min":1,"max":100,"icon":"varme_pil_paa.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 1
+    statusobject: Tilstedesensor -
+    type: 0
+    visparams: ''
+  - cls: ''
+    floor: 413
+    id: 12405
+    locx: 1121
+    locy: 694
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: CO2 i rom - Verdi
+    params: '{"size":16,"color":"#FFFFFF","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 3
+    statusobject: CO2 i rom - Verdi
+    type: 1
+    visparams: '{"decimals":"0","control":"spinner","min":"-670760","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
+  - cls: ''
+    floor: 413
+    id: 12406
+    locx: 1113
+    locy: 710
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Kjoleaktuator - Tilbakemelding
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":30,"height":30,"icon_default":"kjoling_av.png","icon_touch":"","icons_add":[{"min":1,"max":100,"icon":"kjoling_paa.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 1
+    statusobject: Kjoleaktuator - Tilbakemelding
+    type: 1
+    visparams: ''
+  - cls: ''
+    floor: 413
+    id: 12407
+    locx: 1156
+    locy: 710
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Varmeaktuator - Tilbakemelding
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":30,"height":30,"icon_default":"varme_pil_av.png","icon_touch":"","icons_add":[{"min":1,"max":100,"icon":"varme_pil_paa.png"}],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 1
+    statusobject: Varmeaktuator - Tilbakemelding
+    type: 1
+    visparams: ''
+  - cls: ''
+    floor: 413
+    id: 12419
+    locx: 178
+    locy: 602
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 65794
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":30,"height":30,"icon_default":"trend_ikon.png","icon_touch":"","icons_add":[],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":208,"backdrop":0}'
+    pincode: ''
+    readonly: 0
+    sortorder: 1
+    statusobject: 65794
+    type: 1
+    visparams: ''
+  - cls: ''
+    floor: 413
+    id: 12434
+    locx: 1198
+    locy: 691
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 65794
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":30,"height":30,"icon_default":"trend_ikon.png","icon_touch":"","icons_add":[],"displaymode":"icon","showcontrol":0,"fixedvalue":"","update":false,"widget":224,"backdrop":0}'
+    pincode: ''
+    readonly: 0
+    sortorder: 1
+    statusobject: 65794
+    type: 1
+    visparams: ''
+  - cls: ''
+    floor: 413
+    id: 12442
+    locx: 1430
+    locy: 270
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 164
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":70,"height":28,"displaymode":"icon","icon":"seethrough.png","icon_active":""}'
+    pincode: ''
+    sortorder: 2
+    type: 2
+  - cls: ''
+    floor: 413
+    id: 12443
+    locx: 1432
+    locy: 229
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 350
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":60,"height":24,"displaymode":"icon","icon":"seethrough.png","icon_active":""}'
+    pincode: ''
+    sortorder: 2
+    type: 2
+  - cls: ''
+    floor: 413
+    id: 12444
+    locx: 1431
+    locy: 182
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 382
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":64,"height":26,"displaymode":"icon","icon":"seethrough.png","icon_active":""}'
+    pincode: ''
+    sortorder: 2
+    type: 2
+  - cls: ''
+    floor: 413
+    id: 12445
+    locx: 1469
+    locy: 448
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 390
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":109,"height":36,"displaymode":"icon","icon":"seethrough.png","icon_active":""}'
+    pincode: ''
+    sortorder: 2
+    type: 2
+  - cls: ''
+    floor: 413
+    id: 12446
+    locx: 1470
+    locy: 491
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 404
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":109,"height":24,"displaymode":"icon","icon":"seethrough.png","icon_active":""}'
+    pincode: ''
+    sortorder: 2
+    type: 2
+  - cls: ''
+    floor: 413
+    id: 12447
+    locx: 1471
+    locy: 522
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: 411
+    params: '{"size":"","bold":0,"italic":0,"underline":0,"width":102,"height":30,"displaymode":"icon","icon":"seethrough.png","icon_active":""}'
+    pincode: ''
+    sortorder: 2
+    type: 2
+  pincode: ''
+  sortorder: 10
+  touch_bgcolor: ''
+  touch_param: ''
+  usermode_param: ''
+  width: 1920

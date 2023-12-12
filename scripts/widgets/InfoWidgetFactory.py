@@ -97,6 +97,7 @@ class InfoWidgetFactory:
             # Replace placeholders in file with room number
             if self.addPrefixToName:
                 widgetNameAdd = self.widgetNameInFiles.replace("%name%", key)
+                print(widgetNameAdd, " d awda d ad ")
             else:
                 roomName = key
                 num = 0
@@ -111,6 +112,7 @@ class InfoWidgetFactory:
 
             if self.addPrefixToWidgetNameInFiles:
                 roomNameWidget = self.widgetName.replace("%name%", key)
+                print(roomNameWidget, " d awda d ad ")
             else:
                 roomName = key
                 num = 0

@@ -62,7 +62,10 @@ class guiTabTrend:
 
         def on_entry_change(*args):
             value = entry_text.get()
-            roomName = self.main.guiElements.getRoomNumbers()[0]
+            if self.main.guiElements.getRoomNumbers().__len__() == 0:
+                roomName = "A2044"
+            else:
+                roomName = self.main.guiElements.getRoomNumbers()[0]
             if self.addPrefixTrend.get() == 1:
                 num = 0
                 for c in roomName:

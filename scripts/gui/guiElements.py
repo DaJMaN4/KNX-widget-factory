@@ -46,11 +46,11 @@ class guiElements:
         self.leftTree.heading("#0", text="Name", anchor=W)
         self.leftTree.heading("knxName", text="Knx Name", anchor=W)
 
-        rooms = []
-        for x in range(2001, 2008):
-            self.leftTree.insert("", "end", text="A"+str(x), values=("Rom" + str(x),))
-            rooms.append("A"+str(x))
-        self.main.addRoom(rooms)
+        # rooms = []
+        # for x in range(2001, 2008):
+        #    self.leftTree.insert("", "end", text="A"+str(x), values=("Rom" + str(x),))
+        #    rooms.append("A"+str(x))
+        # self.main.addRoom(rooms)
 
 
         self.leftTree.insert("", "end", text="", values=("",))

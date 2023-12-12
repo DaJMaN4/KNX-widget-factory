@@ -108,7 +108,10 @@ class guiTabInfo:
 
         def on_entry_change_files(*args):
             value = entry_text_files.get()
-            roomName = self.main.guiElements.getRoomNumbers()[0]
+            if self.main.guiElements.getRoomNumbers().__len__() == 0:
+                roomName = "A2044"
+            else:
+                roomName = self.main.guiElements.getRoomNumbers()[0]
             if self.addPrefixInfoFiles.get() == 1:
                 num = 0
                 for c in roomName:
@@ -140,7 +143,10 @@ class guiTabInfo:
 
         def on_entry_change_visible(*args):
             value = entry_text_visible.get()
-            roomName = self.main.guiElements.getRoomNumbers()[0]
+            if self.main.guiElements.getRoomNumbers().__len__() == 0:
+                roomName = "A2044"
+            else:
+                roomName = self.main.guiElements.getRoomNumbers()[0]
             if self.addPrefixInfoVisible.get() == 1:
                 num = 0
                 for c in roomName:

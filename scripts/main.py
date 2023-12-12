@@ -337,7 +337,6 @@ class Main:
         for tab in self.boxDataTabs:
             self.boxDataTabs[tab].updateRoomNames(self.roomNumbers)
 
-
     # guiTabStructure object uses this function to add rooms to correct tab in guiBoxDataTab object
     def triesToSelectRooms(self, selectedItems):
         for item in selectedItems:
@@ -377,6 +376,30 @@ class Main:
         for tab in self.boxDataTabs:
             self.boxDataTabs[tab].databaseUpdate(icons)
 
+    # guiRightBar object triggers this function when it's about to create levels and frameworks
+    def checkBeforeUploadingFrameworkAndLevel(self):
+        if self.frameworkFile == None:
+            self.log("Framework schematic is not imported. Aborting")
+            return False
+        if self.mainStructureFile == None:
+            self.log("Level schematic is not imported. Aborting")
+            return False
+        for tab in self.boxDataTabs:
+            if self.boxDataTabs[tab].selectedRooms == []:
+                self.log("Rooms are not selected for room type '" + self.boxDataTabs[tab].name + "'. Aborting")
+                return False
+            if self.boxDataTabs[tab].template.get() == "":
+                self.log("Template is not selected for room type '" + self.boxDataTabs[tab].name + "'. Aborting")
+                return False
+            if self.boxDataTabs[tab].boxIcon.get() == "":
+                self.log("Box icon is not selected for room type '" + self.boxDataTabs[tab].name + "'. Aborting")
+                return False
+            if (self.boxDataTabs[tab].template.get() == None or
+                    self.boxDataTabs[tab].template.get() not in self.boxDataTabs[tab].selectedRooms):
+                self.log("Template is not in selected rooms for room type '" + self.boxDataTabs[tab].name + "'. Aborting")
+                return False
+        return True
+
 
 if __name__ == '__main__':
     main = Main()
@@ -386,8 +409,8 @@ if __name__ == '__main__':
 
 # TODO: Changing name of tabs in boxDataTabs
 
+# TODO: make try except for uploading with webManagement
 
+# TODO: when creating new tab in boxDataTabs, imported schematics dont show up
 
-
-
-
+# TODO: It always deletes prefix info for name widget

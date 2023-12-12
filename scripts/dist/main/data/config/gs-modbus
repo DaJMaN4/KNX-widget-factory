@@ -1,0 +1,5 @@
+config rtu rtu
+  option baudrate 115200
+  option databits 8
+  option duplex H
+  option parity 2

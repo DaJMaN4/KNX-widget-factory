@@ -16,6 +16,8 @@ class GuiBoxDataTab:
         self.selectedRooms = []
         self.objectsNames = []
 
+        self.template = None
+
         self.createBoxDataDefault()
 
     def onItemDoubleClickObjectsNames(self, event):
@@ -84,10 +86,8 @@ class GuiBoxDataTab:
                                       )
         self.tabTextStructure.grid(row=2, column=3, sticky="new")
 
-
         self.templateTabTextStructure = Label(self.frame, text="Choose which room will be used as template")
         self.templateTabTextStructure.grid(column=3, row=3, sticky="")
-
 
         self.template = StringVar()
 
@@ -97,10 +97,8 @@ class GuiBoxDataTab:
 
         self.templateChoicer.grid(column=3, row=4)
 
-
         self.boxTabTextStructure = Label(self.frame, text="Insert which icon is used as box icon")
         self.boxTabTextStructure.grid(column=3, row=5, sticky="")
-
 
         self.main.boxDataTabsLabelsForResize.append(self.tabTextStructure)
 
@@ -119,7 +117,7 @@ class GuiBoxDataTab:
         self.trendIcon = StringVar()
 
         self.trendIconChoicer = ttk.Combobox(self.frame, width=27,
-                                      textvariable=self.trendIcon)
+                                             textvariable=self.trendIcon)
         # Adding combobox drop down list
         self.trendIconChoicer['values'] = self.icons
 
@@ -161,5 +159,3 @@ class GuiBoxDataTab:
         self.tabStructureTreeRooms.delete(*self.tabStructureTreeRooms.get_children())
         for room in selectedRooms:
             self.tabStructureTreeRooms.insert("", "end", text=room)
-
-

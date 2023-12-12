@@ -1,0 +1,300 @@
+plan:
+  background: ''
+  background_add: ''
+  bgcolor: ''
+  bgfixed: 0
+  bgrepeat: 0
+  building: 0
+  height: 380
+  id: 455
+  layout: 0
+  locx: ''
+  locy: ''
+  name: '%name%'
+  objects:
+  - cls: ''
+    floor: 455
+    id: 13399
+    locx: 20
+    locy: 50
+    name: 'Rom modus:'
+    nobg: 1
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 455
+    id: 13400
+    locx: 20
+    locy: 80
+    name: 'Tilstedeværelse:'
+    nobg: 1
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 455
+    id: 13401
+    locx: 20
+    locy: 140
+    name: 'Aktivt SP:'
+    nobg: 1
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 455
+    id: 13402
+    locx: 20
+    locy: 110
+    name: 'Rom temperatur:'
+    nobg: 1
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 455
+    id: 13403
+    locx: 20
+    locy: 200
+    name: 'Ønsket SP:'
+    nobg: 1
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 455
+    id: 13404
+    locx: 20
+    locy: 320
+    name: 'Fukt i rom:'
+    nobg: 1
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 455
+    id: 13405
+    locx: 20
+    locy: 170
+    name: 'Lokal justering: '
+    nobg: 1
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 455
+    id: 13406
+    locx: 20
+    locy: 290
+    name: 'Co2 i rom:'
+    nobg: 1
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 455
+    id: 13407
+    locx: 0
+    locy: 0
+    nobg: 1
+    params: '{"source":"local","src":"boksinfoetg.png","width":"320","height":"380","link":"","refresh":""}'
+    pincode: ''
+    type: 7
+  - cls: ''
+    floor: 455
+    id: 13408
+    locx: 20
+    locy: 230
+    name: 'Varmepådrag:'
+    nobg: 1
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 455
+    id: 13409
+    locx: 20
+    locy: 260
+    name: 'Kjølepådrag:'
+    nobg: 1
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  - cls: ''
+    floor: 455
+    id: 13411
+    locx: 180
+    locy: 50
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Driftsmodus - Rom
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 1
+    statusobject: Driftsmodus - Rom
+    type: 1
+    visparams: ''
+  - cls: ''
+    floor: 455
+    id: 13412
+    locx: 180
+    locy: 80
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Tilstedesensor -
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 2
+    statusobject: Tilstedesensor -
+    type: 0
+    visparams: ''
+  - cls: ''
+    floor: 455
+    id: 13413
+    locx: 180
+    locy: 110
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Romtemperatur - Verdi
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 3
+    statusobject: Romtemperatur - Verdi
+    type: 1
+    visparams: '{"decimals":"1","control":"spinner","min":"-670760","max":"670760","step":""}'
+  - cls: ''
+    floor: 455
+    id: 13414
+    locx: 180
+    locy: 140
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Romtemperatur - Aktivt settpunkt
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 4
+    statusobject: Romtemperatur - Aktivt settpunkt
+    type: 1
+    visparams: '{"address_list_menu":"0 object(s) selected","decimals":"1","control":"spinner","min":"-670760","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
+  - cls: ''
+    floor: 455
+    id: 13415
+    locx: 180
+    locy: 170
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Romtemperatur - Lokal
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 2
+    statusobject: Romtemperatur - Lokal
+    type: 1
+    visparams: '{"address_list_menu":"0 object(s) selected","decimals":"0","control":"spinner","min":"-273","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
+  - cls: ''
+    floor: 455
+    id: 13416
+    locx: 160
+    locy: 195
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Romtemperatur - Settpunkt
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":1,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 0
+    sortorder: 9
+    statusobject: Romtemperatur - Settpunkt
+    type: 1
+    visparams: '{"decimals":"1","control":"spinner","min":"10","max":"30","step":"0.5","popover_bgcolor":"","popover_bgtransparency":"0","scale":"60"}'
+  - cls: ''
+    floor: 455
+    id: 13417
+    locx: 180
+    locy: 230
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Varmeaktuator - Tilbakemelding
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 5
+    statusobject: Varmeaktuator - Tilbakemelding
+    type: 1
+    visparams: '{"decimals":"1","control":"spinner","min":"-670760","max":"670760","step":""}'
+  - cls: ''
+    floor: 455
+    id: 13418
+    locx: 180
+    locy: 260
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Kjoleaktuator - Tilbakemelding
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 5
+    statusobject: Kjoleaktuator - Tilbakemelding
+    type: 1
+    visparams: '{"decimals":"1","control":"spinner","min":"-670760","max":"670760","step":""}'
+  - cls: ''
+    floor: 455
+    id: 13419
+    locx: 180
+    locy: 290
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: CO2 i rom - Verdi
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 7
+    statusobject: CO2 i rom - Verdi
+    type: 1
+    visparams: '{"address_list_menu":"0 object(s) selected","decimals":"0","control":"spinner","min":"-670760","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
+  - cls: ''
+    floor: 455
+    id: 13420
+    locx: 180
+    locy: 320
+    name: ''
+    nobg: 1
+    notouch: 0
+    object: Fukt i rom - Verdi
+    params: '{"size":16,"color":"","font":"","bold":0,"italic":0,"underline":0,"width":null,"height":null,"icon_touch":"","icons_add":[],"displaymode":"value","showcontrol":0,"fixedvalue":"","update":false,"widget":null,"backdrop":0}'
+    pincode: ''
+    readonly: 1
+    sortorder: 8
+    statusobject: Fukt i rom - Verdi
+    type: 1
+    visparams: '{"address_list_menu":"0 object(s) selected","decimals":"0","control":"spinner","min":"-670760","max":"670760","step":"","popover_bgcolor":"","popover_bgtransparency":"0","scale":"100"}'
+  - cls: ''
+    floor: 455
+    id: 13421
+    locx: 80
+    locy: 10
+    name: rom
+    nobg: 1
+    params: '{"size":20,"color":"","font":"Tahoma","bold":1,"italic":0,"underline":0}'
+    pincode: ''
+    type: 6
+  pincode: ''
+  sortorder: 195
+  touch_bgcolor: ''
+  touch_param: ''
+  type: widget
+  usermode_param: ''
+  width: 320

@@ -9,6 +9,7 @@
   'SPLASH': True,
   'SYMLINK': False},
  [('v', None, 'OPTION'),
+  ('pyi-disable-windowed-traceback', '', 'OPTION'),
   ('pyi-contents-directory _internal', '', 'OPTION'),
   ('PYZ-00.pyz',
    'C:\\Users\\Damian\\PycharmProjects\\KNX-widget-factory\\scripts\\build\\main\\PYZ-00.pyz',

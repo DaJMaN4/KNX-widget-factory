@@ -33,6 +33,8 @@ class GuiRightBar:
             self.main.createInfoWidgets()
 
         if self.createStructure.get() == 1:
+            if not self.main.checkBeforeUploadingFrameworkAndLevel():
+                return
             self.main.createStructure()
 
     def createObjectsAndUpload(self):
@@ -46,6 +48,8 @@ class GuiRightBar:
             return
         done = False
         if self.createTrendWidget.get() == 1 and self.createInfoWidget.get() == 1 and self.createStructure.get() == 1:
+            if not self.main.checkBeforeUploadingFrameworkAndLevel():
+                return
             self.main.creatingStructure()
             self.main.createTrendWidgets()
             self.main.createInfoWidgets()
@@ -65,6 +69,8 @@ class GuiRightBar:
             done = True
 
         if self.createStructure.get() == 1 and not done:
+            if not self.main.checkBeforeUploadingFrameworkAndLevel():
+                return
             self.main.creatingStructure()
             self.main.createStructure()
             webManagement.uploadLevel(self.main.mainStructureFileName)
